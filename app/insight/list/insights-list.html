@@ -1,0 +1,23 @@
+<md-content md-theme="altTheme" class="ui-scroll-wrapper md-primary" fi-scroll-shrink source="true">
+    <md-content md-theme="default" class="ui-scroll-container md-primary" infinite-scroll="insightsListController.load()"
+                infinite-scroll-distance='2' infinite-scroll-container="'.ui-scroll-wrapper'" infinite-scroll-immediate-check="false">
+
+        <md-list>
+
+            <md-list-item ng-if="insightsListController.insights.busy">
+                <div flex layout="column" layout-align="center center" >
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+            </md-list-item>
+
+            <md-list-item id="noInsights" ng-if="insightsListController.insights.data.length === 0 && !insightsListController.insights.busy" class="no-list-data">
+                <div flex class="text-align-center">{{'NO_INISIGHTS_IN_STATUS' | translate}}</div>
+            </md-list-item>
+
+            <insight-list-card ng-repeat="insight in insightsListController.insights.data"
+                                 ng-click="insightsListController.navigateToInsight($event, insight)"
+                                 insight="insight">
+            </insight-list-card>
+        </md-list>
+    </md-content>
+</md-content>

@@ -1,0 +1,7 @@
+<span ng-hide="editableIndex === index" ng-transclude></span>
+<span ng-show="editableIndex === index">
+    <md-radio-group ng-model="value" style="padding: 0; color: #000;">
+        <md-radio-button value="LOW" class="item-low-ref">{{ 'LOW' | translate }}</md-radio-button>
+        <md-radio-button value="HIGH" class="item-high-ref">{{ 'HIGH' | translate }}</md-radio-button>
+    </md-radio-group>
+</span>

@@ -1,0 +1,33 @@
+{
+  "createTime": 1429560789000,
+  "insightId": 1045,
+  "department": {
+    "departmentId": 310,
+    "name": "Mens"
+  },
+  "gameRunLocaleList": [
+    {
+      "locale": "en_GB",
+      "conversionRate": 1.0000000000,
+      "currencyCode": "GBP",
+      "gameRunId": 5753,
+      "gameRunStatus": "RUNNING"
+    },
+    {
+      "locale": "en_US",
+      "conversionRate": 1.0000000000,
+      "currencyCode": "USD",
+      "gameRunId": 5755,
+      "gameRunStatus": "SETUP"
+    },
+    {
+      "locale": "de_DE",
+      "conversionRate": 1.0000000000,
+      "currencyCode": "EUR",
+      "gameRunId": 5754,
+      "gameRunStatus": "SETUP"
+    }
+  ],
+  "objective": "test locale tabs",
+  "pricingEnabled": false
+}

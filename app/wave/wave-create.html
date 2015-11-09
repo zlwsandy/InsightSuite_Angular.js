@@ -1,0 +1,47 @@
+<md-dialog aria-label="{{ 'CREATE_WAVE' | translate }}">
+    <md-toolbar id="createWaveToolbar" class="md-primary">
+        <div class="md-subhead pad-left">
+            <h3>
+                <span>{{ 'CREATE_NEW_INSIGHT_WAVE' | translate }}</span>
+            </h3>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="wave-form-dialog" ng-controller="WaveCreateDialogController as create">
+        <form name="createWaveForm" ng-submit="create.save($event)" novalidate>
+
+            <div fi-fill-path>
+                <md-input-container flex class="md-primary">
+                    <label class="md-input-has-value">
+                        {{ 'INSIGHT_WAVE_NAME' | translate }}
+                    </label>
+                    <input id="newWaveName" name="waveName" ng-model="create.waveName" ng-maxlength="150" required>
+                    <div ng-messages="createWaveForm.waveName.$error" multiple>
+                        <div id="newWaveNameRequiredMsg" ng-message="required">{{ 'ERROR_INPUT_REQUIRED' | translate }}</div>
+                        <div id="newWaveNameTooLongMsg" ng-message="maxlength">{{ 'ERROR_INPUT_TOO_LONG' | translate:'{ maxLength: "150" }' }}</div>
+                    </div>
+                </md-input-container>
+                <div class="input-label-has-value">{{ 'INSIGHT_WAVE_LINK' | translate }}</div>
+                <!--TODO input validation FI-10741-->
+                <md-input-container>
+                    <div class="input-has-value">
+                        {{create.gamePlayBaseUrl}}/.../
+                        <input id="wavePath" required name="wavePath" ng-model="create.wavePath" type="text" class="wave-url-path" ng-maxlength="150">
+                    </div>
+                    <div ng-messages="createWaveForm.wavePath.$error" multiple>
+                        <div id="newWavePathRequiredMsg" ng-message="required">{{ 'ERROR_INPUT_REQUIRED' | translate }}</div>
+                        <div id="newWavePathTooLongMsg" ng-message="maxlength">{{ 'ERROR_INPUT_TOO_LONG' | translate:'{ maxLength: "150" }' }}</div>
+                    </div>
+                </md-input-container>
+                <span class="wave-span-hidden">invisible</span>
+            </div>
+
+            <div class="action-row" layout="row" layout-align="end center">
+                <md-button id="cancelCreateNewWaveButton" translate="CANCEL" type="button" ng-click="create.cancel()" md-no-ink>
+                </md-button>
+                <md-button id="submitNewWaveButton" translate="CREATE" type="submit" class="md-primary md-raised">
+                </md-button>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>

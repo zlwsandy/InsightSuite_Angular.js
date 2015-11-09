@@ -1,0 +1,11 @@
+<md-input-container ng-if="FiSegmentSelectController.visible" class="pad-bottom-none">
+    <md-select ng-model="FiSegmentSelectController.currentSegment"
+               ng-change="FiSegmentSelectController.changeSegment()"
+               ng-disabled="FiSegmentSelectController.disabled"
+               aria-label="TODO Put something useful here"
+               id="segmentSelect">
+        <md-option ng-value="opt" ng-class="{'group-start' : opt.groupStart, 'group-end' : opt.groupEnd}" ng-repeat="opt in FiSegmentSelectController.segmentOptions" id="segmentOption-{{$index}}">
+            <span class="select-text primary" ng-class="{'segment-generating' : opt.isGenerating}"><img ng-if="opt.imageUrl" ng-src="{{opt.imageUrl}}" class="segment-select-image"/>{{opt.name}} <span ng-if="opt.isGenerating">({{ 'GENERATING' | translate }})</span></span>
+        </md-option>
+    </md-select>
+</md-input-container>

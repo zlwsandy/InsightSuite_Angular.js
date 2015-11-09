@@ -1,0 +1,22 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 right-nav-slider" md-component-id="waveTabs" style="min-width:800px">
+        <md-toolbar id="rightNavToolbar" class="md-primary" layout="row">
+            <div class="md-toolbar-tools">
+                {{waveController.currentWaveName}}&nbsp;<!--TODO remove &nbsp; once the select below is replaced with md-select v.1.0-->
+                <div>
+                    <select id="rightNavLocaleSelect" ng-options="opt for opt in waveController.localeList" ng-model="waveController.locale">
+                        <option value="">{{ 'ALL' | translate }}</option>
+                    </select>
+                </div>
+                <md-icon id="rightNavMoreButton" md-svg-src="images/ic_more_vert_24px.svg" class="links-side-nav-icon"></md-icon>
+            </div>
+        </md-toolbar>
+
+        <md-tabs md-theme="altTheme" class="md-primary tabs-height" md-selected="waveController.selectedIndex">
+            <md-tab id="linksTab" label="{{ 'LINKS' | translate}}">
+                <div ng-include src="'wave/link/wave-link-list.html'"></div>
+            </md-tab>
+            <md-tab id="insightsTab" label="{{ 'INSIGHTS' | translate}}">
+                <div ng-include src="'wave/insight/wave-insight-list.html'"></div>
+            </md-tab>
+        </md-tabs>
+</md-sidenav>

@@ -1,0 +1,100 @@
+/*
+  Styles related to Waves
+*/
+
+.waves-nav-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.waves-wave-summary {
+  margin: 0;
+  font-weight: normal;
+}
+
+.wave-name {
+  font-size: 1.5em;
+}
+
+.wave-path {
+  font-size: 1.0em;
+}
+
+.waves-company-filter, .waves-company-avatar {
+  min-width: 100px;
+  text-align: center;
+}
+
+.wave-form-dialog {
+  width: 600px;
+  overflow: hidden;
+}
+
+.wave-form-dialog .md-input.wave-url-path {
+  color: $fi-black;
+  display: inline-block;
+  max-width: 100%;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+}
+
+.wave-span-hidden {
+  visibility: hidden;
+  max-width: 100%;
+}
+
+.wave-settings-row-padding {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/***** Links Tab ******/
+
+.links-tab-content {
+  font-weight: normal;
+}
+
+.links-tab-content-list {
+  margin: 5px 0;
+}
+
+.target-type {
+  vertical-align: bottom;
+}
+
+.target-type-icon {
+  height: 20px;
+  vertical-align: bottom;
+}
+
+.add-links-action-button {
+  top: 70%;
+}
+
+.links-side-nav-icon {
+  width: 24px;
+  height: 24px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+/***** Add Links Dialog ******/
+
+.add-links-dialog {
+  width: 1000px;
+}
+
+.add-links-dialog-content {
+  padding: 0;
+}
+
+.add-links-dialog-insight-name-search {
+  font-size: 0.7em;
+  padding-right: 10px;
+}
+
+.add-links-dialog-insight-name-search .add-links-dialog-insight-name-label,
+.add-links-dialog-insight-name-search.md-default-theme.md-input-focused .add-links-dialog-insight-name-label {
+  color: $fi-white;
+}

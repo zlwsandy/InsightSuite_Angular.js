@@ -1,0 +1,22 @@
+<div flex>
+    <ul class="comment-list">
+        <li ng-repeat="comment in ItemCommentsController.comments">
+            <div class="comment-row" ng-class="{'hidden-background' : !comment.visible}" layout="row">
+                <span class="sentiment-tone" flex="5">
+                    <img ng-src="{{ItemCommentsController.getIcon(comment.sentimentValue)}}" ng-if="ItemCommentsController.getIcon(comment.sentimentValue)" alt="{{comment.sentimentValue}}"/>
+                </span>
+                <p flex>{{comment.comment}}</p>
+                <md-menu ng-if="ItemCommentsController.showHidden" class="options-menu" md-position-mode="target-right target" flex>
+                    <md-button class="options-menu-button" ng-click="ItemCommentsController.openMenu($mdOpenMenu, $event)">
+                        <md-icon md-menu-origin md-svg-icon="images/icon-options.svg" class="options-menu-icon"></md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item class="pointer" ng-repeat="opt in comment.menuOptions" ng-click="ItemCommentsController.selectOption(comment, $index)">
+                            <span>{{opt.label}}</span>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+        </li>
+    </ul>
+</div>

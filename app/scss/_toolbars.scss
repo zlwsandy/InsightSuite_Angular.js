@@ -1,0 +1,80 @@
+.bar-shadow {
+  -webkit-box-shadow: 1px 1px 5px -1px rgba(0,0,0,0.5);
+  -moz-box-shadow: 1px 1px 5px -1px rgba(0,0,0,0.5);
+  box-shadow: 1px 1px 5px -1px rgba(0,0,0,0.5);
+}
+
+%toolbar {
+  padding: 0 10%;
+}
+
+.header-bar {
+  @extend %toolbar;
+
+  h1 {
+    font-size: 30px;  // 30px to normalize to Chrome, Firefox, etc.
+    transition: all .3s ease;
+  }
+}
+
+.header-bar.shrink {
+  min-height: 0;
+  transition: all .3s ease;
+
+  h1 {
+    margin: 10px 0;
+    font-size: 1em;
+  }
+}
+
+.header-bar.no-action-bar {
+  @extend .bar-shadow;
+}
+
+.action-bar {
+  @extend .bar-shadow;
+  @extend %toolbar;
+  z-index: 1;
+  height: 55px !important; // this overrides the md-toolbar min-height property in material design
+
+  .md-button, .md-select, .md-select-value {
+      text-transform: uppercase;
+      font-size: .9rem;
+      font-weight: bold;
+  }
+}
+
+/* Print styles for toolbars */
+@media print {
+  md-toolbar.md-altTheme-theme {
+      background-color: $fi-white;
+  }
+  .view-action-bar {
+      visibility: hidden;
+  }
+  .header-bar, .action-bar {
+      -webkit-align-items: flex-start;
+      align-items: flex-start;
+      margin-left: -5%;
+      box-shadow: none;
+  }
+  .header-bar {
+      color: $fi-black !important;
+      background-color: $fi-white !important;
+  }
+  .print-spacer {
+      display: inline;
+      padding-top: 5px;
+      margin-right: $margin-base;
+  }
+  .print-spacer:before {
+      content: '/';
+  }
+  .completed-date {
+      padding-top: 8px;
+      margin: 0;
+      text-transform: uppercase;
+      font-size: 80%;
+      font-weight: bold;
+  }
+}

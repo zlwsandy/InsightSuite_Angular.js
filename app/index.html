@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html ng-app="fi" ng-controller="MainController as mainController">
+<head>
+    <meta charset="UTF-8">
+    <link rel="SHORTCUT ICON" href="/images/favicon.ico">
+    <title ng-bind="mainController.menu.name | translate">First Insight</title>
+
+
+    <!-- build:js js/lib.js -->
+    <script src="../bower_components/highcharts-release/adapters/standalone-framework.js"></script>
+    <!-- bower:js -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.js"></script>
+    <script src="../bower_components/angular-material/angular-material.js"></script>
+    <script src="../bower_components/angular-translate/angular-translate.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="../bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
+    <script src="../bower_components/ng-clip/src/ngClip.js"></script>
+    <script src="../bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+    <script src="../bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+    <script src="../bower_components/messageformat/messageformat.js"></script>
+    <script src="../bower_components/messageformat/locale/en.js"></script>
+    <script src="../bower_components/messageformat/locale/fr.js"></script>
+    <script src="../bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
+    <script src="../bower_components/lodash/lodash.js"></script>
+    <script src="../bower_components/highcharts-release/highcharts.js"></script>
+    <script src="../bower_components/highcharts-release/highcharts-more.js"></script>
+    <script src="../bower_components/highcharts-release/modules/exporting.js"></script>
+    <script src="../bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+    <script src="../bower_components/fi-flow/dist/flow.js"></script>
+    <script src="../bower_components/ng-flow/dist/ng-flow.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../bower_components/fi-img-crop/dist/fi-img-crop.directive.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+  <!-- build:js js/app.js -->
+  <!-- inject:js -->
+  <script src="/app/app.js"></script>
+  <script src="/app/routes.js"></script>
+  <script src="/app/theme.js"></script>
+  <script src="/app/translation.js"></script>
+  <script src="/app/components/announce/announce.service.js"></script>
+  <script src="/app/components/announce/toast.controller.js"></script>
+  <script src="/app/components/company/company-cookie-interceptor.factory.js"></script>
+  <script src="/app/components/company/company-switch.factory.js"></script>
+  <script src="/app/components/company/company.service.js"></script>
+  <script src="/app/components/department/department.service.js"></script>
+  <script src="/app/components/dialog-service/dialog-alert.service.js"></script>
+  <script src="/app/components/dialog-service/dialog-confirm.service.js"></script>
+  <script src="/app/components/dialog/dialog-alert.factory.js"></script>
+  <script src="/app/components/fi/fi-currency-input.directive.js"></script>
+  <script src="/app/components/fi/fi-currency.directive.js"></script>
+  <script src="/app/components/fi/fi-integer-validator.directive.js"></script>
+  <script src="/app/components/fi/fi-locale-checkbox.directive.js"></script>
+  <script src="/app/components/fi/fi-locale-number-validator.directive.js"></script>
+  <script src="/app/components/fi/fi-locale-select.directive.js"></script>
+  <script src="/app/components/fi/fi-locale.directive.js"></script>
+  <script src="/app/components/fi/fi-number-range-validator.directive.js"></script>
+  <script src="/app/components/fi/fi-sanitize-html.filter.js"></script>
+  <script src="/app/components/fi/fi-segment-select.directive.js"></script>
+  <script src="/app/components/fi/fi-sort-by-select.directive.js"></script>
+  <script src="/app/components/fi/fi-special-characters.directive.js"></script>
+  <script src="/app/components/fi/fi.service.js"></script>
+  <script src="/app/components/gamerunstatus/game-run-status.value.js"></script>
+  <script src="/app/components/item/item-data.service.js"></script>
+  <script src="/app/components/locale/locale.service.js"></script>
+  <script src="/app/components/main/app.constants.js"></script>
+  <script src="/app/components/main/chart-config.factory.js"></script>
+  <script src="/app/components/main/lodash.factory.js"></script>
+  <script src="/app/components/main/main.controller.js"></script>
+  <script src="/app/components/menu/menu-side-nav.controller.js"></script>
+  <script src="/app/components/menu/menu.controller.js"></script>
+  <script src="/app/components/menu/menu.service.js"></script>
+  <script src="/app/components/routes/route-error-handler.factory.js"></script>
+  <script src="/app/components/translations/fi-missing-translation-handler.factory.js"></script>
+  <script src="/app/components/utils/confirmExit.directive.js"></script>
+  <script src="/app/components/utils/fi-progress.service.js"></script>
+  <script src="/app/components/utils/fi-scroll-spy.directive.js"></script>
+  <script src="/app/components/utils/fi-sticky.directive.js"></script>
+  <script src="/app/components/utils/fi-svg-icon.directive.js"></script>
+  <script src="/app/components/utils/fiScrollShrink.directive.js"></script>
+  <script src="/app/components/utils/focus.directive.js"></script>
+  <script src="/app/components/utils/formatter.factory.js"></script>
+  <script src="/app/components/utils/ie-tab-inkbar.directive.js"></script>
+  <script src="/app/components/utils/image-loader.factory.js"></script>
+  <script src="/app/components/utils/message-box.directive.js"></script>
+  <script src="/app/components/utils/percentage.filter.js"></script>
+  <script src="/app/components/utils/radioButtonEditable.directive.js"></script>
+  <script src="/app/components/utils/scrollContainer.directive.js"></script>
+  <script src="/app/components/utils/scrollTo.directive.js"></script>
+  <script src="/app/components/utils/textareaEditable.directive.js"></script>
+  <script src="/app/components/utils/textboxEditable.directive.js"></script>
+  <script src="/app/components/utils/utils.service.js"></script>
+  <script src="/app/error/forbidden-access.controller.js"></script>
+  <script src="/app/insight/edit/insight-edit-cancel-dialog.service.js"></script>
+  <script src="/app/insight/fi-insight-name.directive.js"></script>
+  <script src="/app/insight/insight-data.service.js"></script>
+  <script src="/app/insight/insight-list.service.js"></script>
+  <script src="/app/insight/insight-locale.factory.js"></script>
+  <script src="/app/insight/insight-tab.controller.js"></script>
+  <script src="/app/insight/insight-tab.factory.js"></script>
+  <script src="/app/insight/insight-transformer.factory.js"></script>
+  <script src="/app/insight/items/graphs/demand-curve.directive.js"></script>
+  <script src="/app/insight/items/graphs/ticket-price-curve.directive.js"></script>
+  <script src="/app/insight/items/graphs/ticket-price-dialog.controller.js"></script>
+  <script src="/app/insight/items/graphs/ticket-price-dialog.service.js"></script>
+  <script src="/app/insight/items/insight-images-upload.controller.js"></script>
+  <script src="/app/insight/items/insight-item-add.directive.js"></script>
+  <script src="/app/insight/items/insight-item-segment-transformer.factory.js"></script>
+  <script src="/app/insight/items/insight-item-transformer.factory.js"></script>
+  <script src="/app/insight/items/insight-items-add-container.directive.js"></script>
+  <script src="/app/insight/items/insight-items-image-browse-dialog.controller.js"></script>
+  <script src="/app/insight/items/insight-items-image-browse-dialog.service.js"></script>
+  <script src="/app/insight/items/insight-items-move-to-preview-dialog.service.js"></script>
+  <script src="/app/insight/items/insight-items-upload.controller.js"></script>
+  <script src="/app/insight/items/insight-items.controller.js"></script>
+  <script src="/app/insight/items/insight-results-item-detail.controller.js"></script>
+  <script src="/app/insight/items/insight-results-item.directive.js"></script>
+  <script src="/app/insight/items/insight-results-items.directive.js"></script>
+  <script src="/app/insight/items/insight-results-table.directive.js"></script>
+  <script src="/app/insight/items/insight-setup-item-detail.controller.js"></script>
+  <script src="/app/insight/items/insight-setup-item.directive.js"></script>
+  <script src="/app/insight/items/insight-setup-items.directive.js"></script>
+  <script src="/app/insight/items/results/manage-segments.controller.js"></script>
+  <script src="/app/insight/items/sentiments/item-comments-dialog.service.js"></script>
+  <script src="/app/insight/items/sentiments/item-comments.directive.js"></script>
+  <script src="/app/insight/items/sentiments/sentiment-bar-chart.directive.js"></script>
+  <script src="/app/insight/items/sentiments/word-count-bar-chart.directive.js"></script>
+  <script src="/app/insight/list/insight-list-card.directive.js"></script>
+  <script src="/app/insight/list/insights-list-tab.controller.js"></script>
+  <script src="/app/insight/list/insights-list.controller.js"></script>
+  <script src="/app/insight/reports/item-detail-report.controller.js"></script>
+  <script src="/app/insight/reports/item-summary-report.controller.js"></script>
+  <script src="/app/insight/segment-transformer.factory.js"></script>
+  <script src="/app/insight/segments/insight-segments.controller.js"></script>
+  <script src="/app/insight/settings/fi-price-control.directive.js"></script>
+  <script src="/app/insight/settings/insight-add-locale.controller.js"></script>
+  <script src="/app/insight/settings/insight-settings.controller.js"></script>
+  <script src="/app/login/login-admin-company.controller.js"></script>
+  <script src="/app/login/login.service.js"></script>
+  <script src="/app/wave/fi-fill-path.directive.js"></script>
+  <script src="/app/wave/insight/wave-insight.controller.js"></script>
+  <script src="/app/wave/insight/wave-insight.service.js"></script>
+  <script src="/app/wave/link/wave-add-links.controller.js"></script>
+  <script src="/app/wave/link/wave-add-links.service.js"></script>
+  <script src="/app/wave/link/wave-link.controller.js"></script>
+  <script src="/app/wave/link/wave-link.service.js"></script>
+  <script src="/app/wave/wave-create-dialog.controller.js"></script>
+  <script src="/app/wave/wave-create.controller.js"></script>
+  <script src="/app/wave/wave-edit-dialog.controller.js"></script>
+  <script src="/app/wave/wave-edit.controller.js"></script>
+  <script src="/app/wave/wave-settings.controller.js"></script>
+  <script src="/app/wave/wave-toolbar.controller.js"></script>
+  <script src="/app/wave/wave-toolbar.factory.js"></script>
+  <script src="/app/wave/wave.controller.js"></script>
+  <script src="/app/wave/wave.service.js"></script>
+  <!-- endinject -->
+  <!-- endbuild -->
+
+    <script>
+        // Sets the userAgent on the html tag for testing for IE
+        var doc = document.documentElement;
+        doc.setAttribute('data-useragent', navigator.userAgent);
+    </script>
+
+    <!-- build:css styles/lib.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/firstinsight.css -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="styles/firstinsight.css" />
+    <!-- endinject -->
+    <!-- endbuild -->
+
+</head>
+
+<body layout="row" flex>
+    <div ui-view="root" layout="row" flex></div>
+    <div ui-view="print"></div>
+</body>
+
+</html>

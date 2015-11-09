@@ -1,0 +1,8 @@
+<div layout="row" flex="100" class="md-warn message ng-class:messageBoxController.style.color" ng-if="messageBoxController.error">
+    <div flex="85" class="message-body">
+        <p>{{ messageBoxController.error | translate:messageBoxController.errorOptions }}</p>
+    </div>
+    <div flex class="message-button">
+        <md-button ng-click="messageBoxController.closeMessage()">{{ 'DISMISS' | translate }}</md-button>
+    </div>
+</div>

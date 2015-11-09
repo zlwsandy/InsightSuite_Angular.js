@@ -1,0 +1,6 @@
+<span ng-hide="editableIndex === index" ng-transclude></span>
+<span ng-show="editableIndex === index">
+    <md-input-container style="padding: 0;">
+        <input ng-model="value" aria-label="value" />
+    </md-input-container>
+</span>

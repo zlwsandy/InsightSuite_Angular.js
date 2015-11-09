@@ -1,0 +1,21 @@
+<div class="toolbar-container">
+    <md-toolbar class="header-bar" fi-scroll-shrink target="true" ng-class="{'no-action-bar' : !insightTabController.showToolbar() && !insightTabController.isSettingsVisible()}">
+        <div layout="row" class="md-title">
+            <h1>
+                <span ng-if="!insightTabController.isCreate">{{insightTabController.insight.name}}</span>
+                <span ng-if="insightTabController.isCreate">{{'NEW_INSIGHT' | translate}}</span>
+            </h1>
+        </div>
+        <div layout="row" class="tab-list">
+            <div flex="40" layout="row" layout-align="start center">
+                <div ng-repeat="tabOption in insightTabController.tabList" ng-if="tabOption.visible" class="insight-tab" ng-class="{'disabled': insightTabController.isDisabledTab(tabOption.name)}"ng-show="insightTabController.isAdmin || tabOption.name !== 'games'" id="insight-setup-{{tabOption.name}}" layout="column" ng-click="(insightTabController.isDisabledTab(tabOption.name)) || insightTabController.openTab(tabOption)" ng-disabled="insightTabController.isDisabledTab(tabOption.name)">
+                    <span class="insight-tab-text">{{tabOption.translate | translate}}</span>
+                    <div ng-show="insightTabController.selectedTab() === tabOption.name" class="insight-setup-icon-inkbar"></div>
+                </div>
+            </div>
+        </div>
+    </md-toolbar>
+</div>
+
+<!--Tab Content-->
+<div ui-view="insightTabView" flex layout="column"></div>

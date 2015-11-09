@@ -1,0 +1,322 @@
+/* Common Styles to be used across the app that aren't complex or involved enough to have their own partials
+
+  i.e. Body styles, Row Hovering, View Scaffolding
+*/
+
+html, body {
+  font-size: $body-font-size;
+}
+body {
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
+  min-width: $body-min-width;
+  overflow-x: auto;
+}
+
+.clearfix {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Resets */
+hr {
+  border-style: none;
+}
+
+input[type="number"] {
+  text-align: right;
+}
+
+textarea {
+    font-size: 0.875rem;
+}
+
+:focus {
+  outline: none;
+}
+// Hide the IE Clear Icon on inputs (X)
+input::-ms-clear {
+  display: none;
+}
+
+//Set font-family to Helvetica Neue.
+html, body, button, select, html, textarea, input {
+  font-family: 'Helvetica Neue', RobotoDraft, Roboto, sans-serif;
+}
+
+/* IE hacks to set min-height on a flex-display for the body */
+html[data-useragent*='MSIE 10.0'] [layout-fill],
+html[data-useragent*='Trident/7.0'] [layout-fill] {
+
+  .md-title {
+
+    h1 {
+      display: -ms-flexbox;
+      -ms-flex: 0 1 auto;
+
+      span {
+        display: inline-block;
+        -ms-flex: 0 1 auto;
+      }
+    }
+  }
+
+  .insights-filter-toolbar {
+    width: 50%;
+  }
+
+}
+
+.warn {
+  color: $fi-red;
+}
+
+.warn > div {
+  -ms-flex: 0 1 auto;
+}
+
+div[ui-view="print"] {
+  width: 100%;
+  overflow: auto;
+}
+
+div[ui-view="root"]:empty,
+div[ui-view="print"]:empty {
+  display: none;
+}
+.ui-scroll-wrapper, .ui-fixed-wrapper {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  margin-left: -50%;
+  height: 100%;
+
+  .ui-scroll-container, .ui-fixed-container {
+    width: 100%;
+    left: 50%;
+    overflow: visible;
+    margin: {
+      left: -50%;
+      bottom: 5%;
+    }
+
+    @include desktop-xlg {
+      width: 90%;
+      margin: {
+        left: -45%;
+      }
+    }
+
+    @include desktop-xxlg {
+      width: 80%;
+      margin: {
+        left: -40%;
+      }
+    }
+  }
+}
+.ui-fixed-wrapper {
+  overflow: hidden;
+
+  .ui-fixed-container {
+    height: 100%;
+  }
+}
+
+.ui-view-container {
+  position: absolute;
+  height: 100%;
+  width: 80%;
+  left: 50%;
+  margin-left: -40%;
+}
+
+.content-container {
+  position: relative;
+  height: 100%;
+}
+.rowHover {
+  cursor: pointer;
+  background-color: $fi-white-grey;
+}
+
+.data-grid > div {
+  padding: .5em .5em;
+}
+
+.filter-label {
+  font-style: italic;
+}
+
+.card {
+  vertical-align: middle;
+  -o-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff;
+  -o-transition: height .2s ease, transform .1s ease;
+  -moz-transition: height .2s ease, transform .1s ease;
+  -webkit-transition: height .2s ease, transform .1s ease;
+  transition: height .2s ease, transform .1s ease;
+}
+.card.selected {
+  -o-transition: height .3s ease, transform .3s ease;
+  -moz-transition: height .3s ease, transform .3s ease;
+  -webkit-transition: height .3s ease, transform .3s ease;
+  transition: height .3s ease, transform .3s ease;
+  -o-transform: scale(1.08);
+  -ms-transform: scale(1.08);
+  -moz-transform: scale(1.08);
+  -webkit-transform: scale(1.08);
+  transform: scale(1.08);
+  box-shadow: 0 0 8px $fi-black;
+  position: relative;
+  z-index: 10;
+  background-color: #fff;
+}
+
+.card.selected:first-child {
+  margin-top: 5%;
+}
+
+.drag-drop-box {
+  /*height: 100%;*/
+  text-align: center;
+  border: 2px dashed #eee;
+  padding: 30px 15px 30px 15px;
+  margin: 30px 15px 15px 15px;
+}
+
+.progress-container {
+  text-align: center;
+  padding: 30px 15px 30px 15px;
+  margin: 15px 200px 0 200px;
+}
+
+/* Toast */
+.toast {
+  /* Variables */
+  $width: 75%;
+  /* Attributes */
+  position: fixed;
+  width: $width;
+  left: 50%;
+  margin-left: (($width/ 2) * -1) + 2%;  // left margin is the negative value of half the width + considering the menu bar width
+  top: 8px;
+  color: white;
+  z-index: 70;
+  background-color: $fi-black;
+  color: $fi-white;
+  border-radius: 10px;
+  padding: 5px;
+  line-height: 1.25em;
+
+  .md-button.dismiss {
+    color: $fi-white;
+    font-weight: bold;
+  }
+}
+.toast-content {
+  padding: 10px;
+  width: 70%;
+  display: inline-block;
+}
+
+
+/* Backgrounds */
+.background-warn {background-color: $fi-light-yellow;}
+.background-warn-light {background-color: $fi-white-yellow;}
+.background-error {background-color: $fi-light-red;}
+.background-error-light {background-color: $fi-white-red;}
+
+/* Used for displaying visual cue for hidden items */
+.hidden-background {
+  background: -webkit-repeating-linear-gradient(
+                  -45deg,
+                  $fi-white,
+                  $fi-white 8px,
+                  $fi-white-grey 5px,
+                  $fi-white-grey 10px
+  );
+  background: repeating-linear-gradient(
+                  -45deg,
+                  $fi-white,
+                  $fi-white 8px,
+                  $fi-white-grey 5px,
+                  $fi-white-grey 10px
+  );
+}
+
+/*Dividers */
+
+.divider {border-bottom: 1px solid $fi-base-grey;}
+
+.divider-section{
+  margin: ($margin-base * 2) 0;
+}
+
+/* Currency */
+.currency-input {
+  text-align: right;
+}
+
+.print-only {
+  display: none;
+}
+
+/* Lists */
+.odd {
+  background-color: $fi-light-grey;
+}
+
+
+/* No Data for List */
+.no-list-data{
+  color: $fi-no-data-available;
+  background-color: $fi-background-grey;
+  font-weight: normal;
+  margin-top: $margin-base;
+  font-size: 1.2rem;
+}
+
+@page {
+  size: letter portrait;
+  margin: 0.0cm;
+}
+
+/* Print styles for common elements */
+@media print {
+
+  div[ui-view="print"] {
+    overflow: visible;
+  }
+  body {
+    background-color: #fff;
+    overflow: visible;
+    display: block !important;
+  }
+  .ui-scroll-wrapper {
+    position: relative;
+    background: $fi-white !important;
+  }
+  .md-content.md-altTheme-theme {
+      background-color: #fff;
+  }
+  .content-container {
+      margin-left: -5%;
+  }
+  .toast {
+      display: none;
+  }
+  .print-only {
+      display: block;
+  }
+}

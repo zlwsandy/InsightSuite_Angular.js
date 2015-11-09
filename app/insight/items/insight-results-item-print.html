@@ -1,0 +1,78 @@
+<div layout="column" class="insight-results-grid-cell">
+    <div class="pad-all">
+        <p class="item-name">{{InsightResultsItemController.item.name}}</p>
+        <p class="item-number tertiary-text">{{InsightResultsItemController.item.number}}</p>
+    </div>
+
+    <div layout="row">
+        <div class="insight-results-grid-image" flex="45">
+            <fi-img-crop img-src={{InsightResultsItemController.item.primaryImage.fullsizeUrl}}
+                         img-alt={{InsightResultsItemController.item.name}}
+                         img-height="335"
+                         img-width="220">
+            </fi-img-crop>
+        </div>
+        <div class="insight-results-grid-info" flex="45">
+
+            <div class="grid-info-row" layout="row" layout-align="space-between center">
+                <p class="total-value">{{InsightResultsItemController.item.totalValue | number:InsightResultsItemController.getTotalValuePrecision()}}</p>
+                <span class="grid-label">{{ 'TOTAL_VALUE' | translate }}</span>
+            </div>
+            <div class="grid-info-row" ng-if="!InsightResultsItemController.isAllLocales()">
+                <div class="currency margin-bottom" layout="row" layout-align="space-between center">
+                    <p>
+                        <fi-currency value="{{InsightResultsItemController.item.testPrice}}"
+                                     symbol-class="uom"
+                                     round-at-threshold="true"
+                                     current-locale="InsightResultsItemController.currentLocale">
+                        </fi-currency>
+                    </p>
+                    <span class="grid-label test-price-text">{{ 'TEST_PRICE' | translate }} ({{InsightResultsItemController.currentLocale.currencyCode}})</span>
+                </div>
+
+                <div class="currency" layout="row" layout-align="space-between center"
+                     ng-if="InsightResultsItemController.showModelPrice()">
+                    <p>
+                        <fi-currency value="{{InsightResultsItemController.item.modelPrice}}"
+                                     symbol-class="uom"
+                                     round-at-threshold="true"
+                                     current-locale="InsightResultsItemController.currentLocale">
+                        </fi-currency>
+                    </p>
+                    <span class="grid-label model-price-text">{{ 'MODEL_PRICE' | translate }} ({{InsightResultsItemController.currentLocale.currencyCode}})</span>
+                </div>
+
+                <div class="currency margin-bottom" layout="row" layout-align="space-between center"
+                     ng-if="InsightResultsItemController.showMaxGmPrice()">
+                    <p>
+                        <fi-currency value="{{InsightResultsItemController.item.maxGMPrice}}"
+                                     symbol-class="uom"
+                                     round-at-threshold="true"
+                                     current-locale="InsightResultsItemController.currentLocale">
+                        </fi-currency>
+                        <span class="grid-label percent"> ({{InsightResultsItemController.item.maxGrossMarginPercent | percentage: 0:false}}<span>%</span>)</span>
+                    </p>
+                    <span class="grid-label max-gm-price-text">{{ 'MAX_GM' | translate }} <span>({{ 'GROSS_MARGIN_ABBREV' | translate }}%)</span></span>
+                </div>
+
+                <div class="currency" layout="row" layout-align="space-between center"
+                     ng-if="InsightResultsItemController.showGrossMarginDeltaBasisPoints()">
+                    <p>{{InsightResultsItemController.item.grossMarginDeltaBasisPoints | number:0}}<span class="uom"> BPS</span></p>
+                    <span class="grid-label dark-text">{{ 'MARGIN_GAIN' | translate }}</span>
+                </div>
+            </div>
+
+            <div class="grid-info-row">
+                <div class="sentiment margin-bottom" layout="row" layout-align="space-between center">
+                    <p>{{InsightResultsItemController.item.overallPositive | percentage: 0:false}}<span class="uom">%</span></p>
+                    <p class="grid-label">{{ 'LOVE_IT' | translate }}/{{ 'LIKE_IT' | translate }}</p>
+                </div>
+
+                <div class="sentiment" layout="row" layout-align="space-between center">
+                    <p>{{InsightResultsItemController.item.overallNegative | percentage: 0:false}}<span class="uom">%</span></p>
+                    <p class="grid-label">{{ 'LEAVE_IT' | translate }}/{{ 'HATE_IT' | translate }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

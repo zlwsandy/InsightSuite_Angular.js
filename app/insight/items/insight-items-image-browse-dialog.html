@@ -1,0 +1,29 @@
+<md-dialog aria-label="{{ 'IMAGES' | translate}}" class="dialog image-browse-dialog" flex="30">
+    <div>
+        <md-button class="md-icon-button btn-close circular image-browse-close-button "
+                   md-theme="default" ng-click="imageBrowseDialogController.close()"
+                   aria-label="{{ 'CLOSE' | translate}}">
+            <md-icon md-svg-icon="images/ic_close_24px.svg"></md-icon>
+        </md-button>
+    </div>
+    <md-dialog-content>
+
+        <img ng-src="{{imageBrowseDialogController.getCurrentImage()}}" class="item-image">
+
+        <img class="nav-arrow previous"
+             ng-click="imageBrowseDialogController.previous()"
+             ng-show="imageBrowseDialogController.showNavigation()"
+             src="images/icon-arrow-left.svg" alt="{{ 'PREVIOUS' | translate}}"/>
+        <img class="nav-arrow next"
+             ng-click="imageBrowseDialogController.next()"
+             ng-show="imageBrowseDialogController.showNavigation()"
+             src="images/icon-arrow-right.svg" alt="{{ 'NEXT' | translate}}"/>
+
+        <div class="paginator" ng-show="imageBrowseDialogController.showNavigation()">
+            <span class="page-circle"
+                  ng-repeat="image in imageBrowseDialogController.images"
+                  ng-class="{'current' : imageBrowseDialogController.current === $index}"></span>
+        </div>
+
+    </md-dialog-content>
+</md-dialog>

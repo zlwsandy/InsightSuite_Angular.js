@@ -1,0 +1,71 @@
+<!--Tab List-->
+<div class="toolbar-container">
+    <md-toolbar class="header-bar" fi-scroll-shrink target="true" ng-class="{'no-action-bar' : !insightTabController.showToolbar() && !insightTabController.isSettingsVisible()}">
+        <div layout="row" class="md-title">
+            <h1>
+                <span ng-if="!insightTabController.isCreate">{{insightTabController.insight.name}}</span>
+                <span ng-if="insightTabController.isCreate">{{'NEW_INSIGHT' | translate}}</span>
+            </h1>
+        </div>
+        <div layout="row" class="tab-list">
+            <div flex="40" layout="row" layout-align="start center">
+                <div ng-repeat="tabOption in insightTabController.tabList" ng-if="tabOption.visible" class="insight-tab" ng-class="{'disabled': insightTabController.isDisabledTab(tabOption.name)}"ng-show="insightTabController.isAdmin || tabOption.name !== 'games'" id="insight-setup-{{tabOption.name}}" layout="column" ng-click="(insightTabController.isDisabledTab(tabOption.name)) || insightTabController.openTab(tabOption)" ng-disabled="insightTabController.isDisabledTab(tabOption.name)">
+                    <span class="insight-tab-text">{{tabOption.translate | translate}}</span>
+                    <div ng-show="insightTabController.selectedTab() === tabOption.name" class="insight-setup-icon-inkbar"></div>
+                </div>
+            </div>
+        </div>
+    </md-toolbar>
+
+    <!--Insight Tab Toolbar with Selects-->
+    <md-toolbar md-theme="altTheme" class="action-bar" layout="row" layout-align="start center" ng-show="insightTabController.showToolbar()">
+        <fi-locale-select class="locale-select" locales="insightTabController.locales"
+                          flex="25"
+                          current-locale="insightTabController.currentLocale"
+                          change="insightTabController.localeChange(current)"
+                          disabled="insightTabController.isLocaleSelectDisabled()"
+                          visible="insightTabController.isLocaleSelectVisible()"
+                          results-status-only="true">
+        </fi-locale-select>
+
+        <div class="print-only print-spacer" ng-if="insightTabController.isLocaleSelectVisible()"></div>
+
+        <fi-segment-select class="segment-select"
+                           flex="25"
+                           insight="insightTabController.insight"
+                           segments="insightTabController.getSegments()"
+                           disabled="insightTabController.isSegmentSelectDisabled()"
+                           visible="insightTabController.isSegmentSelectVisible()"
+                           current-segment="insightTabController.currentSegment"
+                           current-locale="insightTabController.currentLocale"
+                           change="insightTabController.segmentChange(current)">
+        </fi-segment-select>
+
+        <div class="print-only print-spacer" ng-if="insightTabController.isSegmentSelectVisible() && insightTabController.showCompletedDateOnPrint()"></div>
+
+        <p class="print-only completed-date" ng-if="insightTabController.showCompletedDateOnPrint()" flex><span>{{ 'COMPLETED' | translate }}:</span> {{insightTabController.completedDate | date:'MM/dd/yyyy'}}</p>
+
+        <md-button aria-label="{{ 'ADD_NEW_ITEM' | translate }}" flex
+                   ng-disabled="insightTabController.isAddItemDisabled()"
+                   ng-if="insightTabController.isAddItemVisible()"
+                   ng-click="insightTabController.addItem($event)">
+            <span class="v-align-middle uppercase-font dark-text">{{ 'ADD_NEW_ITEM' | translate }}</span>
+            <md-icon md-svg-icon="/app/images/ic_add_24px.svg" class="dark-text"></md-icon>
+        </md-button>
+
+        <md-menu id="optionsMenu" ng-if="insightTabController.isOptionsMenuVisible()" class="options-menu" md-position-mode="target-right target" flex>
+            <md-button id="optionsMenuButton" class="options-menu-button" ng-click="insightTabController.openMenu($mdOpenMenu, $event)">
+                <span class="options-menu-label">{{ 'OPTIONS' | translate }}</span>
+                <md-icon md-menu-origin md-svg-icon="/app/images/icon-options.svg" class="options-menu-icon"></md-icon>
+            </md-button>
+            <md-menu-content width="4" class="options-menu-content">
+                <md-menu-item id="optionsMenuItem-{{opt.value}}" ng-repeat="opt in insightTabController.menuOptions" class="options-menu-item">
+                    <button class="md-button md-default-theme menu-item-button" ng-disabled="{{opt.disable}}" ng-click="insightTabController.selectOption($index)" >{{opt.label}}</button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-toolbar>
+</div>
+
+<!--Tab Content-->
+<div ui-view="insightTabView" flex class="content-container"></div>

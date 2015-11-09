@@ -1,0 +1,20 @@
+<md-content>
+    <div ng-controller="WaveInsightController as waveInsightController">
+        <md-list>
+            <div id="waveNoInsightMsg" ng-if="waveInsightController.insights.length === 0 && !waveInsightController.showProgressLoader" class="action-row text-align-center"> {{ 'INSIGHT_NONE_DISPLAY' | translate }} </div>
+            <md-list-item ng-repeat="insight in waveInsightController.insights | filter:waveController.localeFilter">
+                <div class="md-list-item-text" flex="1">
+                    <div class="md-tile-content" layout="row">
+                        <div flex="10">
+                            <p><fi-locale locale="{{insight.locale}}"></fi-locale></p></div>
+                        <div flex>
+                            <p>{{insight.basketName}}</p></div>
+                        <div flex>
+                            <p>{{insight.gameRunSummaryStatus | translate}}</p></div>
+                    </div>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </div>
+</md-content>

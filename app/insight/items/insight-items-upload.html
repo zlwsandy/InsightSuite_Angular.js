@@ -1,0 +1,84 @@
+<md-dialog
+    flow-init="{target: '/api/insightlocale/' + insightSetupItemsUploadController.gameRun.gameRunId + '/itemimport'}"
+    flow-files-submitted="insightSetupItemsUploadController.fileUpload($files, $event, $flow)"
+    flow-file-added="insightSetupItemsUploadController.fileAdded($file, $event, $flow)"
+    flow-file-success="insightSetupItemsUploadController.fileSuccess($file, $message, $flow)"
+    flow-file-progress="insightSetupItemsUploadController.fileProgress($file, $flow)"
+    flow-file-error="insightSetupItemsUploadController.fileError($file, $message, $flow)"
+    md-theme="dialogTheme" class="md-primary dialog-fixed-width">
+    <!-- (x) close dialog button -->
+    <md-button id="uploadFileCloseBtn" class="md-icon-button btn-close md-primary md-hue-3" ng-click="insightSetupItemsUploadController.closeDialog($flow)" aria-label="{{ 'CLOSE' | translate}}">
+        <md-icon md-svg-icon="images/ic_close_24px.svg"></md-icon>
+    </md-button>
+    <!-- tabs -->
+    <md-tabs class="md-primary insight-items-dialog-tabs" md-selected="insightSetupItemsUploadController.selectedTabIndex">
+        <!-- upload tab -->
+        <md-tab id="uploadTab" label="{{ 'UPLOAD_ITEMS' | translate}}" ng-click="insightSetupItemsUploadController.test()" ie-tab-inkbar>
+            <!-- drag and drop container -->
+            <div flex class="alert drag-drop-box insight-item-upload-content" flow-drop ng-show="!insightSetupItemsUploadController.uploading && !insightSetupItemsUploadController.showZipMsg">
+                <p>{{ 'DRAG_AND_DROP_UPLOAD' | translate: '{fileExtensions: "XLS, XLSX, or ZIP"}' }}</p>
+                <md-button id="uploadFileChooseFileBtn" class="btn-default-action" type="file" flow-btn flow-attrs="{accept: '.xls,.xlsx,.zip'}">{{ 'OR_CHOOSE_A_FILE' | translate }}</md-button>
+            </div>
+
+            <!-- progress bar container -->
+            <div flex md-theme="default" class="progress-container" ng-show="insightSetupItemsUploadController.uploading">
+                <p>{{ 'FILE_IS_UPLOADING' | translate }}</p>
+                <md-progress-linear md-mode="determinate" value="{{ insightSetupItemsUploadController.determinateVal }}"></md-progress-linear>
+            </div>
+
+            <!-- zip msg container -->
+            <div flex class="progress-container" ng-show="insightSetupItemsUploadController.showZipMsg">
+                <p>{{ 'ZIP_FILE_PROCESSING' | translate }}</p>
+                <md-button id="zipFileCloseBtn" class="md-raised md-accent" ng-click="insightSetupItemsUploadController.closeDialog($flow)">{{ 'CLOSE' | translate }}</md-button>
+            </div>
+        </md-tab>
+
+        <!-- browse items tab -->
+        <md-tab id="browseItemsTab" label="{{ 'BROWSE_ITEMS' | translate}}" ie-tab-inkbar>
+            <div flex class="pad-horizontal">
+                <div class="data-grid" flex="100" layout="row" layout-wrap layout-align="start end">
+                    <div>
+                        <h5 class="secondary-text font-weight-normal insight-browse-item-title">{{ 'RECENT_ITEMS' | translate}}</h5>
+                    </div>
+                </div>
+
+                <div layout="column" layout-align="center center" ng-show="insightSetupItemsUploadController.showProgressLoader" >
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+
+                <div layout="column" layout-align="center center" ng-if="insightSetupItemsUploadController.showNoItemsMessage()">
+                    <p>{{ 'NO_ITEMS' | translate }}</p>
+                </div>
+
+                <div id="item-{{insightSetupItemsUploadController.item.itemId}}" class="data-grid"
+                        flex="100" layout="row" layout-wrap layout-align="start start"
+                        ng-if="!insightSetupItemsUploadController.showNoItemsMessage()">
+                    <div layout="column" class="pad-horizontal insight-browse-item-container"
+                        ng-repeat="item in insightSetupItemsUploadController.recentItems">
+                        <md-tooltip md-direction="top">{{item.name}}</md-tooltip>
+                        <fi-img-crop img-src="{{item.primaryImage.thumbnailUrl}}" img-alt={{item.name}}
+                                  img-class="img-crop left-align" img-height="125" img-width="125"></fi-img-crop>
+                        <div class="insight-browse-items-name" layout-wrap>
+                            {{item.name}}
+                        </div>
+                        <div class="insight-browse-items-item-number uppercase-font">
+                            {{item.number}}
+                        </div>
+
+                    </div> <!-- end repeat -->
+                </div>
+            </div>
+        </md-tab>
+    </md-tabs>
+
+    <!-- download template button -->
+    <div class="md-actions insight-items-dialog" layout="row">
+        <md-button id="browseItems" class="btn-default-action" disabled="true"
+                    ng-show="insightSetupItemsUploadController.isBrowseItemsVisible()">Browse All Items</md-button>
+        <md-button href="/html/help/itemUploadTemplate.xls"
+            ng-show="insightSetupItemsUploadController.isDownloadTemplateVisible()">
+          {{ 'DOWNLOAD_TEMPLATE' | translate}} <md-icon class="md-primary" md-svg-src="images/ic_file_download_24px.svg">
+        </md-button>
+          <span flex></span>
+    </div>
+</md-dialog>

@@ -1,0 +1,18 @@
+<md-dialog md-theme="dialogTheme" aria-label="Dialog" class="dialog comments-dialog" flex="70">
+    <md-toolbar>
+        <div class="md-toolbar-tools" layout-align="space-between" layout="row">
+            <h2>{{'COMMENTS' | translate}}</h2>
+            <md-button class="md-icon-button" ng-click="itemCommentsDialogController.close()">
+                <md-icon md-svg-src="images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content flex class="display-inline-block">
+        <p layout="row" layout-align="end" class="tertiary-text">
+            {{itemCommentsDialogController.comments.length}} {{'COMMENTS' | translate}}
+        </p>
+        <item-comments comments="itemCommentsDialogController.comments"
+                       show-hidden="itemCommentsDialogController.isAdmin || itemCommentsDialogController.isCompanyAdmin">
+        </item-comments>
+    </md-dialog-content>
+</md-dialog>

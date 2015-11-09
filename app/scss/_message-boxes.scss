@@ -1,0 +1,52 @@
+.message {
+
+  left: 15px;
+  right: 15px;
+  top: 15px;
+
+  background-color: $fi-blue;
+  color: $fi-white;
+
+  border: 1px solid $fi-base-grey;
+
+  &.ng-enter {
+    animation: 0.5s fadeInDown ease;
+    opacity: 0;
+  }
+  &.ng-enter.ng-enter-active {
+    opacity: 1;
+  }
+
+  &.ng-leave {
+    animation: 0.5s fadeOutUp ease;
+    opacity: 1;
+  }
+  &.ng-leave.ng-leave-active {
+    opacity: 0;
+  }
+}
+
+.message-warn {
+  background-color: $fi-orange;
+}
+
+.message-error {
+  background-color: $fi-error-background;
+  color: $fi-error-text;
+}
+
+.message-success {
+  background-color: $fi-green;
+}
+
+.message-body {
+
+  padding: {
+      left: 15px;
+      right: 15px;
+  }
+}
+
+.message-button {
+  color: $fi-black;
+}

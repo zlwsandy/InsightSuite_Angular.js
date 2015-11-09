@@ -1,0 +1,12 @@
+<div flex layout="row" >
+    <md-icon ng-click="scroll('left')" md-svg-src="images/ic_backward_24px.svg" class="rollover-action-button-inner"></md-icon>
+    <span flex="90" class="insight-details-scroll-container">
+        <ul class="insight-details-list horizontal">
+            <li ng-repeat="detail in itemDetails">
+                <p class="title">{{detail.itemName}}</p>
+                <p class="value">{{detail.itemValue}}</p>
+            </li>
+        </ul>
+    </span>
+    <md-icon md-svg-src="images/ic_forward_24px.svg" ng-click="scroll('right')" class="rollover-action-button-inner"></md-icon>
+</div>

@@ -1,0 +1,30 @@
+[
+  {
+    gameItemId: 10,
+    id: 1,
+    negativeFrequency: 2,
+    positiveFrequency: 15,
+    word: "Now"
+  },
+  {
+    gameItemId: 20,
+    id: 2,
+    negativeFrequency: 2,
+    positiveFrequency: 12,
+    word: "time"
+  },
+  {
+    gameItemId: 70,
+    id: 7,
+    negativeFrequency: 4,
+    positiveFrequency: 3,
+word: "aid"
+  },
+  {
+    gameItemId: 80,
+    id: 8,
+    negativeFrequency: 7,
+    positiveFrequency: 1,
+    word: "country"
+  }
+]

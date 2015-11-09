@@ -1,0 +1,20 @@
+<md-dialog md-theme="dialogTheme" aria-label="Dialog" class="dialog" flex="40">
+    <md-toolbar>
+        <div class="md-toolbar-tools" layout-align="space-between" layout="row">
+            <h2>{{dialogConfirmServiceController.title | translate}}</h2>
+            <md-button class="md-icon-button" ng-click="dialogConfirmServiceController.handleClick()">
+                <md-icon md-svg-src="images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <p layout="row">
+             {{dialogConfirmServiceController.message | translate}}
+        </p>
+        <p layout="row" layout-align="end" class="dialog-button-container">
+            <md-button ng-repeat="button in dialogConfirmServiceController.buttons" md-theme="default" md-no-ink ng-click="dialogConfirmServiceController.handleClick($index)" class="{{button.className}}">
+                {{button.translateKey | translate}}
+            </md-button>
+        </p>
+    </md-dialog-content>
+</md-dialog>

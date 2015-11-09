@@ -1,0 +1,219 @@
+/* Overrides for styling inconsistencies / bugs in Material Design
+
+  These are not styles that augment MD (i.e. applying padding to all md-selects, etc.  Classes here
+  should be meant to fix poor style choices or bugs inside MD styles
+*/
+
+/*TODO Check if this is necessary once version 1.0 of material design is released*/
+.ng-scope.md-default-theme.md-top.md-left.md-right {
+  max-width: 100% !important; /*md-hack*/
+}
+
+/* toolbar selects */
+md-toolbar {
+
+  /* vertically center toolbar content. */
+  .md-toolbar-tools {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 0 12px;
+  }
+
+  .md-button.bold-font {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  md-select {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+
+    /* override for dropdown label in toolbar */
+    &.md-altTheme-theme {
+
+      .md-select-label.md-placeholder {
+        color: $fi-black;
+      }
+    }
+
+    .md-select-value {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      align-items: center;
+      position: relative;
+      border-bottom: 0;
+      box-sizing: border-box;
+      min-width: 64px;
+      padding: 0;
+      color: $fi-black;
+    }
+  }
+}
+
+md-select .md-select-icon {
+  float: right; /*md-hack*/
+}
+
+.md-select-label *:first-child {
+  -ms-flex-preferred-size: auto;
+}
+
+.md-sidenav-right.md-whiteframe-z2.right-nav-slider {
+  position: fixed;
+}
+
+md-toolbar.md-default-theme.md-hue-3 md-icon {
+  color: $fi-white;
+}
+
+md-list {
+  padding: 0;
+}
+/*  In firefox, number inputs will expand outside the width of md-input-container
+https://github.com/angular/material/issues/1957 */
+md-input-container input[type="number"] {
+  width: 100%; /*mdhack*/
+}
+
+/* NOTE: fixes ripple effect / row select on md-list-item.  Add this class to your md-list-item element */
+/* TODO: remove once this is fixed in material design */
+.disable-md-clickable .md-ripple-container {
+  display: none;
+}
+/* setup tooltips to be used for form errors */
+md-tooltip {
+  z-index: 99999;
+}
+md-tooltip.md-default-theme.error .md-background {
+  background-color: rgba(244,67,54,0.7);
+}
+md-icon.rollover-action-button-inner {
+  vertical-align: baseline;
+}
+.md-fab.md-button.rollover-action-button-outer {
+  height: 40px;
+  width: 40px;
+}
+.md-button.md-altTheme-theme.md-primary.md-fab.md-button.rollover-action-button-outer {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+/* Turns off padding for md-list-items */
+md-list-item.no-padding {
+  padding: 0;
+}
+
+/* remove set height of 64px causing a scrollbar on toolbars containing select elements */
+.md-toolbar-tools {
+  overflow: hidden;
+  height: auto;
+  max-height: auto;
+}
+
+/* override font color for headers */
+md-toolbar {
+  color: $fi-white;
+}
+
+/* overrides as per the mockups
+   note: the altTheme primary grey background is the same color as the slider bar background
+         so the bar is darked */
+md-switch {
+
+  & .md-bar {
+    background-color: $fi-grey-switch-alpha-50;
+  }
+
+  & .md-thumb {
+    background-color: $fi-grey-switch;
+  }
+
+  &.md-altTheme-theme {
+
+    & .md-bar {
+      background-color: $fi-grey-switch-alpha-50;
+    }
+
+    & .md-thumb {
+      background-color: $fi-grey-switch;
+    }
+  }
+}
+
+/* hover effect doesn't work with updated material 9.8 */
+md-list {
+
+  md-list-item {
+
+    button {
+
+      &.md-button {
+
+        &.md-warn {
+
+          &:hover {
+            background-color: $fi-light-grey;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Just use the fade out when closing a dialog instead of the shrink. */
+md-dialog.transition-out {
+  -webkit-transform: translate(0, 0);
+  -moz-tranform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -ms-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  opacity: 0;
+}
+
+/* remove top border on action button panes. */
+md-dialog .md-actions {
+  border-top-width: 0px !important;
+}
+
+/* Fix focus style for default buttons in dialogs */
+.md-button.md-dialogTheme-theme:not([disabled]).md-focused {
+    background-color: $fi-base-black
+}
+
+/* Fix text color for buttons in alt theme toolbar */
+md-toolbar.md-altTheme-theme .md-button {
+    color: $fi-white;
+}
+/* ... Unless the button is a .btn-text-action */
+md-toolbar.md-altTheme-theme .btn-text-action {
+    color: $fi-black;
+}
+
+/* Fix disabled style for default buttons in dialogs */
+.md-button.md-dialogTheme-theme[disabled] {
+    color: $fi-white;
+
+    md-icon {
+      color: $fi-white;
+    }
+}
+
+/* Show md-menu-items as being disabled when disabled */
+.md-open-menu-container.md-active > md-menu-content > * {
+    &[disabled], &:hover[disabled], &.disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+}
+
+//Set to Helvetica Neue, override material design for classes that have a font-family
+.md-bottom-sheet .md-subheader, .md-chips {
+  font-family: 'Helvetica Neue', RobotoDraft, Roboto, sans-serif;
+}

@@ -1,0 +1,55 @@
+<md-content class="md-padding md-margin view-content">
+    <div class='results'>
+        <table class='results-table'>
+            <tr class='results-head'>
+                <th class='result-label' ng-if="insightResultsTableController.resultsType === 'locales'">{{ 'LOCALES' | translate}}</th>
+                <th class='result-label' ng-if="insightResultsTableController.resultsType === 'segments'">{{ 'SEGMENT' | translate}}</th>
+                <th> {{ 'TOTAL' | translate}}&nbsp{{'VALUE' | translate}} </th>
+                <th class='test-price-text'> {{ 'TEST_PRICE' | translate}}</th>
+                <th class='model-price-text' ng-if='insightResultsTableController.insightPricingEnabled && !insightResultsTableController.maxGmPricingEnabled'> {{ 'MODEL_PRICE' | translate}}</th>
+                <th class='max-gm-price-text' ng-if='insightResultsTableController.insightPricingEnabled && insightResultsTableController.maxGmPricingEnabled'> {{ 'MAX_GROSS_MARGIN' | translate}} <span>({{ 'GROSS_MARGIN_ABBREV' | translate }}%)</span></th>
+                <th> {{ 'LOVE_IT' | translate}}/{{ 'LIKE_IT' | translate}}</th>
+                <th> {{ 'HATE_IT' | translate}}/{{ 'LEAVE_IT' | translate}}</th>
+            </tr>
+            <tr class='result-row' ng-repeat='item in insightResultsTableController.itemResults' ng-if="item.showResultsPredicate"
+                ng-class="{ 'hidden-background' : item.isHidden && insightResultsTableController.resultsType === 'locales', 'show-bold' : insightResultsTableController.resultsType === 'locales' || insightResultsTableController.selectedSegment.gameRunId === item.gameRunId, 'no-segment-info' : item.isHidden || item.isGenerating}">
+                <td class='locale-label' ng-class="{'show-opacity' : !item.isItemInResults || item.isItemNotTested || item.isReferenceItem}"
+                    ng-if="insightResultsTableController.resultsType === 'locales'">
+                    <img ng-src="{{ item.flagImageUrl }}" class="insight-locale-flag"/>
+                    <span class='dark-text flag-label'>{{item.gameRunLocale}}</span>
+                    </td>
+                <td class='segment-label' ng-if="insightResultsTableController.resultsType === 'segments'">{{item.gameRunName}}</td>
+                <td ><span ng-if="item.showItemData" class='primary-text'>{{item.totalValue}}</span></td>
+                <td>
+                    <fi-currency
+                             ng-if="item.showItemData" class='primary-text'
+                             value="{{item.testPrice}}"
+                             symbol-class="uom"
+                             round-at-threshold="true"
+                             current-locale="item.currentLocale">
+                    </fi-currency></td>
+                <td ng-if="insightResultsTableController.insightPricingEnabled ">
+                    <fi-currency
+                             ng-if="!insightResultsTableController.maxGmPricingEnabled && item.showItemData" class='primary-text'
+                             value="{{item.modelPrice}}"
+                             symbol-class="uom"
+                             round-at-threshold="true"
+                             current-locale="item.currentLocale">
+                    </fi-currency>
+                    <fi-currency
+                             ng-if="insightResultsTableController.maxGmPricingEnabled && item.showItemData" class='primary-text'
+                             value="{{item.maxGMPrice}}"
+                             symbol-class="uom"
+                             round-at-threshold="true"
+                             current-locale="item.currentLocale">
+                    </fi-currency>
+                    <span ng-if="insightResultsTableController.maxGmPricingEnabled && item.showItemData" class="uom"> ({{item.maxGrossMarginPercent | percentage: 0:false}}<span>%</span>)</span></td>
+
+                <td><p ng-if="item.showItemData" class='secondary-text'>{{item.overallPositive | percentage: 0:false}}<span class="uom">%</span></p></td>
+                <td><p ng-if="item.showItemData" class='secondary-text'>{{item.overallNegative | percentage: 0:false}}<span class="uom">%</span></p></td>
+                <td ng-if="item.isHidden && insightResultsTableController.resultsType === 'segments'" class='no-info'><span class="no-segment-text">{{ 'SEGMENT_NOT_ENOUGH_INFO' | translate}}</span></td>
+                <td ng-if="item.isGenerating" class='no-info'><span class="segment-is-generating">{{ 'GENERATING' | translate}}</span></td>
+            </tr>
+        </table>
+    </div>
+</md-content>

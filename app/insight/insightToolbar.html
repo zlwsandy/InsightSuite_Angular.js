@@ -1,0 +1,41 @@
+<md-toolbar id="insightsToolbar" class="md-primary md-hue-3" layout="row" layout-align="space-around center">
+  <md-select ng-model="toolbar.waveFilter" md-on-open="toolbar.loadWaves()" id="insightWaveFilter" placeholder="{{'WAVE' | translate}}">
+    <md-option ng-value="" translate>ALL</md-option>
+    <md-option ng-value="wave.name" ng-repeat="wave in toolbar.waves">
+      {{wave.name}}
+    </md-option>
+  </md-select>
+
+  <md-select ng-model="toolbar.localeFilter" md-on-open="toolbar.loadLocales()" id="insightLocaleFilter" placeholder="{{'ALL' | translate}}">
+    <md-option ng-value="" translate>ALL</md-option>
+    <md-option ng-value="locale.locale" ng-repeat="locale in toolbar.locales">
+      <fi-locale locale="{{locale.locale}}"></fi-locale>
+    </md-option>
+  </md-select>
+
+  <md-input-container>
+    <label translate>SEARCH_BY_INSIGHT</label>
+    <input type="text" ng-model="toolbar.insightSearch" ng-model-options="{ debounce: 500 }">
+  </md-input-container>
+
+  <md-select ng-model="toolbar.departmentFilter" md-on-open="toolbar.loadDepartments()" id="insightDepartmentFilter" placeholder="{{'DEPARTMENT' | translate}}">
+    <md-option ng-value="" translate>ALL</md-option>
+    <md-option ng-value="department.departmentId" ng-repeat="department in toolbar.departments">
+      {{department.name}}
+    </md-option>
+  </md-select>
+
+  <md-select ng-model="toolbar.statusFilter" id="insightStatusFilter" placeholder="{{'ALL' | translate}}">
+    <md-option ng-value="" translate>ALL</md-option>
+    <md-option ng-value="status.value" ng-repeat="status in toolbar.statuses" translate>
+      {{status.translation}}
+    </md-option>
+  </md-select>
+
+  <!-- Show the switch only if there are multiple locales. -->
+  <div ng-show="toolbar.locales.length > 1">
+    <md-switch ng-model="toolbar.isGroupedByLocale" ng-change="toolbar.switchGroupBy();" id="insightGroupByLocaleSwitch" class="md-primary md-hue-2" md-no-ink aria-label="{{'GROUP_LOCALES' | translate}}">
+      {{'GROUP_LOCALES' | translate}}
+    </md-switch>
+  </div>
+</md-toolbar>

@@ -1,0 +1,42 @@
+<md-dialog aria-label="Dialog" class="dialog ticket-price-dialog" flex="25">
+    <md-toolbar md-theme="dialogTheme">
+        <div class="md-toolbar-tools" layout-align="space-between" layout="row">
+            <h2>{{ 'SET_TICKET_PRICE' | translate }}</h2>
+            <md-button class="md-icon-button" ng-click="ticketPriceDialogController.close('cancel')">
+                <md-icon md-svg-src="images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content flex class="display-inline-block overflow-hidden">
+        <form name="ticketPriceForm">
+            <md-input-container>
+
+                <fi-currency-input
+                        name="ticketPrice"
+                        label="{{ 'ENTER_TICKET_PRICE_TEXT' | translate:ticketPriceDialogController.currentLocale }}"
+                        class="ticket-price-input"
+                        min="{{ticketPriceDialogController.minAllowable}}"
+                        max="{{ticketPriceDialogController.maxAllowable}}"
+                        locale-code="{{ticketPriceDialogController.currentLocale.locale}}"
+                        required="true"
+                        ng-model="ticketPriceDialogController.ticketPrice">
+                </fi-currency-input>
+
+                <div class="message-container" ng-messages="ticketPriceForm.ticketPrice.$error" ng-if='ticketPriceForm.ticketPrice.$dirty'>
+                    <div ng-message="required" class="form-message">{{ 'ERROR_INPUT_REQUIRED' | translate }}</div>
+                    <div ng-message="localeNumber" class="form-message">{{ 'ERROR_INPUT_FORMAT' | translate:ticketPriceDialogController.validationParams }}</div>
+                    <div ng-message="range" class="form-message">{{ 'ERROR_INPUT_RANGE' | translate:ticketPriceDialogController.validationParams }}</div>
+                </div>
+            </md-input-container>
+        </form>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button ng-click="ticketPriceForm.$valid && ticketPriceDialogController.close('save')" ng-disabled="!ticketPriceForm.$valid" class="btn-positive-action">
+            {{ 'SAVE' | translate }}
+        </md-button>
+        <md-button ng-click="ticketPriceDialogController.close('cancel')" class="btn-text-action">
+            {{ 'CANCEL' | translate }}
+        </md-button>
+    </div>
+</md-dialog>

@@ -1,0 +1,15 @@
+.demand-curve, .ticket-price-curve {
+  width: 72%;
+  float: left;
+
+  .highcharts-tooltip span {
+    z-index: 9999 !important;
+    padding: 5px;
+    background-color: rgba($fi-white, 0.9);
+    border: 1px solid $fi-orange;
+  }
+}
+
+.highcharts-xaxis-labels, .price-label {
+  font-family: 'Helvetica Neue', RobotoDraft, Roboto, sans-serif;
+}

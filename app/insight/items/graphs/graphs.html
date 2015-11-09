@@ -1,0 +1,57 @@
+<md-content class="md-padding view-content">
+    <div>
+        <ticket-price-curve
+                ng-if="insightResultsItemDetailController.showTicketPriceCurve"
+                item="insightResultsItemDetailController.item"
+                current-locale="insightResultsItemDetailController.currentLocale"
+                insight-pricing-enabled="insightResultsItemDetailController.insight.pricingEnabled"
+                max-gm-pricing-enabled="insightResultsItemDetailController.insight.maxGrossMargin">
+        </ticket-price-curve>
+
+        <demand-curve
+                ng-if="!insightResultsItemDetailController.showTicketPriceCurve"
+                item="insightResultsItemDetailController.item"
+                current-locale="insightResultsItemDetailController.currentLocale"
+                insight-pricing-enabled="insightResultsItemDetailController.insight.pricingEnabled"
+                max-gm-pricing-enabled="insightResultsItemDetailController.insight.maxGrossMargin">
+        </demand-curve>
+
+
+    </div>
+    <div class="demand-curve-button-container">
+        <div layout="row">
+        <md-button translate="ADD_TICKET_PRICE_BUTTON"
+                   aria-label="{{ 'ADD_TICKET_PRICE_BUTTON' | translate }}"
+                   type="button" ng-click="insightResultsItemDetailController.showTicketPriceDialog()"
+                   class="btn-alternative-action ticket-price-button"></md-button>
+                   </div>
+        <md-radio-group id="demandTicket" ng-model="insightResultsItemDetailController.selectedGraph">
+            <div layout="row" class="ticket-price-change primary-text" ng-if="insightResultsItemDetailController.item.ticketPrice">
+
+                <md-radio-button id="ticketCurveButton"
+                                 value="ticket-price"
+                                 aria-label="ticket-price"
+                                 class="ticket-button"
+                                 ng-click="insightResultsItemDetailController.toggleTicketPriceCurve(true)">
+                </md-radio-button>
+                <fi-currency class="ticket-price"
+                             value="{{insightResultsItemDetailController.item.ticketPrice}}"
+                             symbol-class="demand-currency"
+                             round-at-threshold="true"
+                             current-locale="insightResultsItemDetailController.currentLocale">
+                </fi-currency>
+                <md-icon class="delete-ticket-price"
+                         md-svg-src="images/ic_close_24px.svg"
+                         ng-click="insightResultsItemDetailController.clearTicketPrice()"></md-icon>
+            </div>
+            <div layout="row" class="demand-curve-change primary-text" ng-if="insightResultsItemDetailController.item.ticketPrice">
+                <md-radio-button class="demand-button"
+                                 value="demand-curve"
+                                 aria-label="demand-curve"
+                                 ng-click="insightResultsItemDetailController.toggleTicketPriceCurve(false)">
+                </md-radio-button>
+                <span class='demand'>{{'SHOW_DEMAND_CURVE' | translate}}</span>
+            </div>
+        </md-radio-group>
+    </div>
+</md-content>

@@ -1,0 +1,155 @@
+<section class="item-detail-report">
+    <header class="print-header report-row clearfix">
+        <div class="header-column left">
+            <p class="header-item-name"><img ng-show="itemDetailReportController.showLocaleFlag" class="flag-image" ng-src="{{itemDetailReportController.currentLocale.desktopFlagUrl}}" alt="Flag Image"/> {{itemDetailReportController.insight.name}} <span ng-show="itemDetailReportController.showLocaleCode" class="header-locale-code">({{itemDetailReportController.localeCode}})</span></span></p>
+            <p class="header-text black" ng-class="{'left' : itemDetailReportController.showLocaleFlag}"><span>{{ 'SEGMENT' | translate }}: </span><span>{{itemDetailReportController.currentSegment.gameRunName}}</span></p>
+            <p class="header-text" ng-class="{'left' : itemDetailReportController.showLocaleFlag, 'display-none' : !itemDetailReportController.showLocaleFlag}">{{ 'RESULTS_COMPLETED' | translate }}: {{itemDetailReportController.insightLocale.gameRunCompletedDate | date:'d MMMM y'}}</p>
+        </div>
+        <div class="header-column right" ng-hide="true">
+            <p class="header-text">{{ 'SORT_BY_TOTAL_VALUE' | translate }}</p>
+            <p class="header-text">{{ 'ITEM_X_OF_TOTAL' | translate:{current : 1, total : 10} }}</p>
+        </div>
+    </header>
+    <div class="report-row clearfix">
+        <insight-results-item
+                class="report-item-results"
+                hide-image="true"
+                item="itemDetailReportController.item"
+                current-locale="itemDetailReportController.insightLocale"
+                view-type="'list'"
+                insight="itemDetailReportController.insight">
+        </insight-results-item>
+    </div>
+    <div class="report-row clearfix">
+        <div class="report-column left">
+            <fi-img-crop img-src={{itemDetailReportController.item.primaryImage.fullsizeUrl}}
+                         img-alt={{itemDetailReportController.item.name}}
+                         img-width="420"
+                         img-height="420"
+                         img-class="item-detail-report-image">
+            </fi-img-crop>
+        </div>
+        <div class="report-column right">
+            <div>
+                <p class="report-section-title">{{ 'SENTIMENTS_LABEL' | translate }}</p>
+                <sentiment-bar-chart
+                        hide-sentiment-labels="true"
+                        item="itemDetailReportController.item"
+                        current-locale="itemDetailReportController.currentLocale">
+                </sentiment-bar-chart>
+            </div>
+
+            <div class="word-count-bar-chart">
+
+                <div class="chart-container">
+                    <p class="report-section-title">{{ 'TOP_WORDS' | translate }}</p>
+                    <word-count-bar-chart
+                            height="200"
+                            top-words="itemDetailReportController.topWords"
+                            positive-words="itemDetailReportController.positiveWords"
+                            negative-words="itemDetailReportController.negativeWords">
+                    </word-count-bar-chart>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="report-row clearfix">
+
+        <!--Locale Table-->
+        <div class="report-column left" ng-if="itemDetailReportController.insightItemLocales.length > 1">
+            <table class="report-table locales">
+                <thead>
+                    <tr>
+                        <td>{{ 'LOCALES' | translate }}</td>
+                        <td>{{ 'TOTAL' | translate }}<br>{{ 'VALUE' | translate }}</td>
+                        <td>{{ 'LOVE_IT' | translate }}<br>{{ 'LIKE_IT' | translate }}</td>
+                        <td>{{ 'LEAVE_IT' | translate }}<br>{{ 'HATE_IT' | translate }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="localeResult in itemDetailReportController.insightItemLocales">
+                        <td class="flag-col"><img class="flag-image" ng-src="{{localeResult.flagImageUrl}}" alt="Flag Image"/></td>
+                        <td>{{localeResult.totalValue | number:itemDetailReportController.getTotalValuePrecision()}}</td>
+                        <td>{{localeResult.overallPositive | percentage: 0:false}}<span class="uom">%</span></td>
+                        <td>{{localeResult.overallPositive | percentage: 0:false}}<span class="uom">%</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="report-column right" ng-if="itemDetailReportController.insightPricingEnabled">
+            <div>
+                <p class="report-section-title margin-left">{{ 'DEMAND_CURVE_LABEL' | translate }}</p>
+                <demand-curve
+                        item="itemDetailReportController.item"
+                        current-locale="itemDetailReportController.currentLocale"
+                        insight-pricing-enabled="itemDetailReportController.insight.pricingEnabled"
+                        max-gm-pricing-enabled="itemDetailReportController.insight.maxGrossMargin">
+                </demand-curve>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <header class="print-header report-row clearfix">
+        <div class="header-column left">
+            <p class="header-item-name"><img class="flag-image" ng-src="{{itemDetailReportController.currentLocale.desktopFlagUrl}}" alt="Flag Image"/> {{itemDetailReportController.insight.name}} <span class="header-locale-code">({{itemDetailReportController.currentLocale.locale}})</span></p>
+            <p class="header-text left">{{ 'RESULTS_COMPLETED' | translate }}: {{itemDetailReportController.insightLocale.gameRunCompletedDate | date:'d MMMM y'}}</p>
+        </div>
+        <div class="header-column right" ng-hide="true">
+            <p class="header-text">{{ 'SORT_BY_TOTAL_VALUE' | translate }}</p>
+            <p class="header-text">{{ 'ITEM_X_OF_TOTAL' | translate:{current : 1, total : 10} }}</p>
+        </div>
+    </header>
+    <div class="report-row clearfix">
+
+        <!--Segment Table-->
+        <table class="report-table segments">
+            <thead>
+            <tr>
+                <td class="segment-name-col">{{ 'SEGMENTS_HEADER' | translate }}</td>
+                <td>{{ 'TOTAL_VALUE' | translate }}</td>
+                <td ng-show="!itemDetailReportController.isAllLocales">{{ 'TEST_PRICE' | translate }}</td>
+                <td ng-show="itemDetailReportController.showModelPrice()">{{ 'MODEL_PRICE' | translate }}</td>
+                <td ng-show="itemDetailReportController.showMaxGmPrice()">{{ 'MAX_GM' | translate }}<br>{{ 'PRICE' | translate }} ({{ 'GROSS_MARGIN_ABBREV' | translate }}%)</td>
+                <td>{{ 'LOVE_IT' | translate }}<br>{{ 'LIKE_IT' | translate }}</td>
+                <td>{{ 'LEAVE_IT' | translate }}<br>{{ 'HATE_IT' | translate }}</td>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-class-odd="'odd'" ng-class-even="'even'"
+                    ng-repeat="segmentResult in itemDetailReportController.insightItemSegments.segmentGameItems">
+                    <td class="segment-name-col" ng-class="{'current' : segmentResult.gameRunId === itemDetailReportController.currentSegment.gameRunId}">{{segmentResult.gameRunName}}</td>
+                    <td class="segment-is-generating" ng-show="segmentResult.isGenerating" colspan="5">{{ 'GENERATING' | translate}}</td>
+                    <td ng-show="segmentResult.isHidden" colspan="5">{{ 'SEGMENT_NOT_ENOUGH_INFO' | translate}}</td>
+                    <td ng-hide="segmentResult.hideResults">{{segmentResult.totalValue | number:itemDetailReportController.getTotalValuePrecision()}}</td>
+                    <td ng-show="!itemDetailReportController.isAllLocales && !segmentResult.hideResults">
+                        <fi-currency
+                                 value="{{segmentResult.testPrice}}"
+                                 symbol-class="uom"
+                                 round-at-threshold="true"
+                                 current-locale="itemDetailReportController.currentLocale">
+                        </fi-currency>
+                    </td>
+                    <td ng-show="itemDetailReportController.showModelPrice() && !segmentResult.hideResults">
+                        <fi-currency value="{{segmentResult.modelPrice}}"
+                                     symbol-class="uom"
+                                     round-at-threshold="true"
+                                     current-locale="itemDetailReportController.currentLocale">
+                        </fi-currency>
+                    </td>
+                    <td ng-show="itemDetailReportController.showMaxGmPrice() && !segmentResult.hideResults">
+                        <fi-currency value="{{segmentResult.maxGMPrice}}"
+                                     symbol-class="uom"
+                                     round-at-threshold="true"
+                                     current-locale="itemDetailReportController.currentLocale">
+                        </fi-currency>
+                    </td>
+                    <td ng-hide="segmentResult.hideResults">{{segmentResult.overallPositive | percentage: 0:false}}<span class="uom">%</span></td>
+                    <td ng-hide="segmentResult.hideResults">{{segmentResult.overallNegative | percentage: 0:false}}<span class="uom">%</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

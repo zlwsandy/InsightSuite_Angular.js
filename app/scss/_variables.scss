@@ -1,0 +1,155 @@
+/**
+  Variables for use in all the SASS files
+**/
+
+/* Color Palette ------- */
+
+$fi-black : #000;
+$fi-white: #fff;
+
+
+/**
+ * fiBlue
+ *
+ * Default theme's primary palette
+ *
+ * variable name:   hex color    // material design weight  |  (primary or hue value)
+ */
+$fi-blue: #2196F3;          // 500  | md-primary
+$fi-blue-hue-1: #64B5F6;    // 300  | md-hue-1
+$fi-blue-hue-2: #003399;    // 800  | md-hue-2
+$fi-blue-hue-3: #82B1FF;    // A100 | md-hue-3
+
+/* Blues */
+$fi-dark-blue: #0D285D;
+$fi-light-blue: #5570b3;
+$fi-turquoise: #71c1e6;
+$fi-baby-blue: #bbdefb;
+
+$fi-base-blue: #1976D2;      /* UX-78 */
+$fi-base-dark-blue: #003399; /* UX-78 */
+
+/**
+ * fiOrange
+ *
+ * Default theme's accent palette
+ *
+ * Alt theme's accent palette
+ *
+ * variable name:   hex color    // material design weight  |  (primary or hue value)
+ */
+$fi-orange: #FF9100;        // 500  | md-accent
+$fi-orange-hue-1: #FFB74D;  // 300  | md-hue-1
+$fi-orange-hue-2: #FF6600;  // 800  | md-hue-2
+$fi-orange-hue-3: #FFD180;  // A100 | md-hue-3
+
+/**
+ * FiGrey
+ *
+ * Default theme's background palette
+ *
+ * Alt theme's primary palette
+ * Alt theme's background palette
+ *
+ * variable name:   hex color    // material design weight  |  (primary or hue value)
+ */
+
+/* Greys / Blacks */
+$fi-black : #000;
+$fi-base-dark-black: #333333;                   /* UX-78 */
+$fi-grey-hue-3: #212121;                        // 900  | md-hue-3
+$fi-grey-hue-2: #424242;                        // 800  | md-hue-2
+$fi-black-grey: #404040;
+$fi-base-light-black: #555555;                  /* UX-78 */
+$fi-dark-grey: #606060;
+$fi-base-black: #666666;                        /* UX-78 */
+$fi-grey-switch: #818181;
+$fi-grey: #CCCCCC;                              // 500  | md-background
+$fi-base-grey: #cccccc;                         /* UX-78 */
+$fi-light-grey: #d9d9d9;
+$fi-grey-hue-1: #E0E0E0;                        // 300  | md-hue-1
+$fi-background-grey: #EEE;
+$fi-white-grey: #f3f3f3;
+
+$fi-dark-grey-alpha-50: rgba($fi-dark-grey, 0.5);
+$fi-grey-switch-alpha-50: rgba($fi-grey-switch, 0.5);
+
+/* Reds - google material palette*/
+$fi-red: #D50000;
+$fi-scarlet : #DC143C;
+$fi-pink: #f69799;
+$fi-light-red: #ffcdd2; /* 100 */
+$fi-white-red: #ffebee; /* 50 */
+$fi-error-red: #990000;  /* UX-78 */
+
+/* Error */
+$fi-error-background: #FFCCCC;
+$fi-error-text: #990000;
+$fi-error-input: #F54236;
+
+/* Oranges */
+$fi-orange-alpha-50: rgba($fi-orange, 0.5);
+
+/* Greens */
+$fi-dark-green: #006600;
+$fi-text-green : #339900;
+$fi-green: #4caf50;
+$fi-light-green: lighten($fi-green, 10%);
+
+/* Yellows */
+$fi-yellow: #ffcc00;
+$fi-light-yellow: #fff9c4; /* 100 */
+$fi-white-yellow: #fffde7; /* 50 */
+
+/* Total Value Heat Map Colors */
+$total-value-1 : #e91421;
+$total-value-2 : #e91421;
+$total-value-3 : #ffcc00;
+$total-value-4 : #ffcc00;
+$total-value-5 : #f6ec88;
+$total-value-6 : #f6ec88;
+$total-value-7 : #99cc66;
+$total-value-8 : #99cc66;
+$total-value-9 : #43b153;
+$total-value-10 : #43b153;
+
+/* Sentiment Bar Chart Colors */
+$fi-love-it : #ff9999;
+$fi-like-it : #ffcccc;
+$fi-no-response : #eeeeee;
+$fi-neutral : #999999;
+$fi-leave-it : $fi-base-black;
+$fi-hate-it : $fi-base-dark-black;
+
+/*No data available*/
+$fi-no-data-available: #999999;
+
+/* Body */
+$body-min-width: 1200px;
+$body-font-size: 16px;
+
+
+/* Margins / Padding ------- */
+$margin-base: 15px;
+$padding-base: 15px;
+
+
+/* Border Radius ------- */
+$border-radius-base: 15px;
+
+
+/*Media Queries*/
+$desktop-xlg-width: 1200px;
+$desktop-xxlg-width: 1300px;
+
+@mixin desktop-xlg {
+  @media (min-width: #{$desktop-xlg-width}) and (max-width: #{$desktop-xxlg-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop-xxlg {
+  @media (min-width: #{$desktop-xxlg-width}) {
+    @content;
+  }
+}

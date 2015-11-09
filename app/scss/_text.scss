@@ -1,0 +1,43 @@
+/* Styles for text (colors, fonts, etc.) */
+
+.primary-text {
+  color: $fi-black;
+}
+.secondary-text {
+  color: $fi-dark-grey;
+}
+.tertiary-text {
+  color: $fi-grey;
+}
+.red-text {
+  color: $fi-error-red;
+}
+.dark-text {
+  color: $fi-black;
+}
+.light-text {
+  color: $fi-white;
+}
+.grey-text {
+  color: $fi-base-black;
+}
+
+.disabled-text {
+  color: $fi-black;
+  opacity: 0.26;
+}
+/* Domain specific text colors */
+.test-price-text {
+  color: $fi-turquoise !important;
+}
+.model-price-text {
+  color: $fi-text-green !important;
+}
+.max-gm-price-text {
+  color: $fi-black !important;
+}
+
+.fi-link {
+  color: $fi-blue;
+  text-decoration: none;
+}

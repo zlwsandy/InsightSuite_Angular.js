@@ -1,0 +1,14 @@
+<md-input-container class="no-label-container">
+    <md-select class="select-text primary sort-by-select" placeholder="{{ 'SORT_BY' | translate }}"
+               ng-disabled="FiSortBySelectController.disabled"
+               ng-if="FiSortBySelectController.visible"
+               ng-model="FiSortBySelectController.selectedValue"
+               ng-change="FiSortBySelectController.changeSortBy()"
+               id="sortBySelect">
+        <md-option ng-repeat="option in FiSortBySelectController.options"
+                   ng-value="option"
+                   ng-selected="option === FiSortBySelectController.selectedValue"
+                   id="sortByOption-{{$index}}">{{option.label}}
+        </md-option>
+    </md-select>
+</md-input-container>

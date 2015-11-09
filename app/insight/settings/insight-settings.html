@@ -1,0 +1,263 @@
+<md-toolbar  class="action-bar" md-theme="altTheme" layout="row" layout-align="end center" ng-show="!InsightSettingsController.showProgressLoader">
+    <span flex></span>
+    <div layout="right center">
+        <!-- save -->
+        <md-button id="saveSettingsButton" aria-label="insightFormSave" translate="SAVE" ng-click="InsightSettingsController.save()" ng-disabled="!(insightForm.$valid && InsightSettingsController.hasChanges())" md-theme="default" class="btn-positive-action" md-no-ink>
+        </md-button>
+        <!-- cancel -->
+        <md-button id="cancelSettingsButton" aria-label="insightFormCancel" translate="CANCEL" ng-click="InsightSettingsController.cancel($event)" ng-disabled="!(InsightSettingsController.hasChanges())" md-theme="default" class="btn-text-action" md-no-ink>
+        </md-button>
+    </div>
+</md-toolbar>
+<div layout="row" layout-align="center center" ng-show="InsightSettingsController.showProgressLoader">
+    <span flex></span>
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    <span flex></span>
+</div>
+<div class="content-container" flex>
+    <md-content md-theme="altTheme" class="ui-scroll-wrapper md-primary" fi-scroll-shrink source="true" fi-scroll-spy>
+        <md-content md-theme="default" class="ui-scroll-container md-primary">
+
+            <section layout="row" flex="100">
+                <div flex="20" class="insight-settings-sidebar">
+                    <div class="list-nav insight-settings-nav" fi-sticky fi-sticky-top="200" fi-sticky-container="ui-scroll-wrapper">
+                        <ul>
+                            <li class="active">
+                                <a id="generalLink" href="#general" fi-scroll-to scroll-target="'#general'" scroll-container="'.ui-scroll-wrapper'">
+                                    {{ 'GENERAL' | translate }}
+                                </a>
+                            </li>
+                            <li ng-if="InsightSettingsController.company.i18nEnabled && !InsightSettingsController.isStyleOpt()">
+                                <a id="localesLink" href="#locales" fi-scroll-to scroll-target="'#locales'" scroll-container="'.ui-scroll-wrapper'">
+                                    {{ 'LOCALES' | translate }}
+                                </a>
+                            </li>
+                            <li ng-if="(InsightSettingsController.company.pricingEnabled || InsightSettingsController.isAdmin) && !InsightSettingsController.isStyleOpt()">
+                                <a id="pricingLink" href="#pricing" fi-scroll-to scroll-target="'#pricing'" scroll-container="'.ui-scroll-wrapper'">
+                                    {{ 'PRICING' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div flex="80">
+                    <div layout="column" flex class="md-padding margin-horizontal">
+                        <form name="insightForm" novalidate confirm-exit="InsightSettingsController.enableConfirmExit && InsightSettingsController.hasChanges()">
+
+                            <!-- General Section -->
+                            <div id="general" class="insight-settings-container">
+                                <md-input-container>
+                                    <label>{{ 'INSIGHT_NAME' | translate }}</label>
+                                    <input id="insightName" name="insightName" type="text"
+                                           ng-model="InsightSettingsController.insight.name"
+                                           ng-model-options="{ debounce: 500 }"
+                                           aria-label="{{InsightSettingsController.insight.name}}"
+                                           class="font-weight-bold" required ng-maxlength="255" fi-insight-name fi-special-characters/>
+                                    <div ng-messages="insightForm.insightName.$error">
+                                        <div id="newNameRequiredMsg" ng-message="required">{{ 'ERROR_INPUT_REQUIRED' | translate }}</div>
+                                        <div id="newNameTooLongMsg" ng-message="maxlength">{{ 'ERROR_INPUT_TOO_LONG' | translate:'{ maxLength: "255" }' }}</div>
+                                        <div id="newSpecialCharactersExistsMsg" ng-message="fi-special-characters">{{ 'CANNOT_CONTAIN_SPECIAL_CHARACTERS' | translate }}</div>
+                                        <div id="newNameAlreadyExistsMsg" ng-message="fiInsightName">{{ 'ERROR_INSIGHT_NAME_ALREADY_EXISTS' | translate }}</div>
+                                    </div>
+                                </md-input-container>
+
+                                <div id="department-{{InsightSettingsController.insight.insightId}}"
+                                     class="pad-vertical"
+                                     layout="row"
+                                     layout-align="start center">
+
+                                    <md-input-container class="pad-bottom-none primary-select">
+                                        <label ng-if="InsightSettingsController.hasDepartments()">{{ 'DEPARTMENT' | translate }}</label>
+                                        <label ng-if="!InsightSettingsController.hasDepartments()">{{ 'NO_DEPARTMENTS_AVAILABLE' | translate }}</label>
+                                        <md-select id="departmentSelect" name="department" class="pad-none"
+                                                   ng-model="InsightSettingsController.insight.department"
+                                                   ng-disabled="!InsightSettingsController.hasDepartments()"
+                                                   aria-label="{{ 'DEPARTMENT' | translate }}" >
+                                            <md-option ng-value="department"
+                                                       ng-repeat="department in InsightSettingsController.departments | orderBy: 'name.toLowerCase()'"
+                                                       id="departmentSelect-{{department.departmentId}}">
+                                                {{ department.name }}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+
+                                    <div flex class="clear-dept-icon margin-top pad-top">
+                                        <md-icon md-svg-src="images/ic_highlight_remove_24px.svg" flex
+                                                 ng-if="InsightSettingsController.insight.department"
+                                                 ng-click="InsightSettingsController.clearDeptSelection()"></md-icon>
+                                    </div>
+                                </div>
+
+                                <div class="pad-vertical" layout="row" layout-align="start center" ng-if="InsightSettingsController.isAdmin">
+                                    <md-input-container id="gameType-{{InsightSettingsController.insight.insightId}}"
+                                                        class="pad-bottom-none primary-select">
+                                        <label>{{ 'GAME_TYPE' | translate }}</label>
+                                        <md-select id="gameTypeSelect" name="gameType" class="pad-none"
+                                                   ng-model="InsightSettingsController.insight.gameType"
+                                                   aria-label="{{ 'GAME_TYPE' | translate }}"
+                                                   ng-disabled="!InsightSettingsController.isCreate">
+                                            <md-option ng-value="gameType.value" ng-repeat="gameType in InsightSettingsController.gameTypes">
+                                                {{ gameType.value | translate }}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                </div>
+
+                                <md-input-container class="pad-vertical">
+                                    <label>{{ 'OBJECTIVE' | translate }}</label>
+                          <textarea id="insightObjective" name="objective"
+                                    ng-model="InsightSettingsController.insight.objective"
+                                    aria-label="TODO put something useful here"
+                                    aria-multiline="true"></textarea>
+                                    <!-- <div ng-messages="insightForm.objective.$error">
+                                      <div ng-message="maxlength">{{ 'ERROR_INPUT_TOO_LONG' | translate:'{ maxLength: "5000" }' }}</div>
+                                    </div> -->
+                                </md-input-container>
+                            </div>
+
+                            <!-- Locales Section -->
+                            <div id="locales" class="insight-settings-container" ng-if="InsightSettingsController.company.i18nEnabled && !InsightSettingsController.isStyleOpt()">
+                                <md-toolbar flex class="md-primary md-altTheme-theme md-hue-1 insight-settings-locale-header" layout-fill layout-padding layout="row">
+                                    <div flex>
+                                        <strong>{{ 'LOCALES' | translate | uppercase }}</strong>
+                                    </div>
+
+                                    <div flex="50">
+                                        <div flex layout="row">
+                                            <div layout="column" flex="40">&nbsp;</div>
+                                            <div layout="column" flex="60" layout-align="center start">
+                                                <strong>{{ 'CONVERSION' | translate | uppercase }}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </md-toolbar>
+                                <div layout="row" layout-align="center center" class="divider pad-vertical" ng-if="!InsightSettingsController.hasLocales">
+                                    <p>{{ 'PLEASE_SELECT_LOCALE' | translate }}</p>
+                                </div>
+                                <md-list ng-if="InsightSettingsController.hasLocales">
+                                    <md-list-item ng-repeat="locale in InsightSettingsController.insight.gameRunLocaleList"
+                                                  ng-if="locale.locale != null"
+                                                  layout="row"
+                                                  class="divider">
+                                        <div flex layout="row" layout-padding ng-class="{ 'hidden-background' : InsightSettingsController.gameRunStatusValue.isHidden(locale) }">
+                                            <div  layout="column" layout-align="center start">
+                                                <img ng-src="{{locale.flagImageUrl}}"/>
+                                            </div>
+                                            <div flex layout="column" layout-align="center start">
+                                                <div>
+                                                    <strong>{{ locale.language | uppercase }}-{{ locale.currencyCode }}</strong>
+                                                </div>
+                                                <div class="insight-settings-locale-status-label">
+                                                    {{ locale.gameRunStatus | translate }}
+                                                </div>
+                                            </div>
+
+                                            <div flex="50" layout="column">
+                                                <div layout="row">
+                                                    <div flex="40" class="insight-settings-locale-spacer">&nbsp;</div>
+                                                    <div layout="column" layout-align="center end">
+                                                        <span><strong>1</strong> {{ InsightSettingsController.company.defaultCurrencyCode }} =</span>
+                                                    </div>
+                                                    <div layout="column" flex="15">
+                                                        <ng-form name="localeform">
+                                                            <md-input-container class="pad-none">
+                                                                <md-tooltip ng-if="!localeform.conversionRate.$valid" md-direction="top" class="error">
+                                                                    <div ng-messages="localeform.conversionRate.$error">
+                                                                        <div ng-message="localeNumber" class="form-message">{{ 'ERROR_INPUT_FORMAT' | translate:InsightSettingsController.validationParams }}</div>
+                                                                        <div ng-message="range" class="form-message">{{ 'ERROR_INPUT_RANGE' | translate:InsightSettingsController.validationParams }}</div>
+                                                                    </div>
+                                                                </md-tooltip>
+                                                                <fi-currency-input
+                                                                        required="true"
+                                                                        name="conversionRate"
+                                                                        locale-code="{{ InsightSettingsController.company.defaultLocale }}"
+                                                                        ng-model="locale.conversionRate"
+                                                                        min="{{ InsightSettingsController.minConversionRate }}"
+                                                                        max="{{ InsightSettingsController.maxConversionRate }}">
+                                                                </fi-currency-input>
+                                                            </md-input-container>
+                                                        </ng-form>
+                                                    </div>
+
+                                                    <div layout="column" layout-align="center start" class="margin-left-5">
+                                                        {{ locale.currencyCode }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-list-item>
+                                </md-list>
+                                <md-button class="btn-default-action float-r margin-vertical" ng-click="InsightSettingsController.addLocale($event)" md-no-ink>
+                                    <md-icon md-svg-icon="images/ic_add_circle_24px.svg"></md-icon>
+                            <span>
+                                {{ 'ADD_LOCALE' | translate }}
+                            </span>
+                                </md-button>
+                            </div>
+
+                            <!-- Pricing Section -->
+                            <div id="pricing" class="insight-settings-container" ng-if="(InsightSettingsController.company.pricingEnabled || InsightSettingsController.isAdmin) && !InsightSettingsController.isStyleOpt()">
+                                <div layout="row">
+                                    <div layout="column">
+                                        <label class="form-label margin-bottom-5">{{ 'PRICING' | translate }}</label>
+                                        <md-switch id="insightEditPricing" ng-model="InsightSettingsController.insight.pricingEnabled" aria-label="{{ 'INSIGHT_PRICING' | translate }}" class="form-label-secondary margin-none">
+                                            {{(InsightSettingsController.insight.pricingEnabled ? 'ENABLED' : 'DISABLED') | translate }}
+                                        </md-switch>
+                                    </div>
+                                </div>
+                                <md-divider class="divider-section"></md-divider>
+                                <div layout="row">
+                                    <div layout="column" layout-fill>
+                                        <div layout="row" class="margin-top margin-bottom">
+                                            <div layout="column" flex="33">
+                                                <fi-price-control name="initialMarkdown" label="{{'INITIAL_PRICE_MARKDOWN' | translate}}" min="InsightSettingsController.insight.priceScaling.markDownCadence[1]" max="100" ng-model="InsightSettingsController.insight.priceScaling.markDownCadence[0]" enabled="false"></fi-price-control> <!-- initial is always 100 and disabled -->
+                                            </div>
+                                            <div layout="column" flex="33">
+                                                <fi-price-control name="firstMarkdown" label="{{'FIRST_MARKDOWN' | translate}}" min="InsightSettingsController.insight.priceScaling.markDownCadence[2]" max="InsightSettingsController.insight.priceScaling.markDownCadence[0] == 0 ? 0 : InsightSettingsController.insight.priceScaling.markDownCadence[0] - 1" ng-model="InsightSettingsController.insight.priceScaling.markDownCadence[1]" enabled="InsightSettingsController.insight.pricingEnabled"></fi-price-control>
+                                            </div>
+                                            <div layout="column" flex="33">
+                                                <fi-price-control name="secondMarkdown" label="{{'SECOND_MARKDOWN' | translate}}" min="InsightSettingsController.insight.priceScaling.markDownCadence[3]" max="InsightSettingsController.insight.priceScaling.markDownCadence[1] == 0 ? 0 : InsightSettingsController.insight.priceScaling.markDownCadence[1] - 1" ng-model="InsightSettingsController.insight.priceScaling.markDownCadence[2]" enabled="InsightSettingsController.insight.pricingEnabled"></fi-price-control>
+                                            </div>
+                                        </div>
+                                        <div layout="row" class="margin-top margin-bottom">
+                                            <div layout="column" flex="33">
+                                                <fi-price-control name="thirdMarkdown" label="{{'THIRD_MARKDOWN' | translate}}" min="InsightSettingsController.insight.priceScaling.markDownCadence[4]" max="InsightSettingsController.insight.priceScaling.markDownCadence[2] == 0 ? 0 : InsightSettingsController.insight.priceScaling.markDownCadence[2] - 1" ng-model="InsightSettingsController.insight.priceScaling.markDownCadence[3]" enabled="InsightSettingsController.insight.pricingEnabled"></fi-price-control>
+                                            </div>
+                                            <div layout="column" flex="33">
+                                                <fi-price-control name="fourthMarkdown" label="{{'FOURTH_MARKDOWN' | translate}}" min="0" max="InsightSettingsController.insight.priceScaling.markDownCadence[3] == 0 ? 0 : InsightSettingsController.insight.priceScaling.markDownCadence[3] - 1" ng-model="InsightSettingsController.insight.priceScaling.markDownCadence[4]" enabled="InsightSettingsController.insight.pricingEnabled"></fi-price-control>
+                                            </div>
+                                            <div layout="column" flex="33">
+                                                <fi-price-control name="clearance" label="{{'CLEARANCE' | translate}}" min="1" max="InsightSettingsController.clearanceMax == 0 ? 0 : InsightSettingsController.clearanceMax - 1" ng-model="InsightSettingsController.insight.priceScaling.clearancePercentage" enabled="InsightSettingsController.insight.pricingEnabled"></fi-price-control>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <md-divider class="divider-section"></md-divider>
+                                <div layout="row" class="margin-top margin-bottom">
+                                    <div layout="column" layout-fill>
+                                        <div>
+                                            <label class="form-label margin-bottom-5">{{ 'MAX_GROSS_MARGIN' | translate }}</label>
+                                            <md-switch id="maxGrossMargin" ng-model="InsightSettingsController.insight.maxGrossMargin" aria-label="{{ 'MAX_GROSS_MARGIN' | translate }}" ng-disabled="!InsightSettingsController.insight.pricingEnabled" class="form-label-secondary margin-none">
+                                                {{(InsightSettingsController.insight.maxGrossMargin ? 'ENABLED' : 'DISABLED') | translate }}
+                                            </md-switch>
+                                        </div>
+                                        <div>
+                                            <!-- Add Options Here (Note this is a future Story) -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <md-divider class="divider-section"></md-divider>
+                                <div layout="row" class="margin-top margin-bottom">
+                                    <div layout="column" flex="33">
+                                        <fi-price-control name="minimumSellThru" label="{{'MINIMUM_SELL_THROUGH_PERCENTAGE' | translate}}" min="0" max="99" ng-model="InsightSettingsController.insight.pricingOption.minimumSellThroughPercent" enabled="InsightSettingsController.insight.pricingEnabled && InsightSettingsController.insight.maxGrossMargin"></fi-price-control>
+                                    </div>
+                                </div>
+                            </div> <!-- end pricing section -->
+                        </form>
+                    </div>
+                </div><!-- End Right Column (main content) -->
+            </section>
+        </md-content>
+    </md-content>
+</div>

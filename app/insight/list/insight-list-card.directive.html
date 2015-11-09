@@ -1,0 +1,97 @@
+<md-list-item id="insight-{{InsightListCardController.insight.gameRunId}}" layout="column" flex="100" layout-align="space-between start"
+            ng-mouseover="isHovering = true" ng-mouseout="isHovering = false"
+            ng-class="{'insight-row-hover' : isHovering, 'hidden-background' : InsightListCardController.gameRunStatusValue.isHidden(InsightListCardController.insight)}">
+
+    <div layout="row" flex="100" layout-align="start center" layout-fill layout-padding class="insight-card">
+
+        <div class="img-container">
+            <fi-svg-icon icon="circle" css-class="indicator-icon red" svg-height="75" svg-width="75" ng-if="InsightListCardController.gameRunStatusValue.isInSetupGroup(InsightListCardController.insight) && InsightListCardController.insight.insightImageUrl"></fi-svg-icon>
+            <fi-svg-icon icon="circle" css-class="indicator-icon yellow" svg-height="75" svg-width="75" ng-if="InsightListCardController.gameRunStatusValue.isInPreviewGroup(InsightListCardController.insight) && InsightListCardController.insight.insightImageUrl"></fi-svg-icon>
+            <fi-svg-icon icon="playarrow" css-class="indicator-icon orange" svg-height="75" svg-width="75" ng-if="InsightListCardController.gameRunStatusValue.isInProgressGroup(InsightListCardController.insight) && InsightListCardController.insight.insightImageUrl"></fi-svg-icon>
+            <fi-svg-icon icon="checkmark" css-class="indicator-icon green" svg-height="75" svg-width="75" ng-if="InsightListCardController.gameRunStatusValue.isInResultsGroup(InsightListCardController.insight)  && InsightListCardController.insight.insightImageUrl"></fi-svg-icon>
+
+            <fi-img-crop ng-if="InsightListCardController.insight.insightImageUrl" img-src={{InsightListCardController.insight.insightImageUrl}} img-alt="InsightListCardController.insight.name" img-class="img-crop" img-height="75" img-width="75"></fi-img-crop>
+            <fi-img-crop ng-if="!InsightListCardController.insight.insightImageUrl" img-src="images/noimages-insight.png" img-alt="InsightListCardController.insight.name" img-class="img-crop" img-height="75" img-width="75"></fi-img-crop>
+        </div>
+
+        <div flex="80">
+            <div layout="row" layout-align="start start" layout-fill>
+                <div flex="80" class="margin-5 insight-name">
+                    <span>{{ InsightListCardController.insight.name }}</span>
+                    <span ng-if="InsightListCardController.showLanguageCurrency()">
+                        ({{ InsightListCardController.insight.language | uppercase }}-{{ InsightListCardController.insight.currency }})
+                    </span>
+                </div>
+            </div>
+
+            <!-- Insight Details Row 1-->
+            <div layout="row" layout-align="start center" layout-fill>
+                <p flex="20" class="margin-5">
+                    <span class="smaller-font grey-text">{{ 'ITEMS_TESTED' | translate }}:</span>
+                    <span class="smaller-font secondary-text"><strong>{{ InsightListCardController.insight.testItemCount }}</strong></span>
+                </p>
+                <p flex="25" class="margin-5">
+                    <span class="smaller-font grey-text">{{ 'CREATED' | translate }}:</span>
+                    <span class="smaller-font secondary-text"><strong>{{ InsightListCardController.insight.createTimeConverted | date: 'dd MMMM yyyy' }}</strong></span>
+                </p>
+                <p flex="40" class="margin-5" ng-if="InsightListCardController.gameRunStatusValue.isInResultsGroup(InsightListCardController.insight)">
+                    <span class="smaller-font grey-text">{{ 'COMPLETED' | translate }}:</span>
+                    <span class="smaller-font secondary-text"><strong>{{ InsightListCardController.insight.completionDateConverted | date: 'h:mm a EST dd MMMM yyyy' }}</strong></span>
+                </p>
+                <p flex="40" class="margin-5" ng-if="InsightListCardController.gameRunStatusValue.isInProgressGroup(InsightListCardController.insight)">
+                    <span class="smaller-font grey-text">{{ 'STARTED' | translate }}:</span>
+                    <span class="smaller-font secondary-text"><strong>{{ InsightListCardController.insight.collectionStartDateConverted | date: 'h:mm a EST dd MMMM yyyy' }}</strong></span>
+                </p>
+            </div>
+            <!-- Insight Details Row 2-->
+            <div layout="row" layout-align="start center" layout-fill>
+                <p flex="20" class="margin-5">
+                    <span class="smaller-font grey-text">{{ 'GAME' | translate }}:</span>
+                    <span class="smaller-font secondary-text"><strong>{{ InsightListCardController.insight.gameType | translate }}</strong></span>
+                </p>
+
+                <p ng-if="InsightListCardController.insight.completionPercentageStr" flex="25" class="margin-5">
+                    <span class="smaller-font grey-text">{{ 'PROGRESS' | translate }}:</span>
+                    <span class="smaller-font secondary-text"><strong>{{ InsightListCardController.insight.completionPercentage <= 105 ? 'PROGRESS_VALUE_100' : 'PROGRESS_VALUE_100_PLUS' | translate: InsightListCardController.insight}}</strong></span>
+                </p>
+            </div>
+        </div>
+
+        <div flex md-theme="altTheme" ng-show="isHovering" class="rollover-action-button-container" >
+           <!--
+                *  These will be implemented with FI-12120 and 12121
+                <md-button ng-if="InsightListCardController.gameRunStatusValue.hasResults(InsightListCardController.insight)"
+                           id="insightHideButton-{{InsightListCardController.insight.gameRunId}}"
+                           class="md-fab md-button md-primary rollover-action-button-outer"
+                           aria-label="{{ 'HIDE_INSIGHT' | translate }}">
+                    <md-tooltip>
+                        {{ 'HIDE_INSIGHT' | translate }}
+                    </md-tooltip>
+                    <md-icon md-svg-src="images/ic_visibility_24px.svg" class="rollover-action-button-inner"></md-icon>
+                </md-button>
+
+                <md-button ng-if="InsightListCardController.gameRunStatusValue.isHidden(InsightListCardController.insight)"
+                           id="insightUnhideButton-{{InsightListCardController.insight.gameRunId}}"
+                           class="md-fab md-button md-primary rollover-action-button-outer"
+                           aria-label="{{ 'UNHIDE_INSIGHT' | translate }}">
+                    <md-tooltip>
+                        {{ 'UNHIDE_INSIGHT' | translate }}
+                    </md-tooltip>
+                    <md-icon md-svg-src="images/ic_visibility_off_24px.svg" class="rollover-action-button-inner"></md-icon>
+                </md-button>
+            -->
+            <md-button ng-if="InsightListCardController.gameRunStatusValue.isInSetupGroup(InsightListCardController.insight)"
+                       id="insightMoveToPreviewButton-{{insight.gameRunId}}"
+                       class="md-fab md-mini md-primary margin-right action-button"
+                       aria-label="{{ 'MOVE_TO_PREVIEW' | translate }}"
+                       ng-click="InsightListCardController.moveToPreview($event, InsightListCardController.insight)">
+                <md-tooltip>
+                    {{ 'MOVE_TO_PREVIEW' | translate }}
+                </md-tooltip>
+                <md-icon md-svg-src="images/ic_forward_24px.svg" class="s24 action-button"></md-icon>
+            </md-button>
+        </div>
+
+    </div> <!-- end card -->
+</md-list-item>
+<md-divider ng-if="!$last"></md-divider>

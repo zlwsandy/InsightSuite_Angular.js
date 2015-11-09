@@ -1,0 +1,63 @@
+/* Styles for tabs and tab containers */
+
+.insight-tab {
+  padding: 0 $padding-base;
+  margin-top: 5px;
+  text-align: center;
+  cursor: pointer;
+  text-transform: capitalize;
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &[disabled], &.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.insight-setup-icon-inkbar {
+  margin-top: -2px; /* negative margin to keep icons from jumping */
+  border: solid $fi-orange;
+  border-width: 0 0 2px 0;
+}
+
+.insight-tab-text {
+    /* padding: 0 0 $padding-base 0; */
+    @extend .pad-bottom;
+
+    color: $fi-white;
+    font-size: ceil($body-font-size * 1.1);
+}
+
+md-tabs {
+    .md-tab, .md-tab.md-active {
+        color: $fi-black;
+        font-size: 0.875em;
+        font-weight: bold;
+        text-transform: none;
+    }
+}
+
+/* because material design specificity :( */
+md-tabs:not(.md-no-tab-content):not([md-dynamic-height]).insight-items-dialog-tabs {
+    min-height: 350px;
+}
+
+.tabs-height {
+  height: 100%;
+  min-height: 250px; // thanks safari
+}
+
+md-tabs.md-tabsTheme-theme md-tab-item span {
+    color: $fi-black;
+    opacity: 1;
+    font-weight: bold;
+}
+
+@media print {
+  .tab-list {
+    display: none;
+  }
+}

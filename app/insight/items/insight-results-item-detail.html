@@ -1,0 +1,74 @@
+<div class="toolbar-container">
+    <md-toolbar class="action-bar" md-theme="altTheme" layout="row" layout-align="end center">
+        <fi-locale-select class="locale-select" locales="insightResultsItemDetailController.locales"
+                          flex="25"
+                          current-locale="insightResultsItemDetailController.currentLocale"
+                          disabled="true"
+                          visible="insightResultsItemDetailController.company.i18nEnabled"
+                          results-status-only="true">
+        </fi-locale-select>
+
+        <fi-segment-select class="segment-select"
+                           flex="25"
+                           insight="insightResultsItemDetailController.insight"
+                           disabled="true"
+                           visible="true"
+                           segments="insightResultsItemDetailController.getSegments()"
+                           current-segment="insightResultsItemDetailController.selectedSegment"
+                           current-locale="insightResultsItemDetailController.currentLocale">
+        </fi-segment-select>
+
+        <span flex></span>
+
+        <md-menu id="optionsMenu" class="options-menu" md-position-mode="target-right target" flex>
+            <md-button id="optionsMenuButton" class="options-menu-button" ng-click="$mdOpenMenu($event)">
+                <span class="options-menu-label">{{ 'OPTIONS' | translate }}</span>
+                <md-icon md-menu-origin md-svg-icon="/app/images/icon-options.svg" class="options-menu-icon"></md-icon>
+            </md-button>
+            <md-menu-content width="4" class="options-menu-content">
+                <md-menu-item id="optionsMenuItem-{{opt.value}}" ng-repeat="opt in insightResultsItemDetailController.menuOptions" class="options-menu-item">
+                    <button class="md-button md-default-theme menu-item-button" ng-click="insightResultsItemDetailController.selectOption($index)" >{{opt.label}}</button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-toolbar>
+</div>
+
+<div class="content-container" flex>
+    <md-content md-theme="altTheme" class="ui-scroll-wrapper md-primary">
+        <md-content md-theme="default" class="ui-scroll-container md-primary">
+            <insight-results-item item="insightResultsItemDetailController.item"
+                                  current-locale="insightResultsItemDetailController.currentLocale"
+                                  view-type="insightResultsItemDetailController.viewType"
+                                  insight="insightResultsItemDetailController.insight">
+            </insight-results-item>
+
+            <md-button class="md-icon-button btn-close circular insight-result-details-close-button " md-theme="default" ng-click="insightResultsItemDetailController.close()" aria-label="{{ 'CLOSE' | translate}}">
+                <md-icon md-svg-icon="images/ic_close_24px.svg"></md-icon>
+            </md-button>
+            <md-tabs md-dynamic-height md-border-bottom
+                     md-theme="tabsTheme"
+                     md-selected="insightResultsItemDetailController.selectedTabIndex"
+                     ng-click="insightResultsItemDetailController.selectTab()">
+
+                <md-tab label="{{'DEMAND_CURVE_SUBTAB_NAME' | translate}}"
+                        ng-if="insightResultsItemDetailController.showDemandCurveTab()">
+                    <div ng-include src="'insight/items/graphs/graphs.html'"></div>
+                </md-tab>
+                <md-tab label="{{'LOCALES_SUBTAB_NAME' | translate}}"
+                        ng-if="insightResultsItemDetailController.showLocalesTab()">
+                    <div ng-include src="'insight/items/locales/locales.html'"></div>
+                </md-tab>
+                <md-tab label="{{'SENTIMENTS_SUBTAB_NAME' | translate}}" ng-if="insightResultsItemDetailController.localeIsResults">
+                    <div ng-include src="'insight/items/sentiments/sentiments.html'"></div>
+                </md-tab>
+                <md-tab label="{{'SEGMENTS_SUBTAB_NAME' | translate}}" ng-if="insightResultsItemDetailController.isLocaleHasSegments">
+                    <div ng-include src="'insight/items/segments/segments.html'"></div>
+                </md-tab>
+                <!--<md-tab label="{{'ATTRIBUTES_SUBTAB_NAME' | translate}}">-->
+                    <!--<div ng-include src="'insight/items/attributes/attributes.html'"></div>-->
+                <!--</md-tab>-->
+            </md-tabs>
+        </md-content>
+    </md-content>
+</div>

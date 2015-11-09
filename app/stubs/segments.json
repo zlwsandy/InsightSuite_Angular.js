@@ -1,0 +1,37 @@
+[
+  {
+    "gameRunId" : 1,
+    "name" : "AbcSegment",
+    "gameRunStatus" : "HIddEN",
+    "locale" : "en_US",
+    "isGenerating": false
+  },
+  {
+    "gameRunId" : 2,
+    "name" : "XyzSegment",
+    "gameRunStatus" : "PendING_ANAlysIS",
+    "locale" : "en_US",
+    "isGenerating": true
+  },
+  {
+    "gameRunId" : 3,
+    "name" : "123Segment",
+    "gameRunStatus" : "HiddEN",
+    "locale" : "en_US",
+    "isGenerating": false
+  },
+  {
+    "gameRunId" : 5,
+    "name" : "789Segment",
+    "gameRunStatus" : "pRoCessING",
+    "locale" : "en_US",
+    "isGenerating": false
+  },
+  {
+    "gameRunId" : 4,
+    "name" : "789Segment",
+    "gameRunStatus" : "PROCESSING",
+    "locale" : "en_US",
+    "isGenerating": false
+  }
+]

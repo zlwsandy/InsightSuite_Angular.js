@@ -1,0 +1,554 @@
+/*
+  Styles related to Insights
+*/
+
+/***** Create Insight ******/
+
+.create-insight-name {
+  font-size: 1.5em;
+}
+
+.create-insight-locales .md-subheader-content {
+  padding: 0;
+}
+
+.create-insight-conversion {
+  padding: 0;
+}
+
+.create-insight-locale-container {
+  border: 1px solid #d9d9d9;
+  min-width: 350px;
+}
+
+/***** Setup Insight ******/
+
+.insight-setup-toolbar-name {
+  font-size: 24px;
+  font-weight: 500;
+  padding: 40px;
+}
+
+.insight-setup-icon {
+  color: $fi-white;
+  width: 48px;
+  height: 48px;
+}
+
+/***** Setup Insight Items ******/
+.insight-setup-items-locale-toolbar {
+  padding: 0 10px;
+}
+
+.insight-setup-items-list {
+  z-index: 10;
+}
+
+.insight-setup-test-price-container {
+  padding-left: 7px;
+}
+
+.insight-setup-items-test-price {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: -2px;
+}
+
+.insight-setup-items-locale {
+  font-size: 1.17rem;
+  font-weight: 400;
+  color: #9e9e9e;
+  margin-top: -2px;
+}
+
+.insight-setup-items-name {
+  font-size: 1.17em;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.insight-setup-items-item-number {
+  color: $fi-base-grey;
+  font-size: 0.83em;
+  line-height: 1.5;
+}
+
+.insight-setup-items-reference {
+  font-size: 0.75em;
+  line-height: 1.5;
+}
+
+.insight-setup-items-reference-select {
+  width: 100%;
+}
+
+.insight-setup-items-input-number {
+  text-align: right;
+}
+
+.insight-details {
+  border-bottom: 1px solid $fi-light-grey;
+  min-height: 150px;
+}
+.insight-details-scroll-container {
+  padding: 8px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 80px;
+}
+.insight-details-list {
+  list-style-type: none;
+  padding: 0;
+  text-align: right;
+}
+
+.insight-details-list > li {
+  margin: $margin-base 0;
+}
+
+.insight-details-list.editing > li {
+  margin: 0;
+}
+
+.insight-details-list > li:first-child {
+  margin-top: 0;
+}
+.insight-details-list.horizontal > li {
+  display: inline-block;
+  margin: 0 32px;
+}
+ul.insight-details-list > li .title,
+ul.insight-details-list > li .value,
+ul.insight-details-list .currency-input {
+  padding: 0;
+  margin: 0;
+}
+ul.insight-details-list > li .title {
+  text-transform: uppercase;
+}
+ul.insight-details-list > li .value,
+ul.insight-details-list .currency-input {
+  font-weight: bold;
+}
+
+.item-thumbnail:hover {
+  cursor: pointer;
+}
+.insight-description {
+  margin-bottom: 8px;
+  overflow: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  min-height: 90px;
+  width: 100%;
+}
+
+.insight-edit-button {
+  margin: 8px 5px 5px 0;
+  width: 100px;
+}
+
+.item-name {
+  margin: 0 0 12px 0;
+  font-size: 1.0em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.item-number {
+  font-size: .667em;
+}
+.uom {
+  font-size: .667em;
+  font-weight: normal;
+}
+.insight-item-image-container {
+  padding-left: 25px;
+}
+
+
+/***** Insights List *****/
+.insight-locale-flag {
+  padding-right: 10px;
+  vertical-align: middle;
+}
+
+/***** Insights List -- NEW  (remove old styles above when FI-13367 is completed) *****/
+
+.insight-card {
+    /*  layout crunch issue where it is setting preferred-size to 0px instead of auto
+    *   https://github.com/angular/material/issues/2356
+    *   thanks SafarIE
+    */
+    flex: 1 0 auto !important;
+    -ms-flex: 1 0 auto !important;
+    -webkit-flex: 1 0 auto !important;
+}
+.insight-name {
+    color: $fi-blue;
+    font-size: 1.25em;
+}
+.insight-row-hover {
+    cursor: pointer;
+    background-color: $fi-baby-blue;
+}
+
+/***** Insight Edit *****/
+
+.insight-edit-markdown-cadence-container{
+  padding: 0 1em;
+}
+
+.insight-edit-markdown-cadence-input{
+  width:45px;
+}
+
+.insight-edit-name {
+  font-size: 1.5em;
+}
+
+.insight-edit-locales .md-subheader-content {
+  padding: 0;
+}
+
+.insight-edit-conversion {
+  padding: 0;
+}
+
+.insight-edit-locale-container {
+  border: 1px solid $fi-light-grey;
+  min-width: 350px;
+}
+
+.insight-setup-item-image {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid $fi-light-grey;
+}
+
+.segment-generating {
+  color: $fi-red;
+}
+.insight-checkbox-container {
+  width: 40px;
+}
+
+.insight-checkbox-container md-checkbox {
+  margin-left: 0;
+  width: 40px;
+}
+
+.insight-setup-item-image {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid $fi-light-grey;
+}
+.item-high-ref {
+  color: $fi-green;
+}
+
+.item-low-ref {
+  color: $fi-red; /* previously using #ff0000 */
+}
+
+.filter-advanced {
+  padding-left: 30px;
+}
+
+
+/** Insight Results **/
+.insight-results-list-item {
+  display: block;
+}
+.insight-results-list-item:hover {
+  background-color: $fi-white-grey;
+  cursor: pointer;
+}
+.insight-results-list-item.all-locales:hover {
+  cursor: default;
+  background-color: inherit;
+}
+.insight-results-grid-container {
+  background-color: $fi-background-grey;
+}
+.insight-results-grid-item {
+  padding: $padding-base;
+  background-color: $fi-light-grey;
+  height: 350px;
+  -ms-flex: 0 0 24%;
+  -webkit-flex: 0 0 24%;
+  flex: 0 0 24%;
+  max-width: 24%;
+  margin: 7px;
+  display: inline-block;
+}
+.insight-results-grid-item:first-child,
+.insight-results-grid-item:nth-child(5n+5) {
+  margin-left: 0;
+}
+.insight-results-grid-item:nth-child(4n+4) {
+  margin-right: 0;
+}
+.insight-results-grid-cell {
+  background-color: white;
+  padding-top: 24px;
+
+  .item-name {
+    font-size: 1.0em;
+    margin-bottom: 8px;
+  }
+  .item-number {
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+.insight-results-grid-image {
+  height: 335px;
+  padding-left: $padding-base;
+}
+.insight-results-grid-info {
+  padding: 0 $padding-base 0 $padding-base * 2;
+
+  .item-number {
+      font-size: 1em;
+  }
+
+  .total-value {
+      font-size: 1.7em;
+      font-weight: bold;
+      text-align: left;
+  }
+
+  .currency, .sentiment {
+      font-weight: bold;
+
+      .uom {
+        font-size: 1em;
+      }
+  }
+  .grid-label {
+    font-size: .625em;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+  .grid-label.percent {
+    float: right;
+    margin: 3px 0 0 3px;
+  }
+}
+.insight-results-grid-info p {
+  padding: 0;
+  margin: 0;
+}
+.grid-info-row {
+  border-bottom: 1px solid $fi-light-grey;
+  padding: 9px 0;
+
+  .currency:last-child {
+    margin-bottom: 0;
+  }
+}
+.grid-info-row:last-child {
+  border-bottom: none;
+}
+
+
+
+.demand-curve-button-container {
+  float: right;
+  text-align: center;
+  padding-right: 3em;
+  width: 20%;
+  .ticket-price-button{
+    width: 100%;
+    margin: 8px 0;
+  }
+  .ticket-price-change{
+    .ticket-price{
+      font-weight: bold;
+      font-size: 1.125em;
+    }
+    .ticket-button{
+      margin: 0;
+      width: 1.5em;
+    }
+    .delete-ticket-price{
+      margin-right: 0;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .demand-button{
+    margin: 0;
+    width: 1.5em;
+  }
+  .demand{
+    margin-top: 4px;
+    font-size: 14px;
+  }
+}
+.ticket-price-input .currency-input {
+  text-align: left;
+}
+.demand-currency {
+  font-size: 0.938em;
+  font-weight: normal;
+}
+
+.item-results {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+html[data-useragent*='MSIE 10.0'] .item-results {
+  max-width: 90%;
+}
+.result-value {
+  margin: 0 10px;
+  padding: $padding-base;
+  vertical-align: top;
+}
+.item-results .result-value:first-child {
+  margin-left: 0;
+}
+.item-results .result-value:last-child {
+  margin-right: 0;
+}
+.item-results p {
+  margin: 0;
+}
+.item-results .top {
+  font-size: 1.7em;
+  font-weight: bold;
+}
+.item-results .bottom {
+  text-transform: uppercase;
+  font-size: .833em;
+}
+.result-value.sorted {
+  background-color: $fi-light-yellow;
+  border-radius: $border-radius-base;
+}
+.result-value.total-value {
+  width: 6%;
+}
+.result-value.currency {
+  width: 15%;
+}
+.result-value.gm-price {
+  width: 21%;
+}
+.result-value.sentiment {
+  width: 8%;
+}
+.result-value.margin-gain {
+  width: 14%;
+}
+
+
+/**
+*   Insight Settings - (create and edit)
+*
+*   FIXME:  When insight stories are complete, review and remove
+*   styles that are no longer used from old insight settings views
+*/
+.insight-settings-sidebar {
+    position: relative;
+
+    border: {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 1px solid $fi-grey-hue-1;
+    }
+}
+.insight-settings-nav {
+
+    li.active {
+        border-left: 5px solid $fi-orange;
+        a {
+            /* adjust the padding due to the border so anchors line up */
+            padding-left: 20px;
+            color: $fi-orange;
+        }
+    }
+}
+
+.insight-settings-container {
+    padding-top: 30px;
+    margin-bottom: 100px;
+}
+
+.clear-dept-icon {
+  margin-left: $margin-base;
+  &:hover {
+      cursor: pointer;
+  }
+}
+
+.insight-settings-locale-spacer {
+  margin-right: 10px
+}
+
+/***** Insight Add Items *****/
+.insight-item-upload-content {
+    height: 245px;
+}
+.insight-browse-item-title {
+    margin-bottom: 0;
+}
+.insight-browse-item-container {
+    max-width:125px;
+    margin-right: $margin-base;
+}
+.insight-browse-items-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    overflow: hidden;
+    word-wrap: normal;
+    max-width: 125px; // thanks IE11
+    position: relative;
+    max-height: 2.5em;
+}
+/* pseudo classes to display ellipses if name > 2 lines */
+.insight-browse-items-name:before  {
+    background: $fi-white;
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    content: '\2026';
+
+}
+.insight-browse-items-name:after{
+    content: '';
+    background: $fi-white;
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    z-index: 1;
+}
+.insight-browse-items-item-number {
+  color: $fi-base-grey;
+  font-size: 0.75rem;
+  overflow: hidden;
+  max-height: 1em;
+}
+
+
+/* Print Styles */
+@media print {
+  .insight-results-grid-container {
+      background-color: $fi-white;
+  }
+  .insight-result-details-close-button {
+      display: none;
+  }
+  .print-only.sort-by-label {
+      position: absolute;
+      margin-bottom: $margin-base * 3;
+      top: -15px;
+  }
+}

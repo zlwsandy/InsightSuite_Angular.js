@@ -1,0 +1,178 @@
+/* Sentiments */
+.comment-list {
+  margin-left:0; /* Remove the default left margin */
+  padding-left:0; /* Remove the default left padding */
+  list-style-type: none;
+
+  li {
+    border-bottom: 1px solid $fi-light-grey;
+  }
+}
+.comment-list > li p {
+  margin: 0;
+  line-height: 1.25em;
+}
+.sentiment-percent {
+  margin: 8px 0 $margin-base 0;
+  font-size: 1.75em;
+  @extend .tertiary-text;
+}
+.sentiment-tone {
+  height: 20px;
+  display: inline-block;
+  img {
+    width: 25px;
+  }
+}
+.comment-row {
+  padding: $padding-base 0;
+}
+
+
+.sentiment-bar-chart {
+    width: 100%;
+    height: 80px;
+    padding-top: 25px;
+    padding-bottom: 50px;
+    hr.sentiment-divider {
+        color: $fi-black;
+        background-color: $fi-black;
+        height: 3px;
+        border-style: none;
+        margin-top : 50px;
+        margin-left: 133px;
+        margin-right: 136px;
+    }
+}
+
+/* Sentiment tab bar chart directive*/
+.bar-chart {
+    display : table;
+    font-size: 15px;
+    white-space: nowrap;
+    margin: 0 20px 0 20px;
+    .love-it{
+      padding-right: 25px;
+      font-weight: bold;
+      margin-top: 22px;
+      padding-bottom: 20px;
+        .love-icon{
+            padding-left :5px;
+        }
+    }
+    .hate-it{
+      padding-left: 25px;
+      font-weight: bold;
+        .hate-icon{
+            padding-right :5px;
+        }
+    }
+    .bar {
+        border-top: 1px solid $fi-black;
+        border-right: 1px solid $fi-black;
+        border-bottom: 1px solid $fi-black;
+
+        position: relative;
+        display: table-cell;
+        label {
+            text-align: center;
+            width: 100%;
+            left: 0;
+            right: 0;
+        }
+        label.percentage {
+            position:absolute;
+            top: 70px;
+            font-size: 20px;
+        }
+        label.title {
+            display: none;
+            position: absolute;
+            color: $fi-dark-grey;
+            top: -30px;
+
+        }
+        &:hover {
+          cursor: pointer;
+        }
+        &:hover label.title { display: block;font-weight: bold; }
+    }
+
+  // Style the left border on the second section (which is the beginning of the chart)
+  //   A better solution would be to make all 'bar' classes in their own container, but this is the path of least
+  //   resistance
+  .chart-section:nth-of-type(2) {
+    border-left: 1px solid $fi-black;
+    &:hover {
+          border-left: 3px solid $fi-black;
+        }
+  }
+}
+
+%sentiment-border {
+  &:hover {
+         border-top: 3px solid $fi-black;
+         border-right: 3px solid $fi-black;
+         border-bottom: 3px solid $fi-black;
+         border-left: 2px solid $fi-black;
+        }
+}
+.love-background {
+  $love : $fi-love-it;
+  background-color: $love;
+  @extend %sentiment-border;
+}
+.like-background {
+  $like : $fi-like-it;
+  background-color: $like;
+  @extend %sentiment-border;
+}
+.notvoted-background {
+  $notvoted : $fi-no-response;
+  background-color: $notvoted;
+  @extend %sentiment-border;
+}
+.neutral-background {
+  $neutral : $fi-neutral;
+  background-color: $neutral;
+  @extend %sentiment-border;
+}
+.leave-background {
+  $leave : $fi-leave-it;
+  background-color: $leave;
+  @extend %sentiment-border;
+}
+.hate-background {
+  $hate : $fi-hate-it;
+  background-color: $hate;
+  &:hover {
+        }
+}
+
+/* Word Count Bar Chart Directive*/
+
+.word-count-bar-chart {
+  margin-top: 30px;
+}
+.word-count-divider {
+  margin: 20px;
+}
+.top-word-label {
+  font-weight: bold;
+  margin-left: 20px;
+}
+.price-label-font{
+  font-size: 0.563em;
+  font-weight: 200;
+  text-transform: uppercase;
+}
+.price-label {
+    text-align: center;
+    font-size: 1em;
+    line-height: .7;
+    padding: 3px 0 2px 0;
+}
+.price-label-uom {
+    font-weight: 200;
+    font-size: 0.75em;
+}

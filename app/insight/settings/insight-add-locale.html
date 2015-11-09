@@ -1,0 +1,30 @@
+<md-dialog md-theme="dialogTheme" class="add-locale-dialog" aria-label="{{'ADD_LOCALE' | translate}}" flex="40" flex-sm="40">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{'ADD_LOCALE' | translate}}</h2>
+                <md-button id="closeAddLocaleBtn" class="md-icon-button btn-add-locale-close" ng-click="insightAddLocaleController.close()">
+                    <md-icon md-svg-src="images/ic_close_24px.svg" aria-label="{{'CLOSE' | translate}}"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div layout="row" layout-wrap>
+                <div ng-show="insightAddLocaleController.showProgressLoader" layout="row" layout-align="space-around" flex layout-margin>
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+                <div ng-if="!insightAddLocaleController.showProgressLoader" ng-repeat="locale in insightAddLocaleController.localesArray" flex="50">
+                    <fi-locale-checkbox locale="locale"></fi-locale-checkbox>
+                </div>
+            </div>
+        </md-dialog-content>
+        <div class="md-actions">
+            <md-button id="addLocaleBtn" class="btn-default-action btn-full-width btn-add-locale" ng-click="insightAddLocaleController.add()" ng-disabled="insightAddLocaleController.addBtnDisabled" md-no-ink>
+                <md-icon md-svg-icon="images/ic_add_circle_24px.svg"></md-icon>
+                <span>
+                    {{ 'ADD' | translate }}
+                </span>
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

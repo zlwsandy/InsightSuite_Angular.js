@@ -1,0 +1,40 @@
+<!-- hamburger menu button -->
+<md-button class="md-icon-button menu-button" id="mainMenuButton" ng-click="menuController.toggleLeft()" aria-label="{{ 'SIDE_NAVIGATION' | translate }}">
+    <md-icon md-svg-src="images/ic_dehaze_24px.svg" class="menu-button"></md-icon>
+</md-button>
+
+<!-- side nav -->
+<md-sidenav id="sideNavMenu" class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+    <!-- side nav header -->
+    <md-toolbar id="menuToolbar" class="md-theme-light">
+        <div class="md-subhead pad-left">
+            <h3>
+                <span>{{ 'MENU_OPTIONS' | translate }}</span>
+            </h3>
+        </div>
+    </md-toolbar>
+    <!-- side nav menu items -->
+    <div ng-controller="MenuSideNavController as sideNav">
+
+        <ul id="menuOptions" class="side-menu">
+            <li id="menuOption-{{menuOption.value}}" ng-repeat="menuOption in sideNav.menuList" class="menu-item">
+                <a class="md-button"  ng-class="{'menu-active' : sideNav.isActiveMenu(menuOption.activeStates)}"
+                    md-ink-ripple
+                    ng-click="menuOption.click()"
+                    aria-label="{{ menuOption.translate | translate }}">
+                        <span class="menu-text">
+                            {{ menuOption.translate | translate }}
+                        </span>
+                </a>
+            </li>
+            <md-divider></md-divider>
+
+            <md-content class="md-padding version-label">
+                <div class="margin-bottom-5" ng-repeat="footerList in sideNav.menuFooterList">
+                    <a class="pointer" ng-click="footerList.click()">{{ footerList.translate | translate }}</a>
+                </div>
+                @app.version@
+            </md-content>
+        </ul>
+    </div>
+</md-sidenav>

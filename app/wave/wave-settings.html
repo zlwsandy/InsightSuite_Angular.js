@@ -1,0 +1,58 @@
+<md-dialog aria-label="{{ 'COPY_WAVE_LINKS' | translate }}">
+    <md-toolbar id="waveSettingsToolbar" class="md-primary">
+        <div class="md-subhead pad-left">
+            <h3>
+                <span>{{ 'COPY_WAVE_LINKS' | translate }}</span>
+            </h3>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content ng-controller="WaveSettingsController as settings" class="md-padding">
+        <div layout="row" layout-align="center center" class="wave-settings-row-padding">
+            <div flex="20">{{ 'LOCALE' | translate }}</div>
+            <div flex="20">{{ 'MAY_CHOOSE_LOCALE' | translate }}</div>
+            <div flex="20">{{ 'NO_CHOICE_LOCALE' | translate }}</div>
+            <div flex="20">{{ 'MUST_CHOOSE_LOCALE' | translate }}</div>
+            <div flex="20"></div>
+        </div>
+        <md-divider></md-divider>
+
+        <div ng-repeat="localeRow in settings.waveCopyLinkLocaleList">
+            <div class="wave-settings-row-padding" layout="row" layout-align="center center">
+                <div flex="20">
+                    <fi-locale locale="{{localeRow.name}}"></fi-locale>
+                </div>
+
+                <div flex="20" class="text-align-center">
+                    <md-radio-group ng-if="localeRow.isLocale" ng-model="localeRow.linkType">
+                        <md-radio-button id="{{localeRow.name}}-with-choice" value="localeWithChoice" aria-label="{{ 'MAY_CHOOSE_LOCALE' | translate }}"></md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div flex="20" class="text-align-center">
+                    <md-radio-group ng-if="localeRow.isLocale" ng-model="localeRow.linkType">
+                        <md-radio-button id="{{localeRow.name}}-only" value="localeOnly" aria-label="{{ 'NO_CHOICE_LOCALE' | translate }}"></md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div flex="20" class="text-align-center">
+                    <md-radio-group ng-if="!localeRow.isLocale" ng-model="localeRow.linkType">
+                        <md-radio-button id="{{localeRow.name}}-must-choose" value="choose" aria-label="{{ 'MUST_CHOOSE_LOCALE' | translate }}"></md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div flex="20" class="text-align-right">
+                    <md-button id="{{localeRow.name}}-button" class="md-raised md-primary focus-blue-bg" aria-label="{{ 'COPY_LINK' | translate }}"
+                                         ng-disabled="localeRow.linkType===undefined"
+                                         clip-copy="settings.waveUrl(localeRow)" clip-click="settings.announce()">
+                        <md-icon md-svg-src="images/ic_content_copy_24px.svg" class="s24"></md-icon>
+                        {{ 'COPY_LINK' | translate }}
+                    </md-button>
+                </div>
+            </div>
+            <md-divider></md-divider>
+        </div>
+
+        <div class="action-row" layout="row" layout-align="end center">
+            <md-button translate="CLOSE" aria-label="{{ 'CLOSE' | translate }}" type="button" ng-click="settings.close()" md-no-ink>
+            </md-button>
+        </div>
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,13 @@
+<md-input-container ng-if="FiLocaleSelectController.visible" class="pad-bottom-none">
+    <md-select ng-model="FiLocaleSelectController.selectedLocale"
+            ng-change="FiLocaleSelectController.changeLocale()"
+            ng-disabled="FiLocaleSelectController.disabled"
+            id="localeSelect"
+            translate translate-attr-aria-label="LOCALES"
+            class="select-text primary">
+        <md-option ng-value="opt" ng-repeat="opt in FiLocaleSelectController.localeOptions" id="localeOption-{{opt.label}}">
+            <span class="select-text primary" translate translate-default="{{opt.label}}">{{opt.label}}</span>
+            <span ng-if="opt.gameRunStatus" class="select-text secondary" translate>({{opt.gameRunStatus}})</span>
+        </md-option>
+    </md-select>
+</md-input-container>

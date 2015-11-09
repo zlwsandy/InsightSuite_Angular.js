@@ -1,0 +1,36 @@
+<md-dialog flex="66"
+    flow-init="{target: '/api/item/' + insightImagesUploadController.item.itemId + '/image/add'}"
+    flow-files-submitted="insightImagesUploadController.fileUpload($files, $event, $flow)"
+    flow-file-added="insightImagesUploadController.fileAdded($file, $event, $flow)"
+    flow-files-added="insightImagesUploadController.filesAdded($files, $event, $flow)"
+    flow-file-success="insightImagesUploadController.fileSuccess($file, $message, $flow)"
+    flow-file-progress="insightImagesUploadController.fileProgress($file, $flow)"
+    flow-file-error="insightImagesUploadController.fileError($file, $message, $flow)"
+    md-theme="dialogTheme" class="md-primary">
+
+    <!-- (x) close dialog button -->
+    <md-button id="uploadFileCloseBtn" class="md-icon-button btn-close md-primary md-hue-3" ng-click="insightImagesUploadController.closeDialog($flow)" aria-label="{{ 'CLOSE' | translate}}">
+        <md-icon md-svg-icon="images/ic_close_24px.svg"></md-icon>
+    </md-button>
+    <!-- tabs -->
+    <md-tabs class="md-primary insight-items-dialog-tabs">
+        <!-- upload tab -->
+        <md-tab id="uploadingTab" label="{{ 'UPLOADING' | translate}}">
+            <!-- error messages -->
+            <message-box type="error" error="insightImagesUploadController.error" error-options="insightImagesUploadController.errorOptions"></message-box>
+            <!-- drag and drop container -->
+            <div flex class="alert drag-drop-box" flow-drop ng-show="!insightImagesUploadController.uploading">
+                <p>{{ 'DRAG_AND_DROP_UPLOAD' | translate:'{fileExtensions: "JPG, GIF, or PNG"}' }}</p>
+                <md-button id="uploadFileChooseFileBtn" class="btn-default-action" type="file" flow-btn flow-attrs="{accept: '.jpg,.jpeg,.png,.gif'}">{{ 'OR_CHOOSE_A_FILE' | translate }}</md-button>
+            </div>
+
+            <!-- progress bar container -->
+            <div flex md-theme="default" class="progress-container" ng-show="insightImagesUploadController.uploading">
+                <p ng-show="insightImagesUploadController.numberOfFiles == 1">{{ 'FILE_IS_UPLOADING' | translate }}</p>
+                <p ng-show="insightImagesUploadController.numberOfFiles > 1">{{ 'FILES_ARE_UPLOADING' | translate }}</p>
+                <md-progress-linear md-mode="determinate" value="{{ insightImagesUploadController.determinateVal }}"></md-progress-linear>
+            </div>
+
+        </md-tab>
+    </md-tabs>
+</md-dialog>

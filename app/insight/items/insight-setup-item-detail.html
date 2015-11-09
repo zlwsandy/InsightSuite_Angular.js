@@ -1,0 +1,258 @@
+<md-content md-theme="altTheme" class="ui-scroll-wrapper md-primary" fi-scroll-shrink source="true">
+  <md-content md-theme="default" class="ui-scroll-container md-primary">
+
+    <div>
+      <md-button id="closeButton"
+                class="md-icon-button btn-close circular insight-setup-details-close-button" md-theme="default"
+                ng-click="insightSetupItemDetailController.close()" aria-label="{{ 'CLOSE' | translate}}">
+        <md-icon md-svg-icon="images/ic_close_24px.svg"></md-icon>
+      </md-button>
+    </div>
+    <form name="itemForm" flex="100" layout="row" novalidate>
+        <div id="item-{{insightSetupItemDetailController.localItem.itemId}}" class="pad-horizontal" flex="100" layout="row" layout-wrap layout-align="start center">
+            <!-- main row 1 (view header)-->
+            <div flex="100" layout="row" class="pad-all">
+                <div flex="33">
+                  <h3>{{ 'EDIT_ITEM' | translate }}</h3>
+                </div>
+                <div flex="33">
+                </div>
+                <div flex="33">
+                  <md-button id="saveButton"
+                            class="btn-positive-action float-r"
+                            ng-click="insightSetupItemDetailController.save()"
+                            ng-disabled="insightSetupItemDetailController.isActionDisabled() || itemForm.$invalid || !insightSetupItemDetailController.isItemChanged()">{{ 'SAVE' | translate }}</md-button>
+                </div>
+            </div>
+            <!-- main row 2 (view content) -->
+            <div flex="100" layout="row" class="pad-horizontal divider">
+                <!-- column 1 -->
+                <div flex="25">
+                  <md-input-container>
+                    <label>{{ 'ITEM_NAME' | translate }}</label>
+                    <input id="itemName" ng-model="insightSetupItemDetailController.localItem.name" name="itemName" type="text"
+                        ng-pattern="/\S/" md-maxlength="200" required fi-special-characters
+                        aria-label="{{insightSetupItemDetailController.localItem.name}}" class="font-weight-bold" />
+                    <div ng-messages="itemForm.itemName.$error">
+                      <div ng-message="required">{{ 'ERROR_INPUT_REQUIRED' | translate }}</div>
+                      <div ng-message="pattern">{{ 'ERROR_INPUT_REQUIRED' | translate }}</div>
+                      <div ng-message="maxlength">{{ 'ERROR_INPUT_TOO_LONG' | translate:'{ maxLength: "200" }' }}</div>
+                      <div ng-message="fi-special-characters">{{ 'CANNOT_CONTAIN_SPECIAL_CHARACTERS' | translate }}</div>
+                    </div>
+                  </md-input-container>
+
+                  <div id="itemNumber-{{insightSetupItemDetailController.localItem.itemId}}">
+                    <p class="form-label margin-none">{{ 'ITEM_NUMBER' | translate }}</p>
+                    <p class="tertiary-text uppercase-font margin-none">{{insightSetupItemDetailController.localItem.number}}</p>
+                  </div>
+
+                  <md-input-container id="referenceItem-{{insightSetupItemDetailController.localItem.itemId}}" class="pad-top">
+                      <label>{{ 'REFERENCE_ITEM' | translate }}</label>
+                      <md-select data-ng-model="insightSetupItemDetailController.localItem.reference"
+                                 data-ng-change="insightSetupItemDetailController.changeReferenceItem()"
+                                 id="referenceItemSelect"
+                                 class="pad-none">
+                            <md-option data-ng-value="opt.value" data-ng-repeat="opt in insightSetupItemDetailController.referenceItemOptions"
+                                    id="referenceItemOption-{{opt.value}}">
+                                    <span ng-class="{ 'item-low-ref' : opt.value === 'LOW', 'item-high-ref' : opt.value === 'HIGH'}" class="select-text uppercase-font">
+                                        {{opt.name | translate}}
+                                    </span>
+                            </md-option>
+                      </md-select>
+                  </md-input-container>
+
+                </div> <!-- end column 1 -->
+                <div flex="5"></div>
+
+                <!-- column 2 -->
+                <div flex="75">
+                    <!-- column 2 row 1 (images and testPrice) -->
+                    <div flex="100" layout="row">
+                        <div flex="60">
+                            <div id="itemName-images-{{insightSetupItemDetailController.original.itemId}}" layout="row" layout-align="start start" layout-wrap class="margin-vertical">
+
+                                <div ng-repeat="itemImage in insightSetupItemDetailController.original.itemImages | orderBy: '-primary'" class="img-container margin-none">
+                                    <fi-svg-icon ng-if="itemImage.primary" icon="star" css-class="indicator-icon blue" svg-width="75" svg-height="75" ></fi-svg-icon>
+                                    <fi-img-crop img-src={{itemImage.thumbnailUrl}} img-alt={{itemImage.name}} img-class="img-crop" img-height="75" img-width="75"></fi-img-crop>
+
+                                    <div class="margin-top-neg-20">
+                                        <md-menu class="options-menu text-align-center" md-position-mode="target-right target" flex>
+                                            <md-button ng-disabled="!insightSetupItemDetailController.enableImageOverflowMenu()" ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="{{'UNLINK' | translate}}" flex>
+                                                <md-icon md-menu-origin md-svg-icon="/app/images/icon-options.svg" class="options-menu-icon"></md-icon>
+                                            </md-button>
+                                            <md-menu-content>
+                                                <md-menu-item><md-button class="text-align-left" ng-disabled="itemImage.primary" ng-click="insightSetupItemDetailController.setPrimaryImage(itemImage)">{{'SET_AS_PRIMARY' | translate}}</md-button></md-menu-item>
+                                                <md-menu-item><md-button class="text-align-left" ng-click="insightSetupItemDetailController.unlinkImage(itemImage)">{{'UNLINK' | translate}}</md-button></md-menu-item>
+                                            </md-menu-content>
+                                        </md-menu>
+                                    </div>
+                                </div>
+
+                                <div ng-if="insightSetupItemDetailController.showImageUpload()" class="img-container margin-none">
+                                    <fi-img-crop img-src="images/image-add.svg" img-alt="{{ 'UPLOAD_IMAGE' | translate }}" img-height="75" img-width="75" img-class="img-crop" ng-click="insightSetupItemDetailController.addImage($event)"></fi-img-crop>
+                                </div>
+                            </div>
+                        </div>
+                        <div flex="5"></div>
+                        <div flex="30">
+                            <div class="text-align-right insight-setup-items-test-price">
+                                <fi-currency class="top"
+                                             value="{{insightSetupItemDetailController.localItem.testPrice}}"
+                                             symbol-class="insight-setup-items-locale"
+                                             current-locale="insightSetupItemDetailController.currentLocale">
+                                </fi-currency>
+                                <div class="insight-setup-items-locale">{{insightSetupItemDetailController.currentLocale.currencyCode}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- column 2 row 2 -->
+                    <div flex="100" layout="row">
+                        <div flex="60">
+                            <md-input-container class="insight-description pad-top">
+                              <label>{{ 'DESCRIPTION' | translate }}</label>
+                              <textarea id="itemDescription" name="description"
+                                        ng-model="insightSetupItemDetailController.localItem.description"
+                                        md-maxlength="5000" required aria-label="TODO put something useful here"
+                                        aria-multiline="true"></textarea>
+                              <div ng-messages="itemForm.description.$error">
+                                <div ng-message="maxlength">{{ 'ERROR_INPUT_TOO_LONG' | translate:'{ maxLength: "5000" }' }}</div>
+                              </div>
+                            </md-input-container>
+                        </div>
+                        <div flex="5"></div>
+                        <div flex="30">
+                            <div layout="column" layout-align="space-between end">
+                              <ul class="insight-details-list editing">
+                                <li>
+                                  <p class="form-label margin-none">{{ 'COST' | translate }}</p>
+                                  <!-- <md-input-container>
+                                    <md-tooltip ng-if="!itemForm.unitCost.$valid" md-direction="top" class="error">
+                                        <div ng-messages="itemForm.unitCost.$error" ng-if='itemForm.unitCost.$dirty'>
+                                            <div ng-message="localeNumber">{{ 'ERROR_INPUT_FORMAT' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                            <div ng-message="range">{{ 'ERROR_INPUT_RANGE' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                        </div>
+                                    </md-tooltip>
+                                    <input name="unitCost" ng-model="insightSetupItemDetailController.localItem.unitCost"
+                                        fi-locale-number-validator
+                                        locale-code="{{insightSetupItemDetailController.currentLocale.locale}}"
+                                        fi-number-range-validator
+                                        min="{{insightSetupItemDetailController.minAllowable}}"
+                                        max="{{insightSetupItemDetailController.maxAllowable}}"
+                                        ng-model-options="{ updateOn: 'blur' }"
+                                        class="insight-setup-items-input-number value"
+                                        aria-label="{{insightSetupItemDetailController.localItem.unitCost}}" />
+                                  </md-input-container> -->
+                                  <md-input-container>
+                                      <md-tooltip ng-if="!itemForm.unitCost.$valid" md-direction="top" class="error">
+                                        <div ng-messages="itemForm.unitCost.$error">
+                                            <div ng-message="localeNumber" class="form-message">{{ 'ERROR_INPUT_FORMAT' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                            <div ng-message="range" class="form-message">{{ 'ERROR_INPUT_RANGE' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                      </div>
+                                      </md-tooltip>
+
+                                      <fi-currency-input
+                                              name="unitCost"
+                                              min="{{insightSetupItemDetailController.minAllowable}}"
+                                              max="{{insightSetupItemDetailController.maxAllowable}}"
+                                              class="insight-setup-items-input-number value"
+                                              locale-code="{{insightSetupItemDetailController.currentLocale.locale}}"
+                                              ng-model="insightSetupItemDetailController.localItem.unitCost">
+                                      </fi-currency-input>
+                                  </md-input-container>
+                                </li>
+                                <li>
+                                  <p class="form-label margin-none">{{ 'PROMO' | translate }}</p>
+                                  <md-input-container>
+                                      <!-- <md-tooltip ng-if="!itemForm.promotionalPrice.$valid" md-direction="top" class="error">
+                                          <div ng-messages="itemForm.promotionalPrice.$error" ng-if='itemForm.promotionalPrice.$dirty'>
+                                              <div ng-message="localeNumber">{{ 'ERROR_INPUT_FORMAT' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                              <div ng-message="range">{{ 'ERROR_INPUT_RANGE' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                          </div>
+                                      </md-tooltip>
+                                      <input name="promotionalPrice" ng-model="insightSetupItemDetailController.localItem.promotionalPrice"
+                                          fi-locale-number-validator
+                                          locale-code="{{insightSetupItemDetailController.currentLocale.locale}}"
+                                          fi-number-range-validator
+                                          min="{{insightSetupItemDetailController.minAllowable}}"
+                                          max="{{insightSetupItemDetailController.maxAllowable}}"
+                                          ng-model-options="{ updateOn: 'blur' }"
+                                          class="insight-setup-items-input-number value"
+                                          aria-label="{{insightSetupItemDetailController.localItem.promotionalPrice}}" /> -->
+
+                                    <md-tooltip ng-if="!itemForm.promotionalPrice.$valid" md-direction="top" class="error">
+                                        <div ng-messages="itemForm.promotionalPrice.$error">
+                                            <div ng-message="localeNumber" class="form-message">{{ 'ERROR_INPUT_FORMAT' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                            <div ng-message="range" class="form-message">{{ 'ERROR_INPUT_RANGE' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                        </div>
+                                    </md-tooltip>
+                                      <fi-currency-input
+                                              name="promotionalPrice"
+                                              min="{{insightSetupItemDetailController.minAllowable}}"
+                                              max="{{insightSetupItemDetailController.maxAllowable}}"
+                                              class="insight-setup-items-input-number value"
+                                              locale-code="{{insightSetupItemDetailController.currentLocale.locale}}"
+                                              ng-model="insightSetupItemDetailController.localItem.promotionalPrice">
+                                      </fi-currency-input>
+
+                                  </md-input-container>
+                                </li>
+                                <li>
+                                  <p class="form-label margin-none">{{ 'TEST_PRICE' | translate }}</p>
+                                  <md-input-container>
+                                      <!-- <md-tooltip ng-if="!itemForm.testPrice.$valid" md-direction="top" class="error">
+                                          <div ng-messages="itemForm.testPrice.$error" ng-if='itemForm.testPrice.$dirty'>
+                                              <div ng-message="localeNumber">{{ 'ERROR_INPUT_FORMAT' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                              <div ng-message="range">{{ 'ERROR_INPUT_RANGE' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                          </div>
+                                      </md-tooltip>
+                                      <input name="testPrice" ng-model="insightSetupItemDetailController.localItem.testPrice"
+                                          fi-locale-number-validator
+                                          locale-code="{{insightSetupItemDetailController.currentLocale.locale}}"
+                                          fi-number-range-validator
+                                          min="{{insightSetupItemDetailController.minAllowable}}"
+                                          max="{{insightSetupItemDetailController.maxAllowable}}"
+                                          ng-model-options="{ updateOn: 'blur' }"
+                                          class="insight-setup-items-input-number value"
+                                          aria-label="{{insightSetupItemDetailController.localItem.testPrice}}" /> -->
+
+                                    <md-tooltip ng-if="!itemForm.testPrice.$valid" md-direction="top" class="error">
+                                        <div ng-messages="itemForm.testPrice.$error">
+                                            <div ng-message="localeNumber" class="form-message">{{ 'ERROR_INPUT_FORMAT' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                            <div ng-message="range" class="form-message">{{ 'ERROR_INPUT_RANGE' | translate:insightSetupItemDetailController.validationParams }}</div>
+                                        </div>
+                                    </md-tooltip>
+
+                                    <fi-currency-input
+                                            name="testPrice"
+                                            min="{{insightSetupItemDetailController.minAllowable}}"
+                                            max="{{insightSetupItemDetailController.maxAllowable}}"
+                                            class="insight-setup-items-input-number value"
+                                            locale-code="{{insightSetupItemDetailController.currentLocale.locale}}"
+                                            ng-model="insightSetupItemDetailController.localItem.testPrice">
+                                    </fi-currency-input>
+
+                                  </md-input-container>
+                                </li>
+                              </ul>
+                            </div>
+                        </div><!-- end pricing column -->
+                    </div>
+                </div> <!-- end column 2 -->
+            </div> <!-- end main row 2 (view content) -->
+
+            <div flex="100" layout="row" class="pad-all">
+                <div flex="30">
+                    <md-button id="removeButton" class="md-warn btn-negative-action" ng-click="insightSetupItemDetailController.remove();"
+                                ng-disabled="insightSetupItemDetailController.isActionDisabled()">
+                      <md-icon md-svg-icon="images/ic_remove_circle_24px.svg"></md-icon>
+                      <span>
+                        {{ 'REMOVE' | translate }}
+                      </span>
+                    </md-button>
+                </div>
+                <div flex="70"></div>
+            </div>
+        </div>
+    </form>
+  </md-content>
+</md-content>

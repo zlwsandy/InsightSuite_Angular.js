@@ -1,0 +1,98 @@
+<style>
+    .report-col {
+        width: 50%;
+        margin-bottom: 45px;
+    }
+</style>
+<section class="item-summary-report">
+    <div class="report-row clearfix">
+
+        <div ng-repeat="item in itemSummaryReportController.items"
+                ng-class="{'page-break pad-top' : itemSummaryReportController.isNewPage($index)}">
+
+            <header class="print-header report-row clearfix" ng-if="itemSummaryReportController.isNewPage($index) || $index === 0">
+                <div class="header-column left">
+                    <p class="header-item-name"><img ng-show="itemSummaryReportController.showLocaleFlag" class="flag-image" ng-src="{{itemSummaryReportController.currentLocale.desktopFlagUrl}}" alt="Flag Image"/> {{itemSummaryReportController.insight.name}} <span ng-show="itemSummaryReportController.showLocaleCode" class="header-locale-code">({{itemSummaryReportController.localeCode}})</span></span></p>
+                    <p ng-hide="itemSummaryReportController.isAllLocales" class="header-text black" ng-class="{'left' : itemSummaryReportController.showLocaleFlag}"><span>{{ 'SEGMENT' | translate }}: </span><span>{{itemSummaryReportController.currentSegment.name}}</span></p>
+                    <p class="header-text" ng-class="{'left' : itemSummaryReportController.showLocaleFlag, 'display-none' : !itemSummaryReportController.showLocaleFlag}">{{ 'RESULTS_COMPLETED' | translate }}: {{itemSummaryReportController.insightLocale.gameRunCompletedDate | date:'d MMMM y'}}</p>
+                </div>
+            </header>
+
+
+            <div class="report-col" ng-class-even="'float-r'" ng-class-odd="'float-l'">
+                <div>
+                    <p class="item-name">{{item.name}}</p>
+                    <p class="item-number tertiary-text">{{item.number}}</p>
+                </div>
+                <div class="float-l">
+                    <fi-img-crop img-src={{item.primaryImage.fullsizeUrl}}
+                                 img-alt={{item.name}}
+                                 img-height="335"
+                                 img-width="220">
+                    </fi-img-crop>
+                </div>
+                <div class="grid-info-col">
+                    <div class="insight-results-grid-info">
+
+                        <div class="grid-info-row">
+                            <p class="total-value">{{item.totalValue | number:getTotalValuePrecision()}}</p>
+                            <span class="grid-label">{{ 'TOTAL_VALUE' | translate }}</span>
+                        </div>
+                        <div class="grid-info-row" ng-if="!itemSummaryReportController.isAllLocales">
+                            <div class="currency margin-bottom">
+                                <p>
+                                    <fi-currency value="{{item.testPrice}}"
+                                                 symbol-class="uom"
+                                                 round-at-threshold="true"
+                                                 current-locale="itemSummaryReportController.currentLocale">
+                                    </fi-currency>
+                                </p>
+                                <span class="grid-label test-price-text">{{ 'TEST_PRICE' | translate }} ({{itemSummaryReportController.insightLocale.currencyCode}})</span>
+                            </div>
+
+                            <div class="currency" ng-if="showModelPrice()">
+                                <p>
+                                    <fi-currency value="{{item.modelPrice}}"
+                                                 symbol-class="uom"
+                                                 round-at-threshold="true"
+                                                 current-locale="itemSummaryReportController.currentLocale">
+                                    </fi-currency>
+                                </p>
+                                <span class="grid-label model-price-text">{{ 'MODEL_PRICE' | translate }} ({{itemSummaryReportController.insightLocale.currencyCode}})</span>
+                            </div>
+
+                            <div class="currency margin-bottom" ng-if="showMaxGmPrice()">
+                                <p>
+                                    <fi-currency value="{{item.maxGMPrice}}"
+                                                 symbol-class="uom"
+                                                 round-at-threshold="true"
+                                                 current-locale="itemSummaryReportController.currentLocale">
+                                    </fi-currency>
+                                    <span class="grid-label percent"> ({{item.maxGrossMarginPercent | percentage: 0:false}}<span>%</span>)</span>
+                                </p>
+                                <span class="grid-label max-gm-price-text">{{ 'MAX_GM' | translate }} <span>({{ 'GROSS_MARGIN_ABBREV' | translate }}%)</span></span>
+                            </div>
+
+                            <div class="currency" ng-if="showGrossMarginDeltaBasisPoints()">
+                                <p>{{item.grossMarginDeltaBasisPoints | number:0}}<span class="uom"> BPS</span></p>
+                                <span class="grid-label dark-text">{{ 'MARGIN_GAIN' | translate }}</span>
+                            </div>
+                        </div>
+
+                        <div class="grid-info-row">
+                            <div class="sentiment margin-bottom">
+                                <p>{{item.overallPositive | percentage: 0:false}}<span class="uom">%</span></p>
+                                <p class="grid-label">{{ 'LOVE_IT' | translate }}/{{ 'LIKE_IT' | translate }}</p>
+                            </div>
+
+                            <div class="sentiment">
+                                <p>{{item.overallNegative | percentage: 0:false}}<span class="uom">%</span></p>
+                                <p class="grid-label">{{ 'LEAVE_IT' | translate }}/{{ 'HATE_IT' | translate }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,7 @@
+<fieldset class="fi-checkbox" ng-class="{'disabled': fiLocaleCheckboxController.locale.disabled, 'selected': fiLocaleCheckboxController.locale.selected}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ng-disabled="fiLocaleCheckboxController.locale.disabled">
+    <img ng-src="{{fiLocaleCheckboxController.locale.flagImageUrl}}" class="insight-locale-flag"/>
+    <input type="checkbox" id="{{fiLocaleCheckboxController.locale.locale}}" class="locale-checkbox" ng-model="fiLocaleCheckboxController.locale.selected">
+    <label id="{{fiLocaleCheckboxController.locale.language}}LocalLbl" for="{{fiLocaleCheckboxController.locale.locale}}">{{fiLocaleCheckboxController.locale.language}}-{{fiLocaleCheckboxController.locale.currencyCode}}</label>
+    <md-icon md-svg-src="images/ic_check_24px.svg" ng-show="fiLocaleCheckboxController.locale.selected"></md-icon>
+    <md-icon md-svg-src="images/ic_check_24px.svg" class="locale-checkbox-hover" ng-show="hover && !fiLocaleCheckboxController.locale.selected"></md-icon>
+</fieldset>

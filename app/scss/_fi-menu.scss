@@ -1,0 +1,40 @@
+/* Styles for the <fi-menu> directive only
+    When the Material Design menu is released, this SCSS file can be deleted
+*/
+md-select.fi-menu {
+  -webkit-flex: 0 0 11%;
+  -ms-flex: 0 0 11%;
+  flex: 0 0 11%;
+  max-width: 11%;
+}
+md-select.fi-menu.no-placeholder {
+  -webkit-flex: 0 0 6%;
+  -ms-flex: 0 0 6%;
+  flex: 0 0 6%;
+  max-width: 6%;
+}
+md-select.fi-menu .md-select-label .md-select-icon {
+  background-image: url(../images/icon-options.svg);
+  width: 40px;
+  height: 40px;
+  margin-top: 3px;
+  margin-left: auto !important;
+}
+md-select.fi-menu .md-select-label .md-select-icon:after {
+  content: none;
+}
+md-select.fi-menu .md-select-label > span {
+  text-transform: uppercase;
+  font-size: .75em;
+  font-weight: bold;
+}
+md-select-menu md-option[selected].fi-menu-optgroup {
+  color: rgba(0,0,0,0.87);
+}
+md-select.fi-menu.comment-option{
+padding: 0;
+}
+md-select.fi-menu.comment-option .md-select-label {
+  border: 0;
+  margin-top: -15px;
+}

@@ -1,0 +1,64 @@
+<md-content md-theme="altTheme" class="ui-scroll-wrapper md-primary">
+    <md-content ng-if="InsightsSegmentsController.segments.length > 0 && InsightsSegmentsController.showLocaleResults" class="ui-scroll-container overflow-x-auto">
+	        <table class="segment-table" cellspacing="5px">
+	            <thead>
+	                <td class="item-head">{{'ITEM_NAME' | translate | uppercase}}</td>
+	                <td class="all all-res" ng-class="{'selected':InsightsSegmentsController.currentSort == 'all'}" layout-padding
+	                    ng-click="InsightsSegmentsController.toggleSortAll()">
+	                    <span class="sortorder" ng-show="InsightsSegmentsController.currentSort === 'all'" ng-class="{reverse:InsightsSegmentsController.status === 'asc'}"></span>
+	                    {{'ALL' | translate | uppercase}}
+	                </td>
+	                <td class="segments-name seg-color" ng-class="{'selected':$index == InsightsSegmentsController.currentSort}" layout-padding
+	                    ng-repeat="segment in InsightsSegmentsController.allItems[0].sortedSegmentsArray"
+	                    ng-click="InsightsSegmentsController.toggleSort($index, segment)">
+	                    <span class="sortorder"
+	                          ng-show="InsightsSegmentsController.currentSort === $index && InsightsSegmentsController.gameRunStatusValue.hasResults(segment)"
+	                          ng-class="{reverse:InsightsSegmentsController.status === 'asc'}">
+	                    </span>{{segment.gameRunName}}
+	                </td>
+	                <td class="segments-icon">
+	                        <md-icon class="icon-cycle" md-svg-src="images/ic_add_24px.svg"
+	                                 ng-click="InsightsSegmentsController.addSegments()">
+	                        </md-icon>
+	                </td>
+	            </thead>
+
+	            <tr class="items" ng-repeat="item in InsightsSegmentsController.allItems">
+	                <td class="item-bgc">
+	                   <div layout="row">
+		                    <fi-img-crop img-src={{item.primaryImage.thumbnailUrl}} img-alt={{item.name}}
+		                              	img-class="img-crop clickable" img-height="82" img-width="65"
+										ng-click="InsightsSegmentsController.showImageBrowseDialog(item)">
+		                    </fi-img-crop>
+		                    <div>
+		                        <p id="itemName" class="top segment-item-details">{{item.name}}</p>
+		                        <p id="itemNumber" class="bottom segment-item-details">{{item.number}}</p>
+		                    </div>
+	                    </div>
+	                </td>
+	                <td class="total-value" ng-class='InsightsSegmentsController.getCellColor(item.totalValue)' layout-padding>
+	                    {{item.totalValue}}
+	                </td>
+	                <td class="total-value" ng-repeat="value in item.sortedSegmentsArray track by $index" layout-padding
+	                    ng-class='InsightsSegmentsController.getCellColor(value.totalValue)'>
+	                    {{InsightsSegmentsController.getTotalValueDisplay(value, $parent.$index)}}
+	                </td>
+	                <td></td>
+	            </tr>
+	        </table>
+    </md-content>
+    <md-content md-theme="default" class="ui-scroll-container md-primary">
+        <md-content ng-if="InsightsSegmentsController.showPleaseSelectLocaleMsg"
+             class="action-row text-align-center">
+            <h4>{{'SELECT_LOCALE_VIEW_SEGMENT' | translate}}</h4>
+        </md-content>
+        <md-content ng-if="InsightsSegmentsController.showLocaleResults && InsightsSegmentsController.showNoSegmentsAvailableMsg"
+             class="action-row text-align-center">
+            <h4>{{'NO_SEGMENTS_AVAILABLE' | translate}}<a href="" ng-click="InsightsSegmentsController.addSegments()">{{'CREATE_SEGMENTS' | translate}}</a></h4>
+        </md-content>
+        <md-content ng-if="!InsightsSegmentsController.showLocaleResults && !InsightsSegmentsController.showPleaseSelectLocaleMsg"
+             class="action-row text-align-center">
+            <h4>{{'LOCALE_NOT_COMPLETE' | translate}}</h4>
+        </md-content>
+    </md-content>
+</md-content>

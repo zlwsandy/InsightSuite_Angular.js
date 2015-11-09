@@ -1,0 +1,96 @@
+<md-content md-theme="altTheme" class="ui-scroll-wrapper md-primary" fi-scroll-shrink source="true">
+    <md-content md-theme="default" class="ui-scroll-container md-primary">
+        <div ng-show='insightItemsController.showProgressLoader' layout="row" layout-align="space-around" layout-margin>
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+        <md-toolbar ng-show="insightItemsController.showAllSelectedCheckBox" layout="row" layout-align="start center"
+                    md-theme="altTheme" class="md-primary">
+        </md-toolbar>
+
+        <!--Insight Results - list of insight items shown for locales with results or All locales -->
+        <insight-results-items items="insightItemsController.items"
+                               current-segment="insightItemsController.currentSegment"
+                               current-locale="insightItemsController.currentLocale"
+                               insight="insightItemsController.insight"
+                               sort-by="insightItemsController.sortItemsBy"
+                               show-no-items-msg="insightItemsController.showNoItemsMsg"
+                               show-not-enough-info-segment-msg="insightItemsController.showNotEnoughInfoSegmentMsg"
+                               show-processing-segment-msg="insightItemsController.showProcessingSegmentMsg"
+                               view-type="insightItemsController.viewType"
+                               ng-if="insightItemsController.showResults()">
+        </insight-results-items>
+
+        <!-- A -->
+        <insight-items-add-container ng-if="insightItemsController.addedItems.create.length > 0"
+                                     items="insightItemsController.addedItems.create"
+                                     currency="{{insightItemsController.currentLocale.currencyCode}}"
+                                     primary-message="{{insightItemsController.addedItems.createMsg}}"
+                                     highlight-color="background-warn"
+                                     text-color="secondary-text"
+                                     on-add="insightItemsController.add()"
+                                     on-dismiss="insightItemsController.dismiss('create', item)"
+                                     on-dismiss-all="insightItemsController.dismissAll('create')">
+        </insight-items-add-container>
+
+        <!-- D -->
+        <insight-items-add-container ng-if="insightItemsController.addedItems.itemsExistForOtherLocaleInInsight.length > 0"
+                                     items="insightItemsController.addedItems.itemsExistForOtherLocaleInInsight"
+                                     currency="{{insightItemsController.currentLocale.currencyCode}}"
+                                     primary-message="{{insightItemsController.addedItems.itemsExistForOtherLocaleInInsightMsg}}"
+                                     highlight-color="background-warn"
+                                     text-color="secondary-text"
+                                     on-add="insightItemsController.add()"
+                                     on-dismiss="insightItemsController.dismiss('itemsExistForOtherLocaleInInsight', item)"
+                                     on-dismiss-all="insightItemsController.dismissAll('itemsExistForOtherLocaleInInsight')">
+        </insight-items-add-container>
+
+        <!-- B -->
+        <insight-items-add-container ng-if="insightItemsController.addedItems.itemsExistForLocaleInInsight.length > 0"
+                                     items="insightItemsController.addedItems.itemsExistForLocaleInInsight"
+                                     currency="{{insightItemsController.currentLocale.currencyCode}}"
+                                     primary-message="{{insightItemsController.addedItems.itemsExistForLocaleInInsightMsg}}"
+                                     highlight-color="background-error"
+                                     text-color="red-text"
+                                     on-add="insightItemsController.add()"
+                                     on-dismiss="insightItemsController.dismiss('itemsExistForLocaleInInsight', item)"
+                                     on-dismiss-all="insightItemsController.dismissAll('itemsExistForLocaleInInsight')">
+        </insight-items-add-container>
+
+        <!-- C -->
+        <insight-items-add-container ng-if="insightItemsController.addedItems.itemsExistForLocaleInOtherInsights.length > 0"
+                                     items="insightItemsController.addedItems.itemsExistForLocaleInOtherInsights"
+                                     currency="{{insightItemsController.currentLocale.currencyCode}}"
+                                     primary-message="{{insightItemsController.addedItems.itemsExistForLocaleInOtherInsightsMsg}}"
+                                     highlight-color="background-error"
+                                     text-color="red-text"
+                                     show-add="true"
+                                     on-add="insightItemsController.add('itemsExistForLocaleInOtherInsights', item)"
+                                     on-add-all="insightItemsController.addAll('itemsExistForLocaleInOtherInsights')"
+                                     on-dismiss="insightItemsController.dismiss('itemsExistForLocaleInOtherInsights', item)"
+                                     on-dismiss-all="insightItemsController.dismissAll('itemsExistForLocaleInOtherInsights')">
+        </insight-items-add-container>
+
+        <!-- E -->
+        <insight-items-add-container ng-if="insightItemsController.addedItems.itemsExistForOtherLocale.length > 0"
+                                     items="insightItemsController.addedItems.itemsExistForOtherLocale"
+                                     currency="{{insightItemsController.currentLocale.currencyCode}}"
+                                     primary-message="{{insightItemsController.addedItems.itemsExistForOtherLocaleMsg}}"
+                                     highlight-color="background-error"
+                                     text-color="red-text"
+                                     show-add="true"
+                                     on-add="insightItemsController.add('itemsExistForOtherLocale', item)"
+                                     on-add-all="insightItemsController.addAll('itemsExistForOtherLocale')"
+                                     on-dismiss="insightItemsController.dismiss('itemsExistForOtherLocale', item)"
+                                     on-dismiss-all="insightItemsController.dismissAll('itemsExistForOtherLocale')">
+        </insight-items-add-container>
+
+        <!--Insight Setup - list of insight items shown for locales without results -->
+        <insight-setup-items ng-if="!insightItemsController.showResults()"
+                             items="insightItemsController.items"
+                             current-locale="insightItemsController.currentLocale"
+                             insight="insightItemsController.insight"
+                             show-no-items-msg="insightItemsController.showNoItemsMsg"
+                             show-please-select-locale-msg="insightItemsController.showPleaseSelectLocaleMsg">
+        </insight-setup-items>
+    </md-content>
+</md-content>

@@ -1,0 +1,9 @@
+{
+  "companyId": 1,
+  "createTime": 1375122528000,
+  "defaultCurrencyCode": "USD",
+  "defaultLocale": "en_US",
+  "i18nEnabled": false,
+  "name": "Company A",
+  "pricingEnabled": false
+}

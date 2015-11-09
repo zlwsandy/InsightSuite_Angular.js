@@ -1,0 +1,146 @@
+/* Styles related to menus such as the main menu and the side menu nav */
+
+.main-menu-toolbar {
+  background-color: $fi-white;
+  color: $fi-black;
+
+  .menu-button {
+    margin: 0 auto;
+    width: 100%;
+
+    md-icon {
+      color: $fi-black;
+    }
+  }
+}
+
+
+/***** Side Nav / Menu Bar *****/
+.side-menu {
+  list-style: none;
+  padding: 0;
+}
+.menu-item > a {
+  text-align: left;
+  width: 95%;
+}
+.menu-item .menu-text {
+  font-size: 1.125em;
+  text-transform: capitalize;
+}
+button.menu-item-button {
+  font-weight: bold;
+  text-align: left;
+}
+.version-label {
+  font-size: 0.688em;
+  color: $fi-grey;
+}
+.menu-active {
+  background-color: $fi-orange-hue-3;
+}
+a.md-button:not([disabled]):hover.menu-active {
+  color: $fi-black;
+}
+
+/* Options Menu */
+.options-menu {
+  width: 100%;
+  margin-left: auto;
+  padding-right: 0;
+  color: $fi-black !important;
+  margin-right: 0;
+  text-align: right;
+  display: inline-block;
+
+  .options-menu-button {
+    margin-right: 0;
+    padding-right: 0;
+  }
+}
+/* IE10 causes the button to bleed over the edge of the padding */
+html[data-useragent*='MSIE 10.0'] .options-menu,
+html[data-useragent*='Trident/7.0'] .options-menu {
+  margin-right: $margin-base;
+}
+
+.options-menu-label {
+    text-transform: uppercase;
+    color: black;
+    vertical-align: middle;
+}
+.options-menu-icon {
+    width: 45px;
+    height: 45px;
+}
+
+md-menu-content.options-menu-content {
+    background-color: $fi-white;
+}
+
+.options-menu-item {
+    margin: 0 10px;
+    &:hover {
+        cursor: pointer;
+        background-color: $fi-grey;
+    }
+}
+
+/* Search input */
+.menu-input {
+  margin-top: 8px;
+  padding: 0;
+  height: 100%;
+  background-color: $fi-white;
+
+  md-icon {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    border-bottom: 2px solid $fi-orange-hue-3;
+    height: 100%;
+  }
+
+  &.md-input-focused md-icon {
+    border-bottom: 2px solid $fi-blue;
+  }
+
+  input {
+    margin: {
+      top: 0;
+      left: 24px;
+      right: 0;
+      bottom: 0;
+    }
+    background-color: $fi-white;
+    height: 33px;
+  }
+}
+
+/* Temp class ---------------------*/
+.temp-print-button {
+  width: 100%;
+  margin-left: auto;
+  padding-right: 0;
+  margin-right: 0;
+}
+html[data-useragent*='MSIE 10.0'] .temp-print-button,
+html[data-useragent*='Trident/7.0'] .temp-print-button {
+  margin-right: $margin-base;
+}
+/* Temp class ---------------------*/
+
+
+
+@media print {
+    .main-menu-toolbar {
+        display: none;
+    }
+    .options-menu {
+        display: none;
+    }
+    .temp-print-button {
+        display: none;
+    }
+}

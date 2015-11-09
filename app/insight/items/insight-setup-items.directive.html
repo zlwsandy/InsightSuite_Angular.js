@@ -1,0 +1,22 @@
+<div id="noItemsMsg" ng-show="InsightSetupItemsController.showNoItemsMsg" class="action-row text-align-center">
+    <h4>{{ 'ITEMS_NONE_DISPLAY' | translate }}</h4>
+</div>
+<div id="noLocalesMsg" ng-show="InsightSetupItemsController.showPleaseSelectLocaleMsg" class="action-row text-align-center">
+    <h4>{{ 'SELECT_LOCALE' | translate }}</h4>
+</div>
+<md-list ng-if="InsightSetupItemsController.items.length > 0">
+    <form name="insightItemForm" novalidate>
+        <md-list-item class="card disable-md-clickable"
+                      ng-repeat="item in InsightSetupItemsController.items track by $index"
+                      aria-label="TODO Put something useful here">
+                <insight-setup-item
+                                    item="item"
+                                    locale="InsightSetupItemsController.currentLocale"
+                                    currency="{{InsightSetupItemsController.currentLocale.currencyCode}}"
+                                    flex="100"
+                                    layout="row">
+                </insight-setup-item>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </form>
+ </md-list>

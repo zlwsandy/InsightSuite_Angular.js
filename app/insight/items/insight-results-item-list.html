@@ -1,0 +1,73 @@
+<div id="item-{{InsightResultsItemController.item.itemId}}" ng-click="InsightResultsItemController.viewItemDetail($event)"
+     class="data-grid" flex="100" layout="row" layout-wrap layout-align="start">
+
+    <div flex="15" ng-hide="InsightResultsItemController.hideImage">
+        <fi-img-crop img-src={{InsightResultsItemController.item.primaryImage.thumbnailUrl}} img-alt={{InsightResultsItemController.item.name}} img-height="130"
+                     img-class="item-thumbnail" img-width="130">
+        </fi-img-crop>
+    </div>
+
+    <div class="result-values-container" flex="{{InsightResultsItemController.hideImage ? '100' : '85'}}" layout="column" layout-align="start start">
+        <p class="item-name">{{InsightResultsItemController.item.name}} <span class="item-number tertiary-text">- {{InsightResultsItemController.item.number}}</span></p>
+
+        <div layout="row" class="item-results" flex layout-align="{{InsightResultsItemController.hideImage ? 'space-between' : '    '}}">
+
+            <!--Sorting by total value actually sorts by percent test price-->
+            <div class="result-value total-value primary-text" ng-class="{'sorted' : InsightResultsItemController.sortBy.prop === 'percentTestPrice'}">
+                <p class="top">{{InsightResultsItemController.item.totalValue | number:InsightResultsItemController.getTotalValuePrecision()}}</p>
+                <p class="bottom">{{ 'TOTAL' | translate }}<br>{{ 'VALUE' | translate }}</p>
+            </div>
+
+            <div class="result-value currency secondary-text" ng-class="{'sorted' : InsightResultsItemController.sortBy.prop === 'testPrice'}"
+                 ng-show="!InsightResultsItemController.isAllLocales()">
+                <fi-currency class="top"
+                             value="{{InsightResultsItemController.item.testPrice}}"
+                             symbol-class="uom"
+                             round-at-threshold="true"
+                             current-locale="InsightResultsItemController.currentLocale">
+                </fi-currency>
+                <p class="bottom test-price-text">{{ 'TEST_PRICE' | translate }} ({{InsightResultsItemController.currentLocale.currencyCode}})</p>
+            </div>
+
+            <div class="result-value currency secondary-text" ng-class="{'sorted' : InsightResultsItemController.sortBy.prop === 'modelPrice'}"
+                 ng-show="InsightResultsItemController.showModelPrice()">
+                <fi-currency class="top"
+                             value="{{InsightResultsItemController.item.modelPrice}}"
+                             symbol-class="uom"
+                             round-at-threshold="true"
+                             current-locale="InsightResultsItemController.currentLocale">
+                </fi-currency>
+                <p class="bottom model-price-text">{{ 'MODEL_PRICE' | translate }} ({{InsightResultsItemController.currentLocale.currencyCode}})</p>
+            </div>
+
+            <div class="result-value gm-price secondary-text" ng-class="{'sorted' : InsightResultsItemController.sortBy.prop === 'maxGMPrice' || InsightResultsItemController.sortBy.prop === 'maxGrossMarginPercent'}"
+                 ng-show="InsightResultsItemController.showMaxGmPrice()">
+                <p class="top">
+                    <fi-currency value="{{InsightResultsItemController.item.maxGMPrice}}"
+                                 symbol-class="uom"
+                                 round-at-threshold="true"
+                                 current-locale="InsightResultsItemController.currentLocale">
+                    </fi-currency>
+                    <span class="uom"> ({{InsightResultsItemController.item.maxGrossMarginPercent | percentage: 0:false}}<span>%</span>)</span>
+                </p>
+                <p class="bottom max-gm-price-text">{{ 'MAX_GROSS_MARGIN' | translate }} <span>({{ 'GROSS_MARGIN_ABBREV' | translate }}%)</span></p>
+            </div>
+
+            <div class="result-value margin-gain secondary-text" ng-class="{'sorted' : InsightResultsItemController.sortBy.prop === 'grossMarginDeltaBasisPoints'}"
+                 ng-show="InsightResultsItemController.showGrossMarginDeltaBasisPoints()">
+                <p class="top">{{InsightResultsItemController.item.grossMarginDeltaBasisPoints | number:0}}<span class="uom"> BPS</span></p>
+                <p class="bottom">{{ 'MARGIN_GAIN' | translate }}</p>
+            </div>
+
+            <div class="result-value sentiment tertiary-text" ng-class="{'sorted' : InsightResultsItemController.sortBy.prop === 'overallPositive'}">
+                <p class="top">{{InsightResultsItemController.item.overallPositive | percentage: 0:false}}<span class="uom">%</span></p>
+                <p class="bottom">{{ 'LOVE_IT' | translate }}<br>{{ 'LIKE_IT' | translate }}</p>
+            </div>
+
+            <div class="result-value sentiment tertiary-text" ng-class="{'sorted' : InsightResultsItemController.sortBy.prop === 'overallNegative'}">
+                <p class="top">{{InsightResultsItemController.item.overallNegative | percentage: 0:false}}<span class="uom">%</span></p>
+                <p class="bottom">{{ 'LEAVE_IT' | translate }}<br>{{ 'HATE_IT' | translate }}</p>
+            </div>
+        </div>
+    </div>
+</div>

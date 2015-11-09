@@ -1,0 +1,35 @@
+<div class='bar-chart'>
+    <div class='chart-section love-it'><span ng-if="!sentimentBarChartController.hideSentimentLabels">{{'LOVE_IT' | translate | uppercase}}</span><md-icon class="love-icon" md-svg-src="images/icon-sentiment-loveit.svg"></md-icon></div>
+
+    <div class='chart-section bar love-background' ng-style="sentimentBarChartController.getWidth('love')"
+         ng-if="sentimentBarChartController.loveWidth != '0'">
+        <label class='percentage'>{{sentimentBarChartController.loveWidth | number : 0}}%</label>
+        <label class='title'>{{'LOVE_IT' | translate}}</label>
+    </div>
+    <div class='chart-section bar like-background' ng-style="sentimentBarChartController.getWidth('like')"
+         ng-if="sentimentBarChartController.likeWidth != '0'">
+        <label class='percentage'>{{sentimentBarChartController.likeWidth | number : 0}}%</label>
+        <label class='title'>{{'LIKE_IT' | translate}}</label>
+    </div>
+    <div class='chart-section bar notvoted-background' ng-style="sentimentBarChartController.getWidth('notvoted')"
+         ng-if="sentimentBarChartController.notvotedWidth != '0'">
+        <label class='percentage'>{{sentimentBarChartController.notvotedWidth | number : 0}}%</label>
+        <label class='title'>{{'NOT_VOTED' | translate}}</label>
+    </div>
+    <div class='chart-section bar neutral-background' ng-style="sentimentBarChartController.getWidth('neutral')"
+         ng-if="sentimentBarChartController.neutralWidth != '0'">
+        <label class='percentage'>{{sentimentBarChartController.neutralWidth | number : 0}}%</label>
+        <label class='title'>{{'NEUTRAL' | translate}}</label>
+    </div>
+    <div class='chart-section bar leave-background' ng-style="sentimentBarChartController.getWidth('leave')"
+         ng-if="sentimentBarChartController.leaveWidth != '0'">
+        <label class='percentage'>{{sentimentBarChartController.leaveWidth | number : 0}}%</label>
+        <label class='title'>{{'LEAVE_IT' | translate}}</label>
+    </div>
+    <div class='chart-section bar hate-background' ng-style="sentimentBarChartController.getWidth('hate')"
+         ng-if="sentimentBarChartController.hateWidth != '0'">
+        <label class='percentage'>{{sentimentBarChartController.hateWidth | number : 0}}%</label>
+        <label class='title'>{{'HATE_IT' | translate}}</label>
+    </div>
+    <div class='chart-section hate-it'> <md-icon class="hate-icon" md-svg-src="images/icon-sentiment-hateit.svg"></md-icon> <span ng-if="!sentimentBarChartController.hideSentimentLabels">{{'HATE_IT' | translate | uppercase}}</span></div>
+</div>

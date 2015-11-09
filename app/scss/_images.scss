@@ -1,0 +1,49 @@
+.img-crop {
+  border-radius: 0px;
+  border: 1px solid $fi-light-grey;
+  margin: 5px;
+  display: block;
+}
+
+.img-crop.left-align {
+    border-radius: 0px;
+    border: 1px solid $fi-light-grey;
+    margin: 5px 5px 5px 0;
+}
+.img-crop.clickable {
+  cursor: pointer;
+}
+
+.img-container {
+    position: relative;
+    margin: 5px;
+}
+.img-container.margin-none {
+    margin: 0px;
+}
+
+.indicator-icon {
+    position:absolute;
+    top: 0px;
+    right: 0px;
+    margin:5px;
+    padding: 0px;
+    fill: $fi-white;
+    z-index: 1;
+
+    &.blue {
+        background: linear-gradient(225deg, $fi-base-blue 18%, transparent 0) top right;
+    }
+    &.red {
+        background: linear-gradient(225deg, $fi-red 18%, transparent 0) top right;
+    }
+    &.yellow {
+        background: linear-gradient(225deg, $fi-yellow 18%, transparent 0) top right;
+    }
+    &.orange {
+        background: linear-gradient(225deg, $fi-orange 18%, transparent 0) top right;
+    }
+    &.green {
+        background: linear-gradient(225deg, $fi-green 18%, transparent 0) top right;
+    }
+}

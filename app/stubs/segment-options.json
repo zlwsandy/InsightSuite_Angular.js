@@ -1,0 +1,87 @@
+{
+  "gameRunId": 181,
+  "gameRunName": null,
+  "personas": [
+    {
+      "persona": "P12",
+      "count": 1
+    },
+    {
+      "persona": "P2",
+      "count": 1
+    },
+    {
+      "persona": "P5",
+      "count": 1
+    },
+    {
+      "persona": "P8",
+      "count": 1
+    }
+  ],
+  "regions": [
+    {
+      "region": "Region 71",
+      "count": 1
+    },
+    {
+      "region": "Region 86",
+      "count": 1
+    },
+    {
+      "region": "Region 93",
+      "count": 1
+    },
+    {
+      "region": "Region 96",
+      "count": 1
+    }
+  ],
+  "targetTypes": [
+    {
+      "type": "CUSTOMERS"
+    }
+  ],
+  "predictorOrCrowd": "predictor",
+  "questions": [
+    {
+      "questionId": 383,
+      "surveyId": 212,
+      "questionText": "What is your gender?",
+      "questionLabel": "Gender",
+      "position": 1,
+      "answers": [
+        {
+          "answerId": 151,
+          "questionId": 383,
+          "companyAnswerId": null,
+          "answerText": "Male",
+          "position": 1
+        },
+        {
+          "answerId": 152,
+          "questionId": 383,
+          "companyAnswerId": null,
+          "answerText": "Female",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "questionId": 383,
+      "surveyId": 212,
+      "questionText": "What is your age?",
+      "questionLabel": "Age",
+      "position": 2,
+      "answers": [
+        {
+          "answerId": 151,
+          "questionId": 383,
+          "companyAnswerId": null,
+          "answerText": "0-100",
+          "position": 1
+        }
+      ]
+    }
+  ]
+}

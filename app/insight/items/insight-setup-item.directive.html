@@ -1,0 +1,39 @@
+<div id="item-{{InsightSetupItemController.item.itemId}}" class="data-grid"
+        flex="100" layout="row" layout-wrap layout-align="start center" ng-click="InsightSetupItemController.selectItem();">
+
+    <!-- <md-checkbox flex="5" id="itemCheckBox-{{InsightSetupItemController.item.itemId}}"
+                ng-model="InsightSetupItemController.item.selectedFlag"
+                ng-change="InsightSetupItemController.itemCheckboxClick(InsightSetupItemController.item.selectedFlag);event.stopPropagation();"
+                aria-label="TODO Put something useful here">
+    </md-checkbox> -->
+
+    <div flex="35">
+        <span class="insight-setup-items-name">
+            {{InsightSetupItemController.item.name}}
+        </span>
+
+        <div id="itemNumber-{{InsightSetupItemController.item.itemId}}"
+                class="insight-setup-items-item-number uppercase-font">
+            {{InsightSetupItemController.item.number}}
+        </div>
+
+        <span class="insight-setup-items-reference uppercase-font"
+              ng-class="{ 'item-low-ref' : InsightSetupItemController.item.reference === 'LOW', 'item-high-ref' : InsightSetupItemController.item.reference === 'HIGH'}">
+            {{InsightSetupItemController.item.reference | translate}}
+        </span>
+    </div>
+
+    <div flex="45" id="itemName-images-{{InsightSetupItemController.item.itemId}}"
+            layout="row" layout-align="start start" layout-wrap class="insight-item-image-container">
+        <div ng-repeat="itemImage in InsightSetupItemController.item.itemImages | orderBy: '-primary'" class="img-container">
+            <fi-svg-icon icon="star" css-class="indicator-icon blue" svg-height="75" svg-width="75" ng-if="itemImage.primary"></fi-svg-icon>
+            <fi-img-crop img-src={{itemImage.thumbnailUrl}} img-alt={{itemImage.name}}
+                img-height="75" img-width="75" img-class="img-crop"></fi-img-crop>
+        </div>
+    </div>
+
+    <div flex="20" class="insight-setup-test-price-container" layout="column" layout-align="center end" >
+        <div class="insight-setup-items-test-price">{{InsightSetupItemController.item.testPrice ? (InsightSetupItemController.item.testPrice | number:0) : ('0')}}</div>
+        <div class="insight-setup-items-locale">{{InsightSetupItemController.currency}}</div>
+    </div>
+</div>

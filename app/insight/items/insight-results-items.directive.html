@@ -1,0 +1,108 @@
+<div id="noItemsMsg" ng-if="InsightResultsItemsController.showNoItemsMsg" class="action-row text-align-center">
+    <h4>{{ 'ITEMS_NONE_DISPLAY' | translate }}</h4>
+</div>
+<div id="notEnoughInfoSegmentMsg" ng-if="InsightResultsItemsController.showNotEnoughInfoSegmentMsg"
+     class="action-row text-align-center">
+    <h4>{{ 'SEGMENT_NOT_ENOUGH_INFO' | translate }}</h4>
+</div>
+<div id="processingSegmentMsg" ng-if="InsightResultsItemsController.showProcessingSegmentMsg"
+     class="action-row text-align-center">
+    <h4>{{ 'SEGMENT_PROCESSING' | translate }}</h4>
+</div>
+
+<md-content class="view-action-bar" md-theme="altTheme" layout="row" layout-align="end center">
+    <fi-sort-by-select ng-if="InsightResultsItemsController.isListView()"
+                       default-value="InsightResultsItemsController.sortBy.prop"
+                       disabled="false"
+                       visible="InsightResultsItemsController.showSortBySelect"
+                       current-locale="InsightResultsItemsController.currentLocale"
+                       insight-pricing-enabled="InsightResultsItemsController.insightPricingEnabled"
+                       max-gm-pricing-enabled="InsightResultsItemsController.maxGmPricingEnabled"
+                       change="InsightResultsItemsController.sortByChange(currentSortBy)"
+                       class="prefix-flex">
+    </fi-sort-by-select>
+
+    <!--Uncomment when the grid view is implemented-->
+    <!-- <button class="btn-default-action md-button md-default-theme btn-icon-button"
+            md-theme="default" ng-click="InsightResultsItemsController.toggleView()">
+            <md-icon md-svg-src="/app/images/icon-gridview.svg"></md-icon>
+            <md-icon md-svg-src="{{InsightResultsItemsController.getToggleIcon()}}"></md-icon>
+    </button>
+
+    <button class="btn-default-action md-button md-default-theme btn-icon-button"
+            md-theme="default" ng-click="$mdOpenMenu($event)">
+            <md-icon md-svg-src="/app/images/ic_business_24px.svg"></md-icon>
+    </button> -->
+
+</md-content>
+
+<div ng-if="InsightResultsItemsController.items.length > 0" >
+
+    <!--Uncomment when the grid view is implemented-->
+    <!-- Grid View -->
+    <!--<div class="insight-results-grid-container" layout="row" layout-wrap-->
+         <!--ng-if="!InsightResultsItemsController.isListView()">-->
+
+        <!--<insight-results-item item="item"-->
+                              <!--ng-repeat="item in InsightResultsItemsController.items"-->
+                              <!--ng-if="!item.reference"-->
+                              <!--flex-->
+                              <!--class="insight-results-grid-item"-->
+                              <!--sort-by="InsightResultsItemsController.sortBy"-->
+                              <!--current-locale="InsightResultsItemsController.currentLocale"-->
+                              <!--insight-pricing-enabled="InsightResultsItemsController.insightPricingEnabled"-->
+                              <!--max-gm-pricing-enabled="InsightResultsItemsController.maxGmPricingEnabled"-->
+                              <!--view-type="InsightResultsItemsController.viewType">-->
+        <!--</insight-results-item>-->
+    <!--</div>-->
+
+    <!-- Print View -->
+    <div class="insight-results-grid-container"
+         layout="row"
+         layout-wrap
+         layout-align="space-between"
+         ng-if="!InsightResultsItemsController.isListView()">
+
+        <div class="print-only sort-by-label">
+            <p>{{InsightResultsItemsController.sortBy.label}}</p>
+        </div>
+
+        <md-button class="md-icon-button btn-close circular insight-result-details-close-button"
+                   md-theme="default"
+                   ng-if="!InsightResultsItemsController.isListView()"
+                   ng-click="InsightResultsItemsController.showListView()" aria-label="{{ 'CLOSE' | translate}}">
+            <md-icon md-svg-icon="images/ic_close_24px.svg"></md-icon>
+        </md-button>
+
+        <insight-results-item item="item"
+                              class="display-inline-block"
+                              ng-repeat="item in InsightResultsItemsController.items"
+                              ng-if="!item.reference"
+                              flex="50"
+                              sort-by="InsightResultsItemsController.sortBy"
+                              current-locale="InsightResultsItemsController.currentLocale"
+                              insight="InsightResultsItemsController.insight"
+                              view-type="InsightResultsItemsController.viewType">
+        </insight-results-item>
+    </div>
+
+    <!-- List View -->
+    <md-list ng-if="InsightResultsItemsController.isListView()">
+
+        <md-list-item class="no-padding disable-md-clickable insight-results-list-item"
+                      ng-class="{'all-locales' : InsightResultsItemsController.isAllLocales()}"
+                      ng-repeat="item in InsightResultsItemsController.items" ng-if="!item.reference">
+
+            <insight-results-item item="item"
+                                  sort-by="InsightResultsItemsController.sortBy"
+                                  current-locale="InsightResultsItemsController.currentLocale"
+                                  insight="InsightResultsItemsController.insight"
+                                  view-type="InsightResultsItemsController.viewType"
+                                  flex="100">
+            </insight-results-item>
+
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+
+</div>

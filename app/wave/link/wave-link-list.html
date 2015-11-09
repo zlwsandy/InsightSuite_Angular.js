@@ -1,0 +1,53 @@
+<div ng-controller="WaveLinkController as waveLinkController">
+    <md-content id="linksTabContent" class="links-tab-content">
+        <md-toolbar ng-show="waveLinkController.links.length !== 0" layout="row" layout-align="start center" md-theme="altTheme" class="md-primary md-hue-1">
+            <div flex="85">
+                <md-checkbox id="linksTabAllSelectedCheckBox" ng-model="waveLinkController.selectAll" ng-change="waveLinkController.countLinksSelectAll((waveLinkController.links | filter:waveController.localeFilter))" ng-click="waveLinkController.checkAll()" aria-label="Multi All Checkbox">{{(waveLinkController.filteredLinks | filter: {select: true}).length}} {{ 'LINKS_SELECTED' | translate }}</md-checkbox>
+            </div>
+            <div flex="15">
+                <md-button id="linkCopySelectedButton" clip-copy="waveLinkController.copySelectedLink(waveLinkController.links)" clip-click="waveLinkController.announceSelectedLinkCopy(waveLinkController.links)" class=" md-icon-button links-copy-link-icon">
+                    <md-icon md-svg-src="images/ic_content_copy_24px.svg"></md-icon>
+                </md-button>
+                <md-icon id="linkRemoveSelectedButton" md-svg-src="images/ic_highlight_remove_24px.svg" class="links-side-nav-icon" ng-click="waveLinkController.removeSelectedLinks(waveLinkController.links)"></md-icon>
+            </div>
+        </md-toolbar>
+
+        <div ng-show='waveLinkController.showProgressLoader' layout="row" layout-align="space-around" layout-margin>
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+
+        <md-list>
+            <div id="waveNoLinksMsg" ng-if="waveLinkController.links.length === 0 && !waveLinkController.showProgressLoader" class="action-row text-align-center"> {{ 'NO_WAVE_LINKS' | translate }} </div>
+            <md-list-item ng-repeat="link in waveLinkController.filteredLinks = (waveLinkController.links | filter:waveController.localeFilter)">
+                <div flex="1" class="md-list-item-text links-tab-content-list" layout="row" ng-mouseover="isHovering = true" ng-mouseout="isHovering = false">
+                    <div flex="5">
+                        <md-checkbox id="selectLinkCheckbox-{{link.gamePageId}}" ng-change="waveLinkController.countLinks(link)" ng-model="link.select"></md-checkbox>
+                    </div>
+                    <div flex="10">
+                        <fi-locale locale="{{link.locale}}"></fi-locale>
+                    </div>
+                    <div flex="50" id="linksTabGamePageName-{{link.gamePageId}}" layout="column">
+                        <div id="linksTabGamePageName">{{link.gamePageName}}</div>
+                        <div id="linksTabTargetType" class="target-type smaller-font">
+                            <md-icon id="targetTypeIcon" class="target-type-icon" md-svg-src="images/ic_people_outline_24px.svg"></md-icon>
+                            {{link.targetType | translate}}
+                        </div>
+                        <div id="linksTabInsightName" class="action-row smaller-font">{{link.basketName}}</div>
+                    </div>
+                    <div flex="25" id="linksTabTotalResponses-{{link.gamePageId}}" layout="column">
+                        <div id="linksTabTotalResponses">{{link.totalResponses}}</div>
+                        <div id="totalResponsesText" class="smaller-font">{{'RESPONSES' | translate }}</div>
+                    </div>
+                    <div flex="10">
+                        <md-icon ng-show="isHovering" id="linkRemoveButton-{{link.gamePageId}}" md-svg-src="images/ic_highlight_remove_24px.svg" ng-click="waveLinkController.removeLink(link)" class="links-side-nav-icon"></md-icon>
+                    </div>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+        
+        <md-button id="linksTabAddLinksButton" class="md-fab md-accent main-action-button-outer add-links-action-button" aria-label="{{ 'CREATE_LINK' | translate }}" ng-click="waveLinkController.showAdvanced($event)">
+            <md-icon md-svg-src="images/ic_playlist_add_24px.svg" class="main-action-button-inner"></md-icon>
+        </md-button>
+    </md-content>
+</div>

@@ -1,0 +1,19 @@
+<md-toolbar class="header-bar" fi-scroll-shrink target="true">
+    <div layout="row" class="md-title">
+        <h1>
+            <span translate>WAVES</span>
+        </h1>
+    </div>
+</md-toolbar>
+
+<md-toolbar id="wavesToolbar" layout="row" layout-align="end center" md-theme="altTheme" class="action-bar">
+    <span flex></span>
+    <md-switch id="onlyLiveSwitch"
+            md-theme="default"
+            class="md-accent"
+            ng-model="waveToolbarController.onlyLive"
+            ng-change="waveToolbarController.toggle()"
+            md-no-ink aria-label="{{ 'ONLY_LIVE' | translate }}">
+        {{ 'ONLY_LIVE' | translate }}
+    </md-switch>
+</md-toolbar>

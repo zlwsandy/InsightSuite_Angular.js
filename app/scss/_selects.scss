@@ -1,0 +1,96 @@
+/* Styles for select boxes (dropdowns) */
+
+.md-select-menu-container {
+
+  // Allows for inline grouping in selects
+  .group-start {
+    border-top: 1px solid $fi-light-grey;
+  }
+  .group-end{
+    border-bottom: 1px solid $fi-light-grey;
+  }
+}
+.select-text-container {
+  margin: 2px 0 6px 0;
+}
+.select-text {
+  vertical-align: middle;
+  font-size: .9rem;
+}
+.select-text.primary {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.select-text.secondary {
+  color: $fi-dark-grey; /*md-hack*/  /* TODO temporary as styling is supposed to be changing */
+  padding-left: 10px;
+}
+
+.locale-select {
+  /*width: 215px;*/
+  display: inline-block;
+  margin-right: 10px;
+}
+.locale-md-select {
+  width: 100%;
+}
+.segment-select {
+  width: 200px;
+  display: inline-block;
+}
+.segment-select-image {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  margin-bottom: -2px;
+}
+.primary-select {
+    .md-select-label {
+        min-width: 350px;
+    }
+    md-select[disabled] .md-select-label {
+        border-bottom-color: $fi-grey;
+    }
+}
+
+.sort-by-select {
+  margin: $margin-base 0;
+  background-color: #666;
+  padding: 5px 6px 6px;
+  color: $fi-white;
+  margin-top: 14px;
+
+  .md-select-value {
+      border-bottom-width: 0px;
+  }
+  &:not([disabled]):focus .md-select-value {
+      color: $fi-white!important;
+  }
+}
+
+/*  This is needed when placing md-select inside of a directive in order to maintain flex.
+    Only needed by IE10.  Safari seems to be fine.
+    Put this class on the directive element  e.g. <fi-directive class="prefix-flex" />
+*/
+.prefix-flex {
+    display: -ms-flexbox;
+}
+/* for an md-select that is not using a label, md-input-container padding should be removed */
+.no-label-container {
+    padding-bottom: 0;
+    padding-top: 1px;
+}
+
+@media print {
+    // Hide the dropdown array on print
+    .locale-select, .segment-select {
+        .md-select-icon {
+            display: none;
+        }
+    }
+    .segment-select {
+        md-select {
+          width: 100%;
+        }
+    }
+}

@@ -1,0 +1,199 @@
+.total-value-1{
+  background-color: $total-value-1;
+}
+.total-value-2{
+  background-color: $total-value-2;
+}
+.total-value-3{
+  background-color: $total-value-3;
+}
+.total-value-4{
+  background-color: $total-value-4;
+}
+.total-value-5{
+  background-color: $total-value-5;
+}
+.total-value-6{
+  background-color: $total-value-6;
+}
+.total-value-7{
+  background-color: $total-value-7;
+}
+.total-value-8{
+  background-color: $total-value-8;
+}
+.total-value-9{
+  background-color: $total-value-9;
+
+}
+.total-value-10{
+  background-color: $total-value-10;
+}
+.segments-icon{
+  min-width: 100px;
+  max-width: 100px;
+  text-align: center;
+}
+.icon-cycle{
+  border-radius: 100px;
+  box-shadow: 0px 0px 2px $fi-black-grey;
+  background-color : $fi-grey;
+  color : $fi-white;
+  width : 15px;
+  height : 15px;
+}
+.segments-name{
+  min-width: 100px;
+  max-width: 100px;
+  text-align: center;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+.segments-name:hover{
+  cursor: pointer;
+  background: $fi-grey;
+}
+.all{
+  text-align: center;
+  min-width: 100px;
+  max-width: 100px;
+}
+.all:hover{
+  cursor: pointer;
+  background: $fi-grey;
+}
+.total-value{
+  text-align: center;
+  max-width: 100px;
+}
+.item-head{
+  padding-left: 10px;
+  background: $fi-light-grey;
+}
+.item-bgc{
+  background: $fi-grey;
+}
+.sortorder:after {
+  content: "\25bc";
+  padding-right: 10px;
+}
+.sortorder.reverse:after {
+    content: "\25b2";
+
+}
+.all-res{
+  background: $fi-light-grey;
+}
+.seg-color{
+  background: $fi-light-grey;
+}
+.segment-table th, .segment-table td{
+  border: 1px solid $fi-light-grey;
+}
+.all.selected {
+  background: $fi-grey;
+  border: 1px solid $fi-dark-grey;
+}
+.segments-name.selected {
+  background: $fi-grey;
+  border: 1px solid $fi-dark-grey;
+}
+.segment-item-details{
+  padding: 0 15px;
+  width: 100px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Manage Segments */
+.manage-segment-container {
+  padding: $padding-base;
+  height: 100%;
+
+  .md-button {
+    margin: 0;
+  }
+}
+.segment-detail-container {
+  padding-left: $padding-base;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  md-checkbox {
+    margin: 5px 0;
+    display: inline-block;
+
+    .md-label span {
+      float: right;
+      margin-top: -7px;
+    }
+  }
+
+  md-radio-button {
+    margin: $margin-base 0;
+  }
+}
+.segment-list {
+  padding-left: 0;
+  margin-left: -$margin-base;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  li {
+    overflow: hidden;
+
+    a {
+      margin-left: $margin-base * 2;
+      display: inline-block;
+    }
+  }
+
+  .new-segment-button {
+    margin-left: $margin-base * 2;
+
+    &[disabled] {
+      md-icon, span {
+        color: $fi-grey-switch;
+      }
+    }
+  }
+}
+.segment-list li.selected {
+
+  border-left: 8px solid $fi-orange;
+
+  a {
+    color: $fi-orange;
+    margin-left: 22px; // adjust for the 8px border
+  }
+}
+
+.attribute-group-instruction {
+  margin-bottom: $margin-base * 3;
+  margin-right: 15px;
+  background-color: $fi-light-yellow;
+  padding: 20px;
+  font-weight: bold;
+}
+.attribute-group {
+  margin-bottom: $margin-base * 3;
+}
+.attribute-group h3 {
+  margin-bottom: $margin-base * 0.5;
+}
+.attribute-title {
+  font-weight: bold;
+  font-size: 1.25em;
+}
+.attribute-button-container {
+  border-top: 1px solid $fi-light-grey;
+  margin-left: -$margin-base;
+  margin-right: -$margin-base;
+  padding-top: $padding-base;
+  padding-left: $padding-base;
+
+  button:first-child {
+    margin: 0;
+  }
+}

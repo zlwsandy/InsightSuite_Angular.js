@@ -1,0 +1,253 @@
+.md-button.alpha {
+  margin-left: 0;
+}
+.action-row {
+  margin-top: 1em;
+}
+
+.action-row button {
+  margin-right: 1em;
+}
+
+.main-action-button-outer {
+  position: fixed;
+  top: 90%;
+  right: 8%;
+}
+
+.main-action-button-inner {
+  width: 24px;
+  height: 24px;
+}
+
+.rollover-action-button-container {
+  margin-right: 3em;
+}
+.rollover-action-button-container.omega {
+  margin-right: 0;
+}
+
+.rollover-action-button-inner {
+  color: $fi-white;
+  width: 26px;
+  height: 26px;
+}
+
+/***** Close (X) button - used for dialogs *****/
+.btn-close {
+  position: absolute;
+  right: 0px;
+  top: -5px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-size: 40px;
+  z-index: 1;
+}
+.btn-close.circular {
+  background-color: $fi-dark-grey;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid $fi-white;
+}
+.md-button.md-icon-button.btn-close.circular:hover {
+  background-color: $fi-light-grey;
+}
+.btn-close.circular md-icon {
+  margin-top: -17px;
+  color: $fi-white;
+}
+
+.btn-positive-action {
+    color: $fi-white;
+    background-color: $fi-green;
+    border-radius: 0px;
+    &:not([disabled]):hover {
+        background-color: $fi-light-green;
+        box-shadow: 0 0 0.3em 0.1em $fi-grey;
+    }
+    &:not([disabled]):active {
+        background-color: $fi-dark-green;
+    }
+    &[disabled] {
+        color: $fi-white;
+        background-color: $fi-light-green;
+        opacity: 0.3;
+    }
+}
+
+.btn-negative-action {
+    &:not([disabled]):hover {
+        background-color: $fi-white-red;
+        box-shadow: 0 0 0.3em 0.1em $fi-grey;
+    }
+    &[disabled]
+    &[disabled] md-icon{
+        color: $fi-red;
+        opacity: 0.4;
+    }
+}
+
+.btn-default-action {
+    color: $fi-white;
+    background-color: $fi-base-black;
+    border-radius: 0px !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    md-icon {
+        color: $fi-white;
+    }
+    &:not([disabled]):hover {
+        background-color: $fi-base-black !important;
+        box-shadow: 0 0 0.3em 0.1em $fi-grey;
+    }
+    &:not([disabled]).md-focused {
+      background-color: $fi-base-black !important;
+    }
+    &:active:hover {
+        background-color: $fi-black !important;
+    }
+    &[disabled] {
+        background-color: $fi-black !important;
+        color: $fi-white;
+        opacity: 0.3;
+    }
+}
+
+.btn-text-action {
+    color: $fi-black;
+    border-radius: 0px !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    &:not([disabled]):hover {
+        background-color: $fi-base-grey !important;
+        box-shadow: 0 0 0.3em 0.1em $fi-grey;
+    }
+    &:not([disabled]).md-focused {
+        background: transparent;
+    }
+    &:not([disabled]):active {
+        background-color: $fi-base-grey !important;
+    }
+    &[disabled] {
+        opacity: 0.3;
+    }
+}
+
+.btn-primary-action {
+    color: $fi-white;
+    background-color: $fi-base-blue;
+    border-radius: 0px !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    &:not([disabled]):hover {
+        background-color: $fi-base-blue !important;
+        box-shadow: 0 0 0.3em 0.1em $fi-grey;
+    }
+    &:active:hover {
+        background-color: $fi-base-dark-blue !important;
+    }
+    &[disabled] {
+        opacity: 0.3;
+        color: $fi-white;
+        background-color: $fi-base-blue;
+    }
+}
+
+.btn-alternative-action {
+    color: $fi-white;
+    background-color: $fi-orange;
+    border-radius: 0px !important;
+    padding: 0 10px 0 10px;
+    &:not([disabled]):hover {
+        background-color: $fi-orange !important;
+        box-shadow: 0 0 0.3em 0.1em $fi-grey;
+    }
+    &:active:hover {
+        background-color: $fi-orange-hue-2 !important;
+    }
+    &[disabled] {
+        opacity: 0.3;
+    }
+}
+
+.md-button.btn-delete-action {
+  color: $fi-red;
+  padding-left: 30px;
+  padding-right: 30px;
+  md-icon {
+    color: $fi-red;
+  }
+  &[disabled] {
+    opacity: 0.3;
+  }
+}
+
+.btn-full-width {
+    width: 100%;
+}
+
+/* Close buttons */
+.close-button {
+  right: -25px;
+}
+
+.insight-setup-details-close-button {
+  @extend .close-button;
+  top: 18px;
+  background-color: $fi-dark-grey
+}
+
+.insight-result-details-close-button {
+  position: fixed;
+  right: 0px;
+  top: 220px;
+  @include desktop-xlg {
+    right: 4%;
+  }
+  @include desktop-xxlg {
+      right: 8.5%;
+  }
+}
+.image-browse-close-button {
+  @extend .close-button;
+  top: -20px;
+}
+
+.btn-add-locale-close {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-size: 40px;
+    z-index: 1;
+
+    &.md-icon-button {
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+    }
+}
+
+/* Icon buttons */
+.btn-plus-minus-control {
+    height: 40px;
+    min-width: 40px;
+    width: 40px;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0
+}
+
+.btn-icon-button {
+  min-width: 44px;
+  margin-left: 10px;
+  margin-right: 0;
+  padding: 2px 6px;
+  md-icon {
+      margin-top: -2px;
+  }
+}

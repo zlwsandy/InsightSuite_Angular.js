@@ -1,0 +1,48 @@
+<div class="toolbar-container">
+    <!-- Header with tabs -->
+    <md-toolbar class="header-bar" fi-scroll-shrink target="true">
+        <div layout="row" class="md-title">
+            <h1>
+                <span>{{ 'INSIGHTS' | translate }}</span>
+            </h1>
+        </div>
+        <div layout="row">
+            <div flex="60" layout="row" layout-align="start center">
+                <div id="insight-setup-{{tabOption.name}}" layout="column" class="insight-tab"
+                        ng-repeat="tabOption in insightsListTabController.tabList"
+                        ng-if="tabOption.visible"
+                        ng-click="insightsListTabController.openTab(tabOption)">
+                    <span class="insight-tab-text">{{tabOption.translate | translate}}</span>
+                    <div ng-show="insightsListTabController.selectedTab() === tabOption.name" class="insight-setup-icon-inkbar"></div>
+                </div>
+            </div>
+        </div>
+    </md-toolbar>
+
+    <!-- Action bar (locale select, search, create insight) -->
+    <md-toolbar md-theme="altTheme" class="action-bar" layout="row" layout-align="space-between center">
+        <fi-locale-select class="locale-select" locales="insightsListTabController.locales"
+                          current-locale="insightsListTabController.currentLocale"
+                          change="insightsListTabController.localeChange(current)"
+                          visible="insightsListTabController.isLocaleSelectVisible()"
+                          results-status-only="false">
+        </fi-locale-select>
+        <div layout="row">
+            <md-button id="insightSearchBtn" aria-label="{{ 'SEARCH' | translate }}" ng-if="!insightsListTabController.showSearchInput" ng-click="insightsListTabController.searchBtnClick()">
+                <md-icon md-svg-icon="images/ic_search_24px.svg" class="dark-text"></md-icon>
+                <span class="v-align-middle uppercase-font dark-text">{{ 'SEARCH' | translate }}</span>
+            </md-button>
+            <md-input-container ng-if="insightsListTabController.showSearchInput" md-theme="default" class="menu-input">
+                <md-icon md-svg-icon="images/ic_search_24px.svg"></md-icon>
+                <input type="text" id="insightSearchInput" aria-label="{{ 'INPUT' | translate }}" ng-model="insightsListTabController.searchString" ng-trim="true" ng-model-options="{ debounce: 500 }" ng-blur="insightsListTabController.searchBtnClick()" focus="true"/>
+            </md-input-container>
+            <md-button id="addNewInsightBtn" aria-label="{{ 'NEW_INSIGHT' | translate }}" ng-click="insightsListTabController.addNewInsight()">
+                <md-icon md-svg-icon="images/ic_add_circle_outline_24px.svg" class="dark-text"></md-icon>
+                <span class="v-align-middle uppercase-font dark-text">{{ 'NEW_INSIGHT' | translate }}</span>
+            </md-button>
+        </div>
+    </md-toolbar>
+</div>
+
+<!--Tab Content-->
+<div ui-view="insightsListTabView" flex class="content-container"></div>

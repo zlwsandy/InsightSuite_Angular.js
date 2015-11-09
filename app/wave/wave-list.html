@@ -1,0 +1,46 @@
+
+<md-content md-theme="default" class="ui-scroll-wrapper md-primary md-hue-1" fi-scroll-shrink source="true" infinite-scroll='waveController.infiniteScroll.load()'
+            infinite-scroll-distance='1' infinite-scroll-container="'.ui-scroll-wrapper'" infinite-scroll-immediate-check="false">
+    <md-content md-theme="default" class="ui-scroll-container">
+        <md-list>
+            <md-list-item layout-align="center center" class="md-2-line align-center"
+                          ng-class="{rowHover: isHovering}"
+                          ng-mouseover="isHovering = true" ng-mouseout="isHovering = false"
+                          ng-repeat="wave in waveController.waves | orderBy:'-createTime' | filter:selected">
+
+                <div id="waveRow-{{::wave.urlName}}" flex="80" layout-margin layout-align="start center"
+                     ng-click="waveController.toggleRight(wave);" class="waves-wave-summary md-list-item-text">
+                    <div class="wave-name">{{::wave.name}}</div>
+                    <div class="wave-path">/{{::wave.urlDir}}/{{::wave.urlName}}</div>
+                </div>
+                <div flex ng-show="isHovering" layout="row" layout-align="end center" ng-controller="WaveEditController as editWave" md-theme="altTheme"
+                     class="rollover-action-button-container">
+                    <md-button id="waveSettings-{{::wave.waveId}}" class="md-fab md-mini md-primary"
+                               aria-label="Copy Link" ng-click="editWave.showSettings($event, wave)">
+                        <md-icon md-svg-src="images/ic_content_copy_24px.svg" class="s24"></md-icon>
+                    </md-button>
+                    <md-button id="waveEditButton-{{::wave.waveId}}" class="md-fab md-mini md-primary"
+                               aria-label="Edit Wave" ng-click="editWave.showAdvanced($event, wave, waveController.waves)">
+                        <md-icon md-svg-src="images/ic_mode_edit_24px.svg" class="s24"></md-icon>
+                    </md-button>
+                    <md-button id="waveDeleteButton-{{::wave.waveId}}" class="md-fab md-mini md-primary"
+                               aria-label="Delete Wave" ng-click="editWave.showDeleteDialog($event, wave)">
+                        <md-icon md-svg-src="images/ic_delete_24px.svg" class="s24"></md-icon>
+                    </md-button>
+                </div>
+
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+        <div ng-show='waveController.infiniteScroll.isBusy()'>{{ 'LOADING_DATA' | translate }}</div>
+    </md-content>
+</md-content>
+<div ng-include src="'wave/wave-right-nav.html'"></div>
+
+<div ng-controller="WaveCreateController as createWave">
+    <section layout="row" layout-sm="column" layout-align="end start">
+        <md-button  id="createWaveButton" class="md-fab md-accent main-action-button-outer" aria-label="Create Wave" ng-click="createWave.showAdvanced(waveController, $event)">
+            <md-icon md-svg-src="images/ic_add_24px.svg" class="main-action-button-inner"></md-icon>
+        </md-button>
+    </section>
+</div>

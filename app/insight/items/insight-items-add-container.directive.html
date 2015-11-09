@@ -1,0 +1,24 @@
+<!-- The notification bar -->
+<div class="{{InsightItemsAddContainerController.highlightColor}} data-grid pad-horizontal" flex="100" layout="row" layout-align="space-between center" layout-padding layout-fill>
+    <div flex="55" class="{{InsightItemsAddContainerController.textColor}}">
+      <span ng-bind-html="InsightItemsAddContainerController.primaryMessage"></span>
+    </div>
+    <div layout="row" layout-align="end end" flex="45">
+        <md-button md-no-ink ng-click="InsightItemsAddContainerController.collapsed = !InsightItemsAddContainerController.collapsed" md-theme="altTheme" class="btn-default-action secondary-button-flat">{{ 'VIEW' | translate }}</md-button>
+        <md-button md-no-ink ng-show="InsightItemsAddContainerController.showAdd" ng-click="InsightItemsAddContainerController.addAll()" class="btn-primary-action">{{ 'YES_TO_ALL' | translate }} </md-button>
+        <md-button md-no-ink ng-click="InsightItemsAddContainerController.dismissAll()" class="btn-text-action">{{ 'DISMISS' | translate }}</md-button>
+    </div>
+</div>
+<!-- The list of items that expands/collapses -->
+<md-list class="expand-collapse" ng-hide="InsightItemsAddContainerController.collapsed">
+    <md-list-item ng-repeat="item in InsightItemsAddContainerController.items track by $index"
+                  class="ng-class: InsightItemsAddContainerController.highlightColor + '-light'; divider">
+        <insight-item-add item="item"
+                          currency="{{InsightItemsAddContainerController.currency}}"
+                          show-add="{{InsightItemsAddContainerController.showAdd}}"
+                          on-dismiss="InsightItemsAddContainerController.dismiss(item)"
+                          on-add="InsightItemsAddContainerController.add(item)"
+                          flex="100">
+        </insight-item-add>
+    </md-list-item>
+</md-list>

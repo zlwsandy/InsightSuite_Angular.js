@@ -1,0 +1,26 @@
+<section layout="row" layout-fill flex>
+  <md-content flex>
+    <form name="loginAdminCompanyForm">
+      <div layout="row">
+        <div ng-show='loginAdminCompanyController.showProgressLoader' layout="column" flex layout-align="center center" layout-margin>
+          <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+
+        <div ng-show='!loginAdminCompanyController.showProgressLoader' layout="column" layout-fill layout-align="start center">
+          <md-toolbar>
+            <h4 class="text-align-center font-weight-normal">
+              <span>{{ 'SELECT_COMPANY_ADMINISTER' | translate }}</span>
+            </h4>
+          </md-toolbar>
+          <md-select id="selectCompanyAdmin" ng-model="loginAdminCompanyController.companySelected" placeholder="{{ 'CHOOSE_COMPANY' | translate }}"  required>
+            <md-option ng-value="company.companyId"
+                       ng-repeat="company in loginAdminCompanyController.companyList">{{ company.name }}</md-option>
+          </md-select>
+          <div>
+            <md-button id="continueButton" class="btn-primary-action" ng-disabled="loginAdminCompanyForm.$invalid" ng-click="loginAdminCompanyController.setCompanyToAdmin()">{{ 'CONTINUE' | translate }}</md-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </md-content>
+</section>

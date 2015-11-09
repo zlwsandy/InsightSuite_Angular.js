@@ -1,0 +1,25 @@
+<div id="item-{{InsightItemAddController.item.itemId}}" class="data-grid" flex="100" layout="row" layout-wrap layout-align="start center">
+    <div flex="35">
+        <span class="insight-setup-items-name">{{InsightItemAddController.item.name}}</span>
+        <div id="itemNumber-{{InsightItemAddController.item.itemId}}" class="insight-setup-items-item-number uppercase-font">
+            {{InsightItemAddController.item.number}}
+        </div>
+    </div>
+
+    <div flex="45" id="itemName-images-{{InsightItemAddController.item.itemId}}" layout="row" layout-align="start start" class="insight-item-image-container">
+            <fi-img-crop img-src={{InsightItemAddController.item.displayImage.thumbnailUrl}}
+                      img-alt={{InsightItemAddController.item.displayImage.name}}
+                      img-class="img-crop"
+                      img-height="75" img-width="75">
+            </fi-img-crop>
+        <div class="insight-setup-test-price-container">
+            <div class="insight-setup-items-test-price">{{InsightItemAddController.item.testPrice ? (InsightItemAddController.item.testPrice | number:0) : ('0')}}</div>
+            <div class="insight-setup-items-locale text-align-left">{{InsightItemAddController.currency}}</div>
+        </div>
+    </div>
+
+    <div layout="row" layout-align="end center" flex="20">
+        <md-button md-no-ink ng-show="InsightItemAddController.showAdd" ng-click="InsightItemAddController.add()" class="btn-primary-action">{{ 'ADD' | translate }}</md-button>
+        <md-button md-no-ink ng-click="InsightItemAddController.dismiss()" class="btn-text-action">{{ 'DISMISS' | translate }}</md-button>
+    </div>
+</div>

@@ -1,0 +1,221 @@
+<div class="toolbar-container">
+    <md-toolbar class="action-bar" md-theme="altTheme" layout="row" layout-align="end center">
+        <span flex></span>
+        <div layout="right center">
+            <md-button aria-label="segmentForm" translate="SAVE" ng-click="manageSegmentsController.saveSegment()" ng-disabled="manageSegmentsController.saveDisabled" md-theme="default" class="btn-positive-action" md-no-ink>
+            </md-button>
+            <md-button aria-label="segmentForm" translate="CANCEL" ng-click="manageSegmentsController.cancel($event)" ng-disabled="false" md-theme="default" class="btn-text-action" md-no-ink>
+            </md-button>
+        </div>
+    </md-toolbar>
+</div>
+
+<div class="content-container" flex>
+    <md-content md-theme="altTheme" class="ui-fixed-wrapper md-primary">
+        <md-content md-theme="default" class="ui-fixed-container md-primary">
+
+            <section layout="row" class="manage-segment-container">
+
+                <div class="list-nav left segment-list" flex="30">
+                    <ul>
+                        <li ng-repeat="segment in manageSegmentsController.segments"
+                            ng-class="{'selected' : $index === manageSegmentsController.selectedIndex}"
+                            ng-click="manageSegmentsController.selectSegment($index)"
+                            id="segmentName-{{$index}}">
+                            <a href=""ng-class="{'disabled' : $index !== manageSegmentsController.selectedIndex && !manageSegmentsController.viewMode || !manageSegmentsController.saveDisabled || !manageSegmentsController.ableToNavigate}">
+                                <span>{{segment.name}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <md-button ng-click="manageSegmentsController.newSegment()"
+                               ng-disabled="!manageSegmentsController.viewMode || !manageSegmentsController.ableToNavigate"
+                               class="btn-default-action alpha new-segment-button" md-no-ink
+                               id="newSegmentBtn">
+                        <md-icon md-svg-icon="images/ic_add_circle_outline_24px.svg"></md-icon>
+                            <span>
+                                {{ 'NEW' | translate }}
+                            </span>
+                    </md-button>
+                </div>
+
+
+                <form name="segmentForm" class="segment-detail-container" flex="70">
+                    <div>
+                        <md-input-container>
+                            <label>{{ 'SEGMENT_NAME' | translate }}</label>
+                            <input name="segmentName" type="text"
+                                   required maxlength="255"
+                                   ng-model="manageSegmentsController.selectedSegment.name"
+                                   aria-label="{{manageSegmentsController.selectedSegment.name}}"
+                                   class="font-weight-bold" required fi-special-characters
+                                   id="segmentNameInp"/>
+                            <div ng-messages="segmentForm.segmentName.$error">
+                                <div ng-message="required">{{ 'ERROR_INPUT_REQUIRED' | translate }}</div>
+                                <div ng-message="maxlength">{{ 'ERROR_INPUT_TOO_LONG' | translate:'{ maxLength: "255" }' }}</div>
+                                <div ng-message="fi-special-characters">{{ 'CANNOT_CONTAIN_SPECIAL_CHARACTERS' | translate }}</div>
+                            </div>
+                        </md-input-container>
+
+                        {{manageSegmentsController.totalUnselected}}
+
+                        <!--Relevant Responder / Crowd Segments -->
+                        <div class="attribute-group"
+                            ng-if="manageSegmentsController.showRespondentType()">
+                            <h3 ng-class="{'disabled-text' : manageSegmentsController.viewMode}">{{ 'RESPONDENT_TYPE' | translate }}</h3>
+                            <md-radio-group ng-model="manageSegmentsController.selectedSegment.segmentOptions.predictorOrCrowd">
+                                <md-radio-button value="predictor"
+                                                 ng-disabled="manageSegmentsController.viewMode"
+                                                 id="predictorRad">
+                                    {{ 'RELEVANT_RESPONDERS_RADIO_OPTION' | translate }}
+                                </md-radio-button>
+                                <md-radio-button value="crowd"
+                                                 ng-disabled="manageSegmentsController.viewMode"
+                                                 id="crowdRad">
+                                    {{ 'ALL_RESPONDENTS_RADIO_OPTION' | translate }}
+                                </md-radio-button>
+                            </md-radio-group>
+                        </div>
+
+                        <!-- Check box instructional text -->
+                        <div class="attribute-group-instruction"
+                             ng-if="!manageSegmentsController.viewMode">{{ 'SEGMENT_CHECKBOX_INSTRUCTION' | translate }}</div>
+
+                        <!--Personas-->
+                        <div class="attribute-group"
+                             ng-if="manageSegmentsController.selectedSegment.segmentOptions.personas.length > 0">
+                            <h3 ng-class="{'disabled-text' : manageSegmentsController.viewMode}">{{ 'PERSONAS' | translate }}</h3>
+                            <md-checkbox
+                                    ng-disabled="manageSegmentsController.viewMode"
+                                    ng-model="manageSegmentsController.selectedSegment.segmentOptions.personas.selectAll"
+                                    ng-change="manageSegmentsController.toggleAttrSelectAll('personas')"
+                                    aria-label="{{ 'ALL' | translate }}"
+                                    class="attribute-title"
+                                    id="allPersonasChk">
+                                {{ 'ALL' | translate }}
+                            </md-checkbox>
+                            <div ng-repeat="persona in manageSegmentsController.selectedSegment.segmentOptions.personas | orderBy:'name'">
+                                <md-checkbox
+                                        ng-disabled="manageSegmentsController.viewMode"
+                                        ng-model="persona.selected"
+                                        ng-change="manageSegmentsController.toggleAttrSelect('personas')"
+                                        class="md-align-top-left"
+                                        aria-label="{{persona.persona}}"
+                                        id="personas-{{$index}}">
+                                    {{persona.persona}} ({{persona.count}})
+                                </md-checkbox>
+                            </div>
+                        </div>
+
+                        <!--Survey Questions-->
+                        <div ng-repeat="question in manageSegmentsController.selectedSegment.segmentOptions.questions"
+                             class="attribute-group">
+                            <h3 ng-class="{'disabled-text' : manageSegmentsController.viewMode}">{{question.questionLabel || question.questionText}}</h3>
+                            <md-checkbox
+                                    ng-disabled="manageSegmentsController.viewMode"
+                                    ng-model="manageSegmentsController.selectedSegment.segmentOptions.questions[$index].selectAll"
+                                    ng-change="manageSegmentsController.toggleNestedAttrSelectAll('questions', 'answers', $index)"
+                                    aria-label="{{ 'ALL' | translate }}"
+                                    class="attribute-title"
+                                    id="questions-{{$index}}">
+                                {{ 'ALL' | translate }}
+                            </md-checkbox>
+
+                            <div ng-repeat="answer in question.answers | orderBy:'answerText'">
+                                <md-checkbox
+                                        ng-disabled="manageSegmentsController.viewMode"
+                                        ng-change="manageSegmentsController.toggleNestedAttrSelect('questions', 'answers', $parent.$index)"
+                                        ng-model="answer.selected"
+                                        aria-label="{{answer.answerText}}"
+                                        class="md-align-top-left"
+                                        id="answers-{{$parent.$index}}-{{$index}}">
+                                    {{answer.answerText}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+
+                        <!--Target Type-->
+                        <div ng-if="manageSegmentsController.selectedSegment.segmentOptions.targetTypes.length > 0"
+                             class="attribute-group">
+                            <h3 ng-class="{'disabled-text' : manageSegmentsController.viewMode}">{{ 'TARGET_TYPE' | translate }}</h3>
+                            <md-checkbox
+                                    ng-disabled="manageSegmentsController.viewMode"
+                                    ng-model="manageSegmentsController.selectedSegment.segmentOptions.targetTypes.selectAll"
+                                    ng-change="manageSegmentsController.toggleAttrSelectAll('targetTypes')"
+                                    aria-label="{{ 'ALL' | translate }}"
+                                    class="attribute-title"
+                                    id="allTargetTypeChk">
+                                {{ 'ALL' | translate }}
+                            </md-checkbox>
+                            <div ng-repeat="targetType in manageSegmentsController.selectedSegment.segmentOptions.targetTypes">
+
+                                <md-checkbox
+                                        ng-class="uppercase-font"
+                                        ng-disabled="manageSegmentsController.viewMode"
+                                        ng-change="manageSegmentsController.toggleAttrSelect('targetTypes')"
+                                        ng-model="targetType.selected"
+                                        aria-label="{{targetType.type}}"
+                                        id="targetType-{{$index}}">
+                                    {{targetType.type}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+
+
+                        <!--Location-->
+                        <div ng-if="manageSegmentsController.selectedSegment.segmentOptions.regions.length > 0"
+                             class="attribute-group">
+                            <h3 ng-class="{'disabled-text' : manageSegmentsController.viewMode}">{{ 'REGIONS' | translate }}</h3>
+                            <md-checkbox
+                                    ng-disabled="manageSegmentsController.viewMode"
+                                    ng-model="manageSegmentsController.selectedSegment.segmentOptions.regions.selectAll"
+                                    ng-change="manageSegmentsController.toggleAttrSelectAll('regions')"
+                                    aria-label="{{ 'ALL' | translate }}"
+                                    class="attribute-title"
+                                    id="allRegions">
+                                {{ 'ALL' | translate }}
+                            </md-checkbox>
+                            <div ng-repeat="region in manageSegmentsController.selectedSegment.segmentOptions.regions | orderBy:'name'">
+                                <md-checkbox
+                                        ng-disabled="manageSegmentsController.viewMode"
+                                        ng-model="region.selected"
+                                        ng-change="manageSegmentsController.toggleAttrSelect('regions')"
+                                        class="md-align-top-left"
+                                        aria-label="{{region.region}}"
+                                        id="regions-{{$index}}">
+                                    {{region.region}} ({{region.count}})
+                                </md-checkbox>
+                            </div>
+                        </div>
+
+                        <div class="attribute-button-container" layout="row" layout-align="start center">
+                            <div layout="right center">
+                                <md-button class="btn-default-action"
+                                           ng-disabled="!manageSegmentsController.viewMode || !manageSegmentsController.ableToNavigate"
+                                           ng-click="manageSegmentsController.viewSegment()" md-no-ink
+                                           id="viewSegment">
+                                    <span>
+                                        {{ 'VIEW' | translate }}
+                                    </span>
+                                </md-button>
+                                <md-button aria-label="insightFormCancel"
+                                           ng-click="manageSegmentsController.deleteSegment()"
+                                           ng-disabled="!manageSegmentsController.viewMode"
+                                           class="btn-delete-action" md-no-ink
+                                           id="deleteSegment">
+                                           <md-icon md-svg-icon="images/ic_delete_24px.svg"></md-icon>
+                                            <span>
+                                                {{ 'DELETE' | translate }}
+                                            </span>
+                                </md-button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </section>
+
+        </md-content>
+    </md-content>
+</div>
+

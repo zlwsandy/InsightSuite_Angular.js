@@ -1,0 +1,58 @@
+{
+  "en_US": {
+    "locale": "en_US",
+    "numberFormat": {
+      "currencyCode": "USD",
+      "currencySymbol": "$",
+      "currencyDecimalSeparator": ".",
+      "currencyFractionDigits": 2,
+      "currencySpaceBetweenAmountAndSymbol": false,
+      "currencySymbolFirst": true,
+      "groupingSeparator": ","
+    },
+    "desktopFlagUrl": "/app/images/flags/flag.us.png",
+    "gameRunStatus": "SUMMARY_RESULTS"
+  },
+  "fr_FR": {
+    "locale": "fr_FR",
+    "numberFormat": {
+      "currencyCode": "EUR",
+      "currencySymbol": "€",
+      "currencyDecimalSeparator": ",",
+      "currencyFractionDigits": 2,
+      "currencySpaceBetweenAmountAndSymbol": true,
+      "currencySymbolFirst": false,
+      "groupingSeparator": " "
+    },
+    "desktopFlagUrl": "/app/images/flags/flag.fr.png",
+    "gameRunStatus": "HIDDEN"
+  },
+  "es_CO": {
+    "locale": "es_CO",
+    "numberFormat": {
+      "currencyCode": "COP",
+      "currencySymbol": "$",
+      "currencyDecimalSeparator": ",",
+      "currencyFractionDigits": 2,
+      "currencySpaceBetweenAmountAndSymbol": false,
+      "currencySymbolFirst": true,
+      "groupingSeparator": "."
+    },
+    "desktopFlagUrl": "/app/images/flags/flag.co.png",
+    "gameRunStatus": "SETUP"
+  },
+  "zh_CN": {
+    "locale": "zh_CN",
+    "numberFormat": {
+      "currencyCode": "CNY",
+      "currencySymbol": "￥",
+      "currencyDecimalSeparator": ".",
+      "currencyFractionDigits": 2,
+      "currencySpaceBetweenAmountAndSymbol": false,
+      "currencySymbolFirst": true,
+      "groupingSeparator": ","
+    },
+    "desktopFlagUrl": "/app/images/flags/flag.cn.png",
+    "gameRunStatus": "SUMMARY_RESULTS"
+  }
+}

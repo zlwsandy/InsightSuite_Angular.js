@@ -1,0 +1,15 @@
+<div class="price-control-container">
+    <div class="price-control-label">
+        <label id="{{fiPriceControlController.name}}Label" for="{{fiPriceControlController.name}}">{{fiPriceControlController.label}}</label>
+    </div>
+    <div class="price-control">
+        <md-tooltip ng-if="fiPriceControlController.error && fiPriceControlController.enabled" md-direction="top" class="error">
+            <div ng-if="fiPriceControlController.error">{{fiPriceControlController.error | translate}}</div>
+        </md-tooltip>
+
+        <input id="{{fiPriceControlController.name}}Input" name="{{fiPriceControlController.name}}" type="text" class="price-control-input" ng-class="{'error': fiPriceControlController.error}" ng-model="fiPriceControlController.localModel" ng-min="fiPriceControlController.min" ng-max="fiPriceControlController.max" ng-disabled="!fiPriceControlController.enabled">
+        <label>%</label>
+        <md-button id="{{fiPriceControlController.name}}PlusBtn" class="btn-default-action btn-plus-minus-control" ng-click="increment()" ng-disabled="fiPriceControlController.maxDisabled()">+</md-button>
+        <md-button id="{{fiPriceControlController.name}}MinusBtn" class="btn-default-action btn-plus-minus-control" ng-click="decrement()" ng-disabled="fiPriceControlController.minDisabled()">-</md-button>
+    </div>
+</div>

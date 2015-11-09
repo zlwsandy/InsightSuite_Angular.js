@@ -1,0 +1,102 @@
+[
+    {
+        "createTime" : 1440165610000,
+        "itemId" : 100,
+        "gameItemId" : null,
+        "parentGameItemId" : null,
+        "name" : "TEST ITEM 1",
+        "number" : "100",
+        "reference" : null,
+        "itemImages" : [],
+        "testPrice" : 14.99,
+        "promotionalPrice" : 11.00,
+        "unitCost" : 4.00,
+        "description" : "Test Item 1 description",
+        "totalValue" : null,
+        "maxGMPrice" : null,
+        "modelPrice" : null,
+        "percentTestPrice" : null,
+        "maxGrossMarginPercent" : null,
+        "grossMarginDeltaBasisPoints" : null,
+        "overallPositive" : null,
+        "overallNegative" : null
+    },
+    {
+        "createTime" : 1440165610000,
+        "itemId" : 200,
+        "gameItemId" : null,
+        "parentGameItemId" : null,
+        "name" : "TEST ITEM 2",
+        "number" : "200",
+        "reference" : null,
+        "itemImages" : [
+            {
+                "itemImageId" : 4000,
+                "primary" : false,
+                "status" : "COMPLETE",
+                "name" : "item-image.jpg",
+                "thumbnailUrl" : "/secure/imageviewer.iv?f=%2F2015%2F183%2F1b09cf61-31bf-4525-9bc9-1e332f0c60bd",
+                "fullsizeUrl" : "/secure/imageviewer.iv?f=%2F2015%2F183%2F28827693-37d7-4e2f-a505-a14f5783182d"
+            },
+            {
+                "itemImageId" : 3996,
+                "primary" : true,
+                "status" : "COMPLETE",
+                "name" : "item-image-1.jpg",
+                "thumbnailUrl" : "/secure/imageviewer.iv?f=%2F2015%2F183%2F1b09cf61-31bf-4525-9bc9-1e332f0c60bd",
+                "fullsizeUrl" : "/secure/imageviewer.iv?f=%2F2015%2F183%2F28827693-37d7-4e2f-a505-a14f5783182d"
+            }
+        ],
+        "testPrice" : 99.99,
+        "promotionalPrice" : 10.00,
+        "unitCost" : 5.55,
+        "description" : "Test Item 2 description",
+        "totalValue" : null,
+        "maxGMPrice" : null,
+        "modelPrice" : null,
+        "percentTestPrice" : null,
+        "maxGrossMarginPercent" : null,
+        "grossMarginDeltaBasisPoints" : null,
+        "overallPositive" : null,
+        "overallNegative" : null
+    },
+    {
+        "createTime" : 1440165610000,
+        "itemId" : 300,
+        "gameItemId" : null,
+        "parentGameItemId" : null,
+        "name" : "TEST ITEM 3",
+        "number" : "300",
+        "reference" : null,
+        "itemImages" : [
+            {
+                "itemImageId" : 4000,
+                "primary" : false,
+                "status" : "COMPLETE",
+                "name" : "item-image.jpg",
+                "thumbnailUrl" : "/secure/imageviewer.iv?f=%2F2015%2F183%2F1b09cf61-31bf-4525-9bc9-1e332f0c60bd",
+                "fullsizeUrl" : "/secure/imageviewer.iv?f=%2F2015%2F183%2F28827693-37d7-4e2f-a505-a14f5783182d"
+            },
+            {
+                "itemImageId" : 3996,
+                "primary" : false,
+                "status" : "COMPLETE",
+                "name" : "item-image-1.jpg",
+                "thumbnailUrl" : "/secure/imageviewer.iv?f=%2F2015%2F183%2F1b09cf61-31bf-4525-9bc9-1e332f0c60bd",
+                "fullsizeUrl" : "/secure/imageviewer.iv?f=%2F2015%2F183%2F28827693-37d7-4e2f-a505-a14f5783182d"
+            }
+        ],
+        "testPrice" : 100.00,
+        "promotionalPrice" : 90.00,
+        "unitCost" : 5.00,
+        "description" : "Test Item 3 description",
+        "totalValue" : null,
+        "maxGMPrice" : null,
+        "modelPrice" : null,
+        "percentTestPrice" : null,
+        "maxGrossMarginPercent" : null,
+        "grossMarginDeltaBasisPoints" : null,
+        "overallPositive" : null,
+        "overallNegative" : null
+    }
+]

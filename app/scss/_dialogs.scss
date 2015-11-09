@@ -1,0 +1,134 @@
+.dialog {
+
+  md-toolbar {
+    padding: $padding-base;
+    min-height: 55px;
+    max-height: 55px;
+
+    h2 {
+      font-weight: bold;
+    }
+
+    .md-icon-button {
+      md-icon {
+        height: 40px;
+        width: 40px;
+      }
+    }
+  }
+  md-dialog-content {
+    display: inline-block;
+    -ms-flex: none;
+    -webkit-flex: none;
+    flex: none;
+  }
+  .dialog-button-container {
+    margin: 0;
+    padding-top: $padding-base;
+  }
+}
+
+md-dialog .md-actions.insight-items-dialog {
+    border-top: 1px solid $fi-light-grey !important;
+    padding: 10px;
+}
+
+.dialog-fixed-width {
+    width: 750px;
+}
+
+/* Styles for the Comments Dialog */
+.comments-dialog {
+  height: 500px;
+}
+
+.ticket-price-dialog {
+  height: 280px;
+}
+
+.alert-dialog {
+    height: 230px;
+}
+
+/* Image Browse Dialog */
+.image-browse-dialog {
+
+  overflow: visible;
+
+  md-dialog-content {
+    position: relative;
+    display: inline-block;
+    border: 10px solid $fi-white;
+    padding: 0;
+    border-radius: $border-radius-base;
+    overflow: hidden;
+    
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .nav-arrow {
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    opacity: .4;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .nav-arrow.previous {
+    left: 5px;
+  }
+  .nav-arrow.next {
+    right: 5px;
+  }
+  .paginator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  .page-circle {
+    border-radius: 50%;
+    border: 1px solid $fi-black;
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  .page-circle:last-child {
+    margin-right: 0;
+  }
+  .page-circle.current {
+    background: $fi-grey;
+  }
+
+}
+
+.progress-dialog {
+  background-color: transparent;
+  box-shadow: none;
+
+  md-dialog-content {
+    text-align: center;
+    margin: 0 auto;
+    padding: $padding-base * 2;
+  }
+}
+.progress-circle {
+  .md-inner .md-left .md-half-circle {
+    border-top-color: $fi-orange-hue-3;
+    border-left-color: $fi-orange-hue-3;
+  }
+  .md-inner .md-right .md-half-circle {
+    border-top-color: $fi-orange-hue-3;
+    border-right-color: $fi-orange-hue-3;
+  }
+}
